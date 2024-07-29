@@ -1,0 +1,20 @@
+<header class= "mb-72px" >
+  <nav class= "flex justify-between w-full items-center h-72px bg-header-orange fixed top-0 left-0">
+    <div class= "text-3xl ml-9">
+      <%= link_to '資格取ろ!', '#' %>
+    </div>
+    
+    <div class="flex space-x-8 mr-9 items-center">
+      <div class= "dropdown dropdown-hover dropdown-bottom dropdown-end">
+        <label tabindex="0" class= "text-lg m-1 py-2 px-2 hover:bg-slate-200">教材</label>
+        <ul tabindex="0" class= "dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+          <li><a href="#" class= "hover:bg-slate-200">教材新規作成</a></li>
+          <li><a href="#" class=" hover:bg-slate-200">教材一覧ページ</a></li>
+        </ul>
+      </div>
+      <%= link_to 'ログアウト', '#', class:"text-lg m-1 py-2 px-2 hover:bg-slate-200" %>
+      <%= link_to image_tag('login_user.png', class:"h-14 w-auto"), '#' %>
+    </div>
+    
+  </nav>
+</header>
