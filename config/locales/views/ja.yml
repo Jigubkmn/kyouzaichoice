@@ -1,0 +1,32 @@
+ja:
+  helpers:
+    submit:
+      create: 登録
+      submit: 保存
+      update: 更新
+      login: ログイン
+    label:
+      email: メールアドレス
+      password: パスワード
+  user_sessions:
+    new:
+      title: ログイン
+      login: ログイン
+      to_register_page: 新規登録はこちら
+      password_forget: パスワードをお忘れの方はこちら
+  users:
+    new:
+      title: ユーザー新規登録
+      to_login_page: ログインページへ
+  header:
+    logo: 資格取ろ！
+    login: ログイン
+    logout: ログアウト
+    new_registration: 新規登録
+    material: 教材
+    material_index: 教材一覧
+    material_new: 教材新規追加
+  footer:
+    term_of_service: 利用規約
+    privacy_policy: プライバシーポリシー
+    inquiry: お問い合わせ

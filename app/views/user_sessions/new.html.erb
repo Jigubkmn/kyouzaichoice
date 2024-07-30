@@ -1,6 +1,6 @@
-<div class="min-h-screen flex justify-center">
+<div class="flex justify-center">
   <div class="w-full max-w-md">
-    <h3 class="text-3xl my-50px text-center font-bold">ログイン</h3>
+    <h3 class="text-3xl my-50px text-center font-bold"><%= t('.title') %></h3>
     <%= form_with model: @user, local: true do |f| %>
       <div class= "mb-20px flex flex-col " >
         <%= f.label :email, class: "mb-5px" %>
@@ -11,11 +11,11 @@
         <%= f.password_field :password, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4" %>
       </div>
       <div class="flex justify-center mb-20px">
-      <%= f.submit "ログイン", class: "btn bg-pale-blue hover:bg-dark-blue w-full max-w-200px text-xl text-white" %>
+      <%= f.submit t('helpers.submit.login'), class: "btn bg-pale-blue hover:bg-dark-blue w-full max-w-200px text-xl text-white" %>
       </div>
     <% end %>
     <div class="flex justify-center mb-50px">
-      <%= link_to "新規登録はこちら", new_user_path, class: "text-lg text-dark-green underline underline-offset-4 " %>
+      <%= link_to t('.to_register_page'), new_user_path, class: "text-lg text-dark-green underline underline-offset-4 " %>
     </div>
   </div>
 </div>
