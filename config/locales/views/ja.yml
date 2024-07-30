@@ -14,10 +14,18 @@ ja:
       login: ログイン
       to_register_page: 新規登録はこちら
       password_forget: パスワードをお忘れの方はこちら
+    create:
+      success: ログインしました
+      danger: ログインに失敗しました
+    destroy:
+      success: ログアウトしました
   users:
     new:
       title: ユーザー新規登録
       to_login_page: ログインページへ
+    create:
+      success: ユーザー登録が完了しました
+      danger: ユーザー登録に失敗しました
   header:
     logo: 資格取ろ！
     login: ログイン
