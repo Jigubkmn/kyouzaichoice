@@ -34,6 +34,8 @@ ja:
     material: 教材
     material_index: 教材一覧
     material_new: 教材新規追加
+    mypage_user: マイページ(ユーザー情報)
+    mypage_material: マイページ(教材)
   footer:
     term_of_service: 利用規約
     privacy_policy: プライバシーポリシー
