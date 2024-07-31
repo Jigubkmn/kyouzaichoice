@@ -10,6 +10,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to root_path, success: t('users.create.success')
     else
+      @user = User.new(session_params)
       flash.now[:danger] = t('users.create.danger')
       render :new, status: :unprocessable_entity
     end
@@ -18,6 +19,10 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :name, :introduction)
+    params.require(:user).permit(:email, :password, :password_confirmation, :name, :introduction, :image, :image_cache)
+  end
+
+  def session_params
+    params.require(:user).permit(:name)
   end
 end

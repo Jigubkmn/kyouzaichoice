@@ -1,7 +1,7 @@
 <div class="min-h-screen flex justify-center">
   <div class="w-full max-w-md">
     <h3 class="text-3xl my-50px text-center font-bold"><%= t('.title') %></h3>
-    <%= form_with model: @user, local: true do |f| %>
+    <%= form_with model: @user, url: login_path, local: true do |f| %>
       <div class= "mb-20px flex flex-col " >
         <%= f.label :email, class: "mb-5px" %>
         <%= f.email_field :email, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4" %>
