@@ -29,11 +29,21 @@ module.exports = {
         '50px': '50px',
         '72px': '72px',
       },
+      padding: {
+        '30px': '30px',
+      },
       maxWidth: {
         '200px': '200px',
+        '700px': '700px',
       },
       height: {
         '72px': '72px',
+      },
+      fontSize: {
+        '28px': '28px',
+      },
+      spacing: {
+        '50px': '50px',
       },
     },
     backgroundImage: {

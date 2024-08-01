@@ -1,0 +1,20 @@
+<div class="min-h-screen flex justify-center">
+  <div class="mt-50px w-full max-w-700px border-2 border-gray rounded-md ">
+    <div class="my-50px ml-50px flex items-center ">
+      <div class="flex justify-start items-center">
+        <div><%= link_to image_tag(current_user.image_url, class:"h-20 w-20 rounded-full"), '#' %></div>
+        <div class="text-28px ml-50px"><%= current_user.name %></div>
+      </div>
+      <div class="flex items-center ml-auto mr-50px">
+        <div class="flex justify-center items-center bg-header-orange h-9 w-9 rounded-full"><i class="fa-sharp fa-solid fa-pencil fa-lg"></i></div> 
+      </div>
+    </div>
+    <div class="border-y-2 border-gray mx-30px py-30px">
+      <div class="text-base ml-50px mb-20px font-bold">メールアドレス</div>
+      <div class="text-base ml-50px"><%= current_user.email %></div>
+    </div>
+    <div>
+     02
+    </div>
+  </div>
+</div>

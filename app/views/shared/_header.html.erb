@@ -1,4 +1,4 @@
-<header class= "mb-72px" >
+<header class= "mb-72px">
   <nav class= "flex justify-between w-full items-center h-72px bg-header-orange fixed top-0 left-0">
     <div class= "text-3xl ml-9">
       <%= link_to t('header.logo'), '/' %>
@@ -18,11 +18,10 @@
         <%= link_to image_tag(current_user.image_url, class:"h-14 w-14 rounded-full"), '#' %>
         </label>
         <ul tabindex="0" class= "dropdown-content menu bg-base-100 rounded-box z-[1] w-60 p-2 shadow">
-          <li><a href="#" class= "hover:bg-slate-200"><%= t('header.mypage_user') %></a></li>
-          <li><a href="#" class=" hover:bg-slate-200"><%= t('header.mypage_material') %></a></li>
+          <li><%= link_to t('header.mypage_user'), profile_user_path, class: "hover:bg-slate-200" %></li>
+          <li><%= link_to t('header.mypage_material'), "#", class: "hover:bg-slate-200" %></li>
         </ul>
       </div>
     </div>
-    
   </nav>
 </header>

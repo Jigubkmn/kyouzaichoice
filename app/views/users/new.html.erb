@@ -20,7 +20,7 @@
       </div>
       <div class= "mb-50px flex flex-col">
         <%= f.label :image, class: "mb-5px font-bold" %>
-        <%= f.file_field :image, class: "file-input file-input-bordered file-input-warning w-full max-w-xs", accept: 'image/*' %>
+        <%= f.file_field :image, class: "file-input file-input-bordered file-input-warning file-input-sm w-full max-w-xs", accept: 'image/*' %>
         <%= f.hidden_field :image_cache %>
       </div>
       <div class="flex justify-center mb-20px">
@@ -33,3 +33,5 @@
     
   </div>
 </div>
+
+
