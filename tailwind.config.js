@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       colors: {
         'blue': '#1E91E4', 
-        'header-orange': '#FFDB7D',
+        'thin-orange': '#FFDB7D',
         'pale-orange': '#FFCD4C',
         'dark-orange': '#FFB800',
         'pale-green': '#25E04E',
@@ -29,6 +29,7 @@ module.exports = {
         '40px': '40px',
         '50px': '50px',
         '72px': '72px',
+        '100px': '100px',
       },
       padding: {
         '30px': '30px',
@@ -37,8 +38,15 @@ module.exports = {
         '200px': '200px',
         '700px': '700px',
       },
+      minWidth: {
+        '250px': '250px',
+        '700px': '700px',
+      },
       height: {
         '72px': '72px',
+      },
+      mineight: {
+        '700px': '700px',
       },
       fontSize: {
         '28px': '28px',
