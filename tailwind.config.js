@@ -25,6 +25,7 @@ module.exports = {
         '5px': '5px',
         '15px': '15px',
         '20px': '20px',
+        '25px': '25px',
         '30px': '30px',
         '40px': '40px',
         '50px': '50px',
@@ -32,6 +33,8 @@ module.exports = {
         '100px': '100px',
       },
       padding: {
+        '15px': '15px',
+        '20px': '20px',
         '30px': '30px',
       },
       maxWidth: {
@@ -45,8 +48,8 @@ module.exports = {
       height: {
         '72px': '72px',
       },
-      mineight: {
-        '700px': '700px',
+      minHeight: {
+        '600px': '600px',
       },
       fontSize: {
         '28px': '28px',
@@ -56,7 +59,6 @@ module.exports = {
       },
     },
     backgroundImage: {
-      'my-image': "url('/top.jpg')",
     }
   },
   plugins: [require("daisyui")],

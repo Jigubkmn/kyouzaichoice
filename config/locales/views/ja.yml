@@ -40,12 +40,20 @@ ja:
     create:
       success: ユーザー登録が完了しました
       danger: ユーザー登録に失敗しました
-  profile_user:
-    uqdate:
+  profile:
+    user: ユーザー情報
+    qualification: 資格
+    material: 教材
+  profile_users:
+    update:
       success: ユーザー情報を更新しました
       danger: ユーザー情報を更新出来ませんでした
     show:
-      side_bar: ユーザー情報
+      title: ユーザー情報
+      email: メールアドレス
+      introduction: 自己紹介
+    edit:
+      title: ユーザー情報編集
 
 
       

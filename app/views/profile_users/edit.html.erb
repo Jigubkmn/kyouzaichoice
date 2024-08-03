@@ -1,26 +1,30 @@
-<div class="flex flex-col justify-center items-center">
-  <div class="w-full max-w-700px ">
-    <h3 class="mt-50px text-3xl font-bold">ユーザー情報編集</h3>
-    <div class="mt-20px border-2 border-gray rounded-md ">
-      <div class="my-50px ml-50px flex items-center ">
-        <div class="flex justify-start items-center">
-          <div><%= link_to image_tag(current_user.image_url, class:"h-20 w-20 rounded-full"), '#' %></div>
-          <div class="text-28px ml-50px"><%= current_user.name %></div>
+<div class="flex flex-row w-full">
+  <%= render 'profile/side_bar' %>
+  <div class="flex flex-col">
+    <h3 class="mt-50px text-28px font-bold"><%= t('.title') %></h3>
+    <div class="min-w-700px mt-15px border-2 border-gray rounded-md flex justify-center ">
+      <%= form_with model: @user, url: profile_user_path, method: :put do |f| %>
+        <div class= "mt-30px mb-20px flex flex-col" >
+          <%= f.label :name, class: "font-bold" %>
+          <%= f.text_field :name, class: "input input-bordered input-warning input-sm m-0 py-0 pr-0 pl-4", style: "width:550px;" %>
         </div>
-        <div class="flex items-center ml-auto mr-50px">
-          <div class="flex justify-center items-center bg-thin-orange h-9 w-9 rounded-full"><i class="fa-sharp fa-solid fa-pencil fa-lg"></i></div> 
+        <div class= "mb-20px flex flex-col" >
+          <%= f.label :email, class: "font-bold" %>
+          <%= f.email_field :email, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "width:550px;" %>
         </div>
-      </div>
-      <div class="border-y-2 border-gray mx-30px py-30px">
-        <div class="text-base ml-20px mb-5px font-bold">メールアドレス</div>
-        <div class="text-base ml-20px"><%= current_user.email %></div>
-      </div>
-      <div class="mx-30px py-30px">
-        <div class="text-base ml-20px mb-5px font-bold">自己紹介</div>
-          <div class="text-base ml-20px">
-            <%= current_user.introduction.present? ? current_user.introduction : "未記入" %>
-          </div>
-      </div>
-    </div>
+        <div class= "mb-20px flex flex-col" >
+          <%= f.label :introduction, class: "font-bold" %>
+          <%= f.text_area :introduction, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "width:550px; height:70px;" %>
+        </div>
+        <div class= "mb-20px flex flex-col">
+          <%= f.label :image, class: "font-bold" %>
+          <%= f.file_field :image, class: "file-input file-input-bordered file-input-warning file-input-sm w-full max-w-xs", accept: 'image/*' %>
+          <%= f.hidden_field :image_cache %>
+        </div>
+        <div class="flex justify-center mb-30px">
+          <%= f.submit t('helpers.submit.update'), class: "btn bg-pale-blue hover:bg-dark-blue w-full max-w-200px text-xl text-white" %>
+        </div>
+      <% end %>
+    </div>  
   </div>
 </div>
