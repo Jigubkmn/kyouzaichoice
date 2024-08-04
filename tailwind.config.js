@@ -19,7 +19,10 @@ module.exports = {
         'flash-messages-yellow': '#F3F65D',
         'pale-blue': '#27CBFF',
         'dark-blue': '#00B6EF',
-        'gray': '#D9D9D9',
+        'pale-gray': '#D9D9D9',
+        'dark-gray': '#9B9393',
+        'pale-pink': '#FCC2C2',
+        'dark-pink': '#FF9A9A',
       },
       margin: {
         '5px': '5px',
@@ -33,6 +36,7 @@ module.exports = {
         '100px': '100px',
       },
       padding: {
+        '10px': '10px',
         '15px': '15px',
         '20px': '20px',
         '30px': '30px',
@@ -46,6 +50,7 @@ module.exports = {
         '700px': '700px',
       },
       height: {
+        '48px': '48px',
         '72px': '72px',
       },
       minHeight: {

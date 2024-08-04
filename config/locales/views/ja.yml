@@ -5,6 +5,8 @@ ja:
       submit: 保存
       update: 更新
       login: ログイン
+      cancel: キャンセル
+      qualification_addition: 資格を追加
     label:
       email: メールアドレス
       password: パスワード
@@ -54,6 +56,13 @@ ja:
       introduction: 自己紹介
     edit:
       title: ユーザー情報編集
+  profile_qualifications:
+    new:
+      title: 資格追加
+    index:
+      title: 資格一覧
+    edit:
+      title: 資格編集
 
 
       

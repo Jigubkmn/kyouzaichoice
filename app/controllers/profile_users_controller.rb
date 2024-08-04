@@ -1,5 +1,7 @@
 class ProfileUsersController < ApplicationController
-  before_action :set_user, only: %i[edit update]
+  before_action :set_user, only: %i[index edit update]
+
+  def show; end
 
   def edit; end
 
@@ -13,7 +15,7 @@ class ProfileUsersController < ApplicationController
     end
   end
 
-  def show; end
+
 
   private
 
