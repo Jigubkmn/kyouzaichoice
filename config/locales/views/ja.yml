@@ -44,7 +44,7 @@ ja:
       danger: ユーザー登録に失敗しました
   profile:
     user: ユーザー情報
-    qualification: 資格
+    qualification: 資格一覧
     material: 教材
   profile_users:
     update:

@@ -4,12 +4,12 @@
     <%= f.text_field :name, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "width:550px;" %>
   </div>
 
-  <div class= "mb-20px flex flex-col" >
+  <div class= "mb-20px flex flex-col" id="progress-select" >
     <%= f.label :progress, "進捗状況", class: "font-bold" %>
     <%= f.select :progress, ["学習開始前", "学習中","科目合格", "合格済み"], { include_blank: true }, class: "select select-warning select-sm w-full m-0 py-0 pr-0 pl-4", style: "width:250px;" %>
   </div>
 
-  <div class= "mb-20px flex flex-col mr-30px" >
+  <div class= "mb-20px flex flex-col mr-30px" id="year-acquired-container">
     <%= f.label :year_acquired, "取得年", class: "font-bold" %>
     <div class="flex items-center">
       <%= f.select :year_acquired, (1950..Date.today.year).to_a.reverse, { include_blank: true }, class: "select select-warning select-sm input-sm m-0 py-0 pr-0 pl-4", style: "width:100px;" %>
@@ -24,5 +24,4 @@
       <%= f.submit nil, class: "btn bg-pale-blue hover:bg-dark-blue w-full text-xl text-white", style: "width:150px;" %>
     </div>
   </div>
-  
 <% end %>
