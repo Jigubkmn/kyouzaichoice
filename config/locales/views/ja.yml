@@ -63,6 +63,14 @@ ja:
       title: 資格一覧
     edit:
       title: 資格編集
+    create:
+      success: 資格を作成しました
+      danger: 資格を作成出来ませんでした
+    update:
+      success: 資格を更新されました
+      danger: 資格を更新出来ませんでした
+    destroy:
+      success: 資格が削除されました
 
 
       

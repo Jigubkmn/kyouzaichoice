@@ -13,11 +13,10 @@ class ProfileQualificationsController < ApplicationController
   def create
     @qualification = current_user.qualifications.build(qualification_params)
     if @qualification.save
-      redirect_to profile_qualifications_path, success: '資格を作成しました'
+      redirect_to profile_qualifications_path, success: t('profile_qualifications.create.success')
     else
       @qualifications = Qualification.all
-      puts @qualification.errors.full_messages 
-      flash.now['danger'] = '資格を作成出来ませんでした'
+      flash.now['danger'] = t('profile_qualifications.create.danger')
       render :new, status: :unprocessable_entity
     end
   end
@@ -26,9 +25,9 @@ class ProfileQualificationsController < ApplicationController
 
   def update
     if @qualification.update(qualification_params)
-      redirect_to profile_user_path, notice: '資格を更新されました'
+      redirect_to profile_qualifications_path, success: t('profile_qualifications.update.success')
     else
-      flash.now['danger'] = '資格を更新出来ませんでした'
+      flash.now['danger'] = t('profile_qualifications.update.danger')
       render :edit, status: :unprocessable_entity
     end
   end
@@ -36,7 +35,7 @@ class ProfileQualificationsController < ApplicationController
   def destroy
     qualification = current_user.qualifications.find(params[:id])
     qualification.destroy
-    redirect_to profile_qualifications_path, success: '資格が削除されました'
+    redirect_to profile_qualifications_path, success: t('profile_qualifications.destroy.success')
   end
 
   private

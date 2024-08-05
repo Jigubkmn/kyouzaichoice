@@ -1,4 +1,4 @@
-<%= form_with model: @qualification, url: profile_qualifications_path, local: true, id: "qualification-form", style: "display: none;" do |f| %>
+<%= form_with model: @qualification, url: @qualification.new_record? ? profile_qualifications_path : profile_qualification_path(@qualification), local: true do |f| %>
   <div class= "mb-20px pt-30px flex flex-col">
     <%= f.label :name, "資格名", class: "font-bold" %>
     <%= f.text_field :name, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "width:550px;" %>
@@ -6,18 +6,23 @@
 
   <div class= "mb-20px flex flex-col" >
     <%= f.label :progress, "進捗状況", class: "font-bold" %>
-    <%= f.text_field :progress, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "width:550px;" %>
+    <%= f.select :progress, ["学習開始前", "学習中","科目合格", "合格済み"], { include_blank: true }, class: "select select-warning select-sm w-full m-0 py-0 pr-0 pl-4", style: "width:250px;" %>
   </div>
 
-  <div class= "mb-20px flex flex-col" >
+  <div class= "mb-20px flex flex-col mr-30px" >
     <%= f.label :year_acquired, "取得年", class: "font-bold" %>
-    <%= f.text_field :year_acquired, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "width:550px;" %>
+    <div class="flex items-center">
+      <%= f.select :year_acquired, (1950..Date.today.year).to_a.reverse, { include_blank: true }, class: "select select-warning select-sm input-sm m-0 py-0 pr-0 pl-4", style: "width:100px;" %>
+      <span class="ml-2">年</span>
+    </div>
+  </div>
+  <div class="flex justify-end mb-30px">
+    <div class="flex justify-center item-center mr-30px">
+      <%= link_to t('helpers.submit.cancel'), profile_qualifications_path, class: "btn bg-thin-gray hover:bg-pale-gray w-full text-xl text-white", style: "width:150px;" %>
+    </div> 
+    <div class="flex justify-center item-center">
+      <%= f.submit nil, class: "btn bg-pale-blue hover:bg-dark-blue w-full text-xl text-white", style: "width:150px;" %>
+    </div>
   </div>
   
-  <div class="flex justify-center item-center">
-    <%= link_to t('helpers.submit.cancel'), "#", class: "btn bg-pale-gray hover:bg-dark-gray w-full max-w-200px text-xl text-white", id: "cancel-button", style: "display: none;"  %>
-  </div> 
-  <div class="flex justify-center mb-30px">
-    <%= f.submit t('helpers.submit.create'), class: "btn bg-pale-blue hover:bg-dark-blue w-full max-w-200px text-xl text-white" %>
-  </div>
 <% end %>
