@@ -56,7 +56,7 @@ ja:
       introduction: 自己紹介
     edit:
       title: ユーザー情報編集
-  profile_qualifications:
+  qualifications:
     new:
       title: 資格追加
     index:

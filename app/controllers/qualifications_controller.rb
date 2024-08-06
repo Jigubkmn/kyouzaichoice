@@ -1,4 +1,4 @@
-class ProfileQualificationsController < ApplicationController
+class QualificationsController < ApplicationController
   before_action :require_login
   before_action :set_qualification, only: [:edit, :update, :destroy]
   
@@ -13,10 +13,10 @@ class ProfileQualificationsController < ApplicationController
   def create
     @qualification = current_user.qualifications.build(qualification_params)
     if @qualification.save
-      redirect_to profile_qualifications_path, success: t('profile_qualifications.create.success')
+      redirect_to qualifications_path, success: t('qualifications.create.success')
     else
       @qualifications = Qualification.all
-      flash.now['danger'] = t('profile_qualifications.create.danger')
+      flash.now['danger'] = t('qualifications.create.danger')
       render :new, status: :unprocessable_entity
     end
   end
@@ -25,9 +25,9 @@ class ProfileQualificationsController < ApplicationController
 
   def update
     if @qualification.update(qualification_params)
-      redirect_to profile_qualifications_path, success: t('profile_qualifications.update.success')
+      redirect_to qualifications_path, success: t('qualifications.update.success')
     else
-      flash.now['danger'] = t('profile_qualifications.update.danger')
+      flash.now['danger'] = t('qualifications.update.danger')
       render :edit, status: :unprocessable_entity
     end
   end
@@ -35,7 +35,7 @@ class ProfileQualificationsController < ApplicationController
   def destroy
     qualification = current_user.qualifications.find(params[:id])
     qualification.destroy
-    redirect_to profile_qualifications_path, success: t('profile_qualifications.destroy.success')
+    redirect_to qualifications_path, success: t('qualifications.destroy.success')
   end
 
   private

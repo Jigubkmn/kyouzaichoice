@@ -10,3 +10,7 @@ ja:
         password_confirmation: パスワード確認 
         image: プロフィール画像
         introduction: 自己紹介
+      qualification:
+        name: 資格名
+        progress: 進捗状況
+        year_acquired: 取得年
