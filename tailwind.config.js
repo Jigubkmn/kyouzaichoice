@@ -41,14 +41,16 @@ module.exports = {
         '10px': '10px',
         '15px': '15px',
         '20px': '20px',
+        '25px': '25px',
         '30px': '30px',
       },
       maxWidth: {
         '200px': '200px',
-        '700px': '700px',
+        '610px': '610px',
       },
       minWidth: {
-        '250px': '250px',
+        '200px': '200px',
+        '610px': '610px',
         '700px': '700px',
       },
       height: {

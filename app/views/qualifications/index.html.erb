@@ -1,36 +1,36 @@
 <div class="flex flex-row w-full">
   <%= render 'profile/side_bar' %>
   <div class="flex flex-col mb-30px">
-    <h3 class="mt-50px text-28px font-bold"><%= t('.title') %></h3>
-    <div class="min-w-700px mt-15px border-2 border-gray rounded-md ">
+    <h3 class="mt-30px text-28px font-bold"><%= t('.title') %></h3>
+    <div class="min-w-610px mt-5px border-2 border-gray rounded-md px-30px pb-30px">
     <% if @qualifications.present? %>
       <!-- 作成した資格を表示 -->
       <% @qualifications.each do |qualification| %>
-        <div class="flex flex-row items-center border-b-2 border-gray mx-30px py-10px">
-          <div class="font-bold ml-20px mr-50px"><%= qualification.name %></div>
-         <%= qualification.progress %>
-        <div class="ml-auto mr-20px flex justify-center items-center">
+        <div class="flex flex-row items-center border-b-2 border-gray py-10px">
+          <div class="font-bold ml-20px mr-30px"><%= qualification.name %></div>
+          <div class="mr-30px"><%= qualification.progress %></div>
           <% if qualification.year_acquired.present? %>
-            <div class="mr-75px">取得年数：<%= qualification.year_acquired %>年</div>
+            <div class="mr-30px">取得年数：<%= qualification.year_acquired %>年</div>
           <% end %>
-          <%= link_to edit_qualification_path(qualification), class:'flex justify-center items-center bg-thin-orange hover:bg-pale-orange h-9 w-9 rounded-full mr-20px' do %>
-            <i class="fa-sharp fa-solid fa-pencil fa-lg"></i>
-          <% end %>
-          <%= link_to qualification_path(qualification), class:'flex justify-center items-center bg-pale-pink hover:bg-dark-pink h-9 w-9 rounded-full', data: { turbo_method: :delete } do %>
-            <i class="fa-solid fa-trash"></i>
-          <% end %>
-        </div>
+          <div class="ml-auto mr-20px flex justify-center items-center">
+            <%= link_to edit_qualification_path(qualification), class:'flex justify-center items-center bg-thin-orange hover:bg-pale-orange h-9 w-9 rounded-full mr-20px' do %>
+              <i class="fa-sharp fa-solid fa-pencil fa-lg"></i>
+            <% end %>
+            <%= link_to qualification_path(qualification), class:'flex justify-center items-center bg-pale-pink hover:bg-dark-pink h-9 w-9 rounded-full', data: { turbo_method: :delete } do %>
+              <i class="fa-solid fa-trash"></i>
+            <% end %>
+          </div>
         </div>
       <% end %>
     <% else %>
-      <div class="ml-50px mt-30px">
+      <div class="ml-30px mt-30px">
         <div>資格が登録されていません。</div>
         <div>下記ボタンより資格を追加してください</div>
       </div>
     <% end %>
       <div class="flex flex-col">
-        
-        <div class="ml-50px my-30px">
+
+        <div class="mt-20px ml-20px">
           <%= link_to t('helpers.submit.qualification_addition'), new_qualification_path, class: "btn bg-pale-blue hover:bg-dark-blue w-full max-w-200px text-xl text-white" %>
         </div>
       </div>

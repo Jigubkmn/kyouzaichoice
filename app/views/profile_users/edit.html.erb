@@ -1,10 +1,10 @@
 <div class="flex flex-row w-full">
   <%= render 'profile/side_bar' %>
-  <div class="flex flex-col">
-    <h3 class="mt-50px text-28px font-bold"><%= t('.title') %></h3>
-    <div class="min-w-700px mt-15px border-2 border-gray rounded-md flex justify-center ">
+  <div class="flex flex-col m-30px">
+    <h3 class="mt-30px text-28px font-bold"><%= t('.title') %></h3>
+    <div class="min-w-610px mt-5px border-2 border-gray rounded-md flex justify-center p-30px ">
       <%= form_with model: @user, url: profile_user_path, method: :put do |f| %>
-        <div class= "mt-30px mb-20px flex flex-col" >
+        <div class= "mb-20px flex flex-col" >
           <%= f.label :name, class: "font-bold" %>
           <%= f.text_field :name, class: "input input-bordered input-warning input-sm m-0 py-0 pr-0 pl-4", style: "width:550px;" %>
         </div>
@@ -21,7 +21,7 @@
           <%= f.file_field :image, class: "file-input file-input-bordered file-input-warning file-input-sm w-full max-w-xs", accept: 'image/*' %>
           <%= f.hidden_field :image_cache %>
         </div>
-        <div class="flex justify-center mb-30px">
+        <div class="flex justify-center">
           <%= f.submit t('helpers.submit.update'), class: "btn bg-pale-blue hover:bg-dark-blue w-full max-w-200px text-xl text-white" %>
         </div>
       <% end %>
