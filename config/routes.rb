@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :qualifications, only: %i[new index create edit update destroy]
   resources :materials, only: %i[new index create edit update destroy] do
     collection { get :search }#このルーティングを追加
+    # material_evaluationコントローラーを用意していないため、material内に記述している
+    resources :comments, only: %i[create edit destroy], shallow: true
   end
   # Defines the root path route ("/")
   # root "articles#index"

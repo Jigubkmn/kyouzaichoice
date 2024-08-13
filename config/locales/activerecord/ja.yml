@@ -4,6 +4,7 @@ ja:
       user: ユーザー
       qualification: 資格
       material_evaluation: 教材評価
+      comment: コメント
     attributes:
       user:
         name: ユーザー名
@@ -19,3 +20,5 @@ ja:
       material_evaluation:
         evaluation: 教材評価
         feature: 教材の特徴
+      comment:
+        body: コメント

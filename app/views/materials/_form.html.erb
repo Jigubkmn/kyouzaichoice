@@ -8,7 +8,7 @@
       <%= f.hidden_field :info_link, value: @material.info_link %>
       <%= f.hidden_field :systemid, value: @material.systemid %>
 
-      <!-- 入力フォーム -->
+      <!-- MaterialEvaluationの入力フォーム -->
       <%= f.fields_for :material_evaluations do |evaluation_f| %>
         <div class= "mb-20px flex flex-col">
           <div class="font-bold">教材名</div>
@@ -30,8 +30,15 @@
             <% end %>
           </div>
         </div>
+        <!-- Commentの入力フォーム -->
+        <%= evaluation_f.fields_for :comments do |comment_f| %>
+          <div class= "mb-20px flex flex-col">
+            <%= comment_f.label :body, class: "font-bold" %>
+            <%= comment_f.text_area :body, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "width:400px;" %>
+          </div>
+        <% end %>
       <% end %>
-      
+
       <!-- ボタン -->
       <div class="flex justify-end">
         <div class="flex justify-center item-center mr-30px"><%= link_to t('helpers.submit.cancel'), materials_path, class: "btn bg-thin-gray hover:bg-pale-gray w-full text-xl text-white" %></div> 

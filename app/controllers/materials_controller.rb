@@ -5,7 +5,7 @@ class MaterialsController < ApplicationController
   def new
     @material = Material.new(material_params)
     @title = @material.title
-    @material.material_evaluations.build
+    @material.material_evaluations.build.comments.build
   end  
 
   def index
@@ -31,6 +31,9 @@ class MaterialsController < ApplicationController
     # ユーザー情報を設定
     @material.material_evaluations.each do |evaluation|
       evaluation.user = current_user
+      evaluation.comments.each do |comment|
+        comment.user = current_user
+      end
     end
 
     if @material.save
@@ -45,7 +48,11 @@ class MaterialsController < ApplicationController
 
   def material_params
     params.require(:material).permit(:title, :image_link, :published_date, :info_link, :systemid,
-    material_evaluations_attributes: [:id, :evaluation, :_destroy, feature: []])
+    material_evaluations_attributes: [
+      :id, :evaluation, :_destroy, feature: [],
+      comments_attributes: [:id, :body, :_destroy]
+      ]
+    )
   end
   
   def set_material
