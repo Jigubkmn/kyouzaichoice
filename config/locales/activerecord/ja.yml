@@ -2,6 +2,8 @@ ja:
   activerecord:
     models:
       user: ユーザー
+      qualification: 資格
+      material_evaluation: 教材評価
     attributes:
       user:
         name: ユーザー名
@@ -14,3 +16,6 @@ ja:
         name: 資格名
         progress: 進捗状況
         year_acquired: 取得年
+      material_evaluation:
+        evaluation: 教材評価
+        feature: 教材の特徴

@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   post 'login', to: 'user_sessions#create'
   delete 'logout', to: 'user_sessions#destroy'
   resource :profile_user, only: %i[show edit update]
-  resources :qualifications, only: %i[new index edit create update destroy]
+  resources :qualifications, only: %i[new index create edit update destroy]
+  resources :materials, only: %i[new index create edit update destroy] do
+    collection { get :search }#このルーティングを追加
+  end
   # Defines the root path route ("/")
   # root "articles#index"
 end

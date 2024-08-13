@@ -7,6 +7,8 @@ ja:
       login: ログイン
       cancel: キャンセル
       qualification_addition: 資格を追加
+      material_addition: 教材を追加
+      search: 検索
     label:
       email: メールアドレス
       password: パスワード
@@ -21,6 +23,7 @@ ja:
     mypage_user: マイページ(ユーザー情報)
     mypage_qualification: マイページ(資格一覧)
     mypage_material: マイページ(教材一覧)
+    mypage_new_material: マイページ(教材追加)
   footer:
     term_of_service: 利用規約
     privacy_policy: プライバシーポリシー
@@ -72,6 +75,18 @@ ja:
       danger: 資格を更新出来ませんでした
     destroy:
       success: 資格が削除されました
+  materials:
+    new:
+      title: 教材追加
+    index:
+      title: 教材一覧
+    search:
+      name: 教材名
+      title: 教材検索
+      danger: 教材を選択出来ませんでした
+    create:
+      success: 教材を登録しました
+      danger: 教材を登録出来ませんでした
 
 
       

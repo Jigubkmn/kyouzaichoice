@@ -9,14 +9,14 @@
             <div><%= link_to image_tag(current_user.image_url, class:"h-20 w-20 rounded-full"), '#' %></div>
             <div class="text-28px ml-50px"><%= current_user.name %></div>
           </div>
-          <div class="flex items-center ml-auto mr-50px">
+          <div class="flex items-center ml-auto mr-30px">
             <%= link_to edit_profile_user_path, class: 'flex justify-center items-center bg-thin-orange hover:bg-pale-orange h-9 w-9 rounded-full' do %>
               <i class="fa-sharp fa-solid fa-pencil fa-lg"></i>
             <% end %>
           </div>
         </div>
         
-        <div class="border-y-2 border-gray py-30px ml-20px flex flex-col">
+        <div class="border-y-2 border-gray py-30px pl-20px flex flex-col">
           <div class="text-base mb-5px font-bold"><%= t('.email') %></div>
           <div class="text-base"><%= current_user.email %></div>
         </div>

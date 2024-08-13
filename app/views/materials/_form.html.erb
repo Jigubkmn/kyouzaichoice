@@ -1,0 +1,44 @@
+<div class="max-w-610px mt-5px border-2 border-gray rounded-md">
+  <div class="p-30px">
+    <%= form_with model: @material, local: true do |f| %>
+      <!-- Materialの隠しフィールド -->
+      <%= f.hidden_field :title, value: @material.title %>
+      <%= f.hidden_field :image_link, value: @material.image_link %>
+      <%= f.hidden_field :published_date, value: @material.published_date %>
+      <%= f.hidden_field :info_link, value: @material.info_link %>
+      <%= f.hidden_field :systemid, value: @material.systemid %>
+
+      <!-- 入力フォーム -->
+      <%= f.fields_for :material_evaluations do |evaluation_f| %>
+        <div class= "mb-20px flex flex-col">
+          <div class="font-bold">教材名</div>
+          <div><%= @title %></div>
+        </div>
+        <div class= "mb-20px flex flex-col">
+          <%= evaluation_f.label :evaluation, class: "font-bold" %>
+          <%= evaluation_f.select :evaluation, options_for_select((0..10).map { |i| [sprintf('%.1f', i * 0.5), sprintf('%.1f', i * 0.5)] }), {include_blank: true},
+          class: "select select-warning select-sm w-full m-0 py-0 pr-0 pl-4", style: "width:200px;" %>
+        </div>
+        <div class= "mb-20px flex flex-col">
+          <%= evaluation_f.label :feature, class: "font-bold" %>
+          <div class= "flex flex-row flex-wrap">
+            <% experience_levels.each_with_index do |level, index| %>
+              <div class= "mr-20px">
+                <%= evaluation_f.check_box :feature, { multiple: true }, level, false %>
+                <%= evaluation_f.label :feature, level, value: level %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      
+      <!-- ボタン -->
+      <div class="flex justify-end">
+        <div class="flex justify-center item-center mr-30px"><%= link_to t('helpers.submit.cancel'), materials_path, class: "btn bg-thin-gray hover:bg-pale-gray w-full text-xl text-white" %></div> 
+        <div class="flex justify-center item-center"><%= f.submit nil, class: "btn bg-pale-blue hover:bg-dark-blue w-full text-xl text-white", style: "width:150px;" %></div>
+      </div>
+    <% end %>
+  </div>     
+</div>
+
+

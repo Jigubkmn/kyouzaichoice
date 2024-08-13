@@ -33,6 +33,9 @@ gem "jbuilder"
 # 画像アップロード 
 gem 'carrierwave', '~> 3.0'
 
+# Net::HTTPを使用してコードが煩雑になることを防ぐため、より簡潔にコードが記載できる
+gem 'faraday'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

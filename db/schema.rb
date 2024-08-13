@@ -10,9 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_04_015007) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_12_141350) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "material_evaluations", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "material_id"
+    t.string "evaluation", null: false
+    t.string "feature"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_id"], name: "index_material_evaluations_on_material_id"
+    t.index ["user_id"], name: "index_material_evaluations_on_user_id"
+  end
+
+  create_table "materials", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "image_link", null: false
+    t.date "published_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "info_link"
+    t.string "systemid"
+  end
 
   create_table "qualifications", force: :cascade do |t|
     t.bigint "user_id"
@@ -36,5 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_04_015007) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "material_evaluations", "materials"
+  add_foreign_key "material_evaluations", "users"
   add_foreign_key "qualifications", "users"
 end

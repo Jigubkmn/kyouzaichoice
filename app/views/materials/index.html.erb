@@ -1,0 +1,18 @@
+<div class="flex flex-row w-full">
+  <%= render 'profile/side_bar' %>
+  <div class="flex flex-col mb-30px">
+    <h3 class="mt-30px text-28px font-bold"><%= t('.title') %></h3>
+    <div class="min-w-610px mt-5px border-2 border-gray rounded-md px-30px pb-30px">
+      <div class="mt-30px">
+        <div>資格が登録されていません。</div>
+        <div>下記ボタンより資格を追加してください</div>
+      </div>
+      <div class="flex flex-col">
+        <div class="mt-20px">
+          <%= link_to t('helpers.submit.material_addition'), search_materials_path, class: "btn bg-pale-blue hover:bg-dark-blue w-full max-w-200px text-xl text-white" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

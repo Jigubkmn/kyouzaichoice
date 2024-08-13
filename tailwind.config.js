@@ -27,6 +27,7 @@ module.exports = {
       },
       margin: {
         '5px': '5px',
+        '10px': '10px',
         '15px': '15px',
         '20px': '20px',
         '25px': '25px',
@@ -44,31 +45,45 @@ module.exports = {
         '25px': '25px',
         '30px': '30px',
       },
+      width: {
+        '100px': '100px',
+        '300px': '300px',
+      },
       maxWidth: {
+        '120px': '120px',
         '200px': '200px',
         '610px': '610px',
+        '940px': '940px',
       },
       minWidth: {
+        '100px': '100px',
+        '150px': '150px',
         '200px': '200px',
+        '300px': '300px',
         '610px': '610px',
         '700px': '700px',
       },
       height: {
+        '30px': '30px',
         '48px': '48px',
         '72px': '72px',
+        '170px': '170px',
       },
       minHeight: {
+        '170px': '170px',
         '600px': '600px',
       },
+      lineHeight: {
+        '30px': '30px',
+      },
       fontSize: {
+        '16px': '16px',
         '28px': '28px',
       },
       spacing: {
         '50px': '50px',
       },
     },
-    backgroundImage: {
-    }
-  },
+  }, 
   plugins: [require("daisyui")],
 }
