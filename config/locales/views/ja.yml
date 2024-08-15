@@ -7,7 +7,6 @@ ja:
       login: ログイン
       cancel: キャンセル
       qualification_addition: 資格を追加
-      material_addition: 教材を追加
       search: 検索
     label:
       email: メールアドレス
@@ -74,12 +73,20 @@ ja:
       success: 資格を更新されました
       danger: 資格を更新出来ませんでした
     destroy:
-      success: 資格が削除されました
+      success: 資格を削除しました
   materials:
     new:
       title: 教材追加
     index:
-      title: 教材一覧
+      title: 登録済み教材一覧
+      like: いいね
+      already_registered: 登録済み
+      material_addition: 教材を追加
+    like:
+      title: いいねした教材一覧
+      like: いいね
+      already_registered: 登録済み
+      material_index: 教材一覧画面へ
     search:
       name: 教材名
       title: 教材検索
@@ -87,6 +94,10 @@ ja:
     create:
       success: 教材を登録しました
       danger: 教材を登録出来ませんでした
+    edit:
+      title: 教材編集
+    destroy:
+      success: 登録した教材を削除されました
 
 
       

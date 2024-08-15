@@ -4,12 +4,16 @@ class MaterialsController < ApplicationController
 
   def new
     @material = Material.new(material_params)
-    @title = @material.title
     @material.material_evaluations.build.comments.build
   end  
 
   def index
-    @material = Material.all
+    @materials = Material.all
+    @user_comments = current_user.comments.where(commentable_type: "MaterialEvaluation")
+  end
+
+  def like
+    @materials = Material.all
   end
 
   def search 
@@ -44,6 +48,20 @@ class MaterialsController < ApplicationController
     end
   end
 
+  def edit
+    @material = Material.find(params[:id])
+    # 既存のmaterial_evaluationsとそのコメントを読み込む
+    @material.material_evaluations.each do |evaluation|
+      evaluation.comments.build if evaluation.comments.empty?
+    end
+  end
+
+  def destroy
+    @material = Material.find(params[:id])
+    @material.destroy
+    redirect_to materials_path, success: t('materials.destroy.success')
+  end
+
   private
 
   def material_params
@@ -57,9 +75,7 @@ class MaterialsController < ApplicationController
   
   def set_material
     @material = Material.find(params[:id])
+    @material.material_evaluations.includes(:comments) # 関連するMaterialEvaluationとそのコメントを読み込む
   end
 
-  def set_material_evaluation
-    @materialEvaluation = MaterialEvaluation.find(params[:id])
-  end
 end

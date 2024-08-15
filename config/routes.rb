@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   resource :profile_user, only: %i[show edit update]
   resources :qualifications, only: %i[new index create edit update destroy]
   resources :materials, only: %i[new index create edit update destroy] do
-    collection { get :search }#このルーティングを追加
+    collection { get :search } # 教材検索用
+    collection { get :like } # いいねした教材一覧表示用
     # material_evaluationコントローラーを用意していないため、material内に記述している
     resources :comments, only: %i[create edit destroy], shallow: true
   end

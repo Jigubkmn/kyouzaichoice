@@ -19,33 +19,33 @@
       <% end %>
     </div>
     <% if @google_materials.present? %>
-  <div class="my-30px">
-    <!-- 検索した教材の情報を表示する -->
-    <div class="flex flex-wrap gap-4"> 
-      <% @google_materials['items']&.each do |google_material| %>
-        <div class="flex flex-row border-2 border-gray rounded-md w-300px h-170px" >
-          <div class="flex flex-row m-10px">
-            <div class="mr-10px"><%= image_tag google_material_thumbnail(google_material), style: "width: 100px; max-width: 100px;" %></div>
-            <div class="flex flex-col">
-              <div class="mt-5px"><%= truncate(google_material['volumeInfo']['title'], length: 20) %></div>
-              <div><%= google_material['volumeInfo']['publishedDate'] %></div>
-              <!-- 選択ボタンを押したらhidden_fieldを使用してnew.html.erbに値が送信される -->
-              <%= form_with url: new_material_path, local: true, method: :get do |f| %>
-                <%= hidden_field_tag 'material[title]', set_google_material_params(google_material)["title"] %>
-                <%= hidden_field_tag 'material[published_date]', set_google_material_params(google_material)["publishedDate"] %>
-                <%= hidden_field_tag 'material[info_link]', set_google_material_params(google_material)["canonicalVolumeLink"] %>
-                <%= hidden_field_tag 'material[image_link]', set_google_material_params(google_material)["image"] %>
-                <%= hidden_field_tag 'material[systemid]', set_google_material_params(google_material)["systemid"] %>
-                <%= button_tag type: "submit" do %>
-                  <div class="btn bg-pale-blue hover:bg-dark-blue w-full text-xl text-white h-30px leading-30px">選択</div>
-                <% end %>
-              <% end %>
+      <div class="my-30px">
+        <!-- 検索した教材の情報を表示する -->
+        <div class="flex flex-wrap gap-4">
+          <% @google_materials['items']&.each do |google_material| %>
+            <div class="flex flex-row border-2 border-gray rounded-md w-300px h-170px" >
+              <div class="flex flex-row m-10px">
+                <div class="mr-10px"><%= image_tag google_material_thumbnail(google_material), style: "width: 100px; max-width: 100px;" %></div>
+                <div class="flex flex-col">
+                  <div class="mt-5px"><%= truncate(google_material['volumeInfo']['title'], length: 20) %></div>
+                  <div><%= google_material['volumeInfo']['publishedDate'] %></div>
+                  <!-- 選択ボタンを押したらhidden_fieldを使用してnew.html.erbに値が送信される -->
+                  <%= form_with url: new_material_path, local: true, method: :get do |f| %>
+                    <%= hidden_field_tag 'material[title]', set_google_material_params(google_material)["title"] %>
+                    <%= hidden_field_tag 'material[published_date]', set_google_material_params(google_material)["publishedDate"] %>
+                    <%= hidden_field_tag 'material[info_link]', set_google_material_params(google_material)["canonicalVolumeLink"] %>
+                    <%= hidden_field_tag 'material[image_link]', set_google_material_params(google_material)["image"] %>
+                    <%= hidden_field_tag 'material[systemid]', set_google_material_params(google_material)["systemid"] %>
+                    <%= button_tag type: "submit" do %>
+                      <div class="btn bg-pale-blue hover:bg-dark-blue w-full text-xl text-white h-30px leading-30px">選択</div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
             </div>
-          </div>
+          <% end %>
         </div>
-      <% end %>
-    </div>
-  </div>
-<% end %>
+      </div>
+    <% end %>
   </div>
 </div>

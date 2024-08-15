@@ -12,19 +12,20 @@
       <%= f.fields_for :material_evaluations do |evaluation_f| %>
         <div class= "mb-20px flex flex-col">
           <div class="font-bold">教材名</div>
-          <div><%= @title %></div>
+          <div><%= @material.title %></div>
         </div>
         <div class= "mb-20px flex flex-col">
           <%= evaluation_f.label :evaluation, class: "font-bold" %>
-          <%= evaluation_f.select :evaluation, options_for_select((0..10).map { |i| [sprintf('%.1f', i * 0.5), sprintf('%.1f', i * 0.5)] }), {include_blank: true},
-          class: "select select-warning select-sm w-full m-0 py-0 pr-0 pl-4", style: "width:200px;" %>
+          <%= evaluation_f.select :evaluation, options_for_select((0..10).map { |i| [sprintf('%.1f', i * 0.5), sprintf('%.1f', i * 0.5)] }, evaluation_f.object.evaluation),
+           {include_blank: true},class: "select select-warning select-sm w-full m-0 py-0 pr-0 pl-4", style: "width:200px;" %>
         </div>
+        <!-- （feature）入力フォーム -->
         <div class= "mb-20px flex flex-col">
           <%= evaluation_f.label :feature, class: "font-bold" %>
           <div class= "flex flex-row flex-wrap">
             <% experience_levels.each_with_index do |level, index| %>
               <div class= "mr-20px">
-                <%= evaluation_f.check_box :feature, { multiple: true }, level, false %>
+                <%= evaluation_f.check_box :feature, { multiple: true }, level, evaluation_f.object.feature.include?(level) %>
                 <%= evaluation_f.label :feature, level, value: level %>
               </div>
             <% end %>
@@ -34,7 +35,7 @@
         <%= evaluation_f.fields_for :comments do |comment_f| %>
           <div class= "mb-20px flex flex-col">
             <%= comment_f.label :body, class: "font-bold" %>
-            <%= comment_f.text_area :body, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "width:400px;" %>
+            <%= comment_f.text_area :body, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "width:500px; height:100px;" %>
           </div>
         <% end %>
       <% end %>
