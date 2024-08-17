@@ -3,7 +3,7 @@
   <div class="flex flex-col mb-30px">
     <div class="flex flex-row items-center mt-30px mb-5px">
       <h3 class="text-28px font-bold mr-50px"><%= t('.title') %></h3>
-      <%= link_to materials_path, class: "min-w-75px min-h-30px font-bold mr-20px flex justify-center items-center rounded-md" do %>
+      <%= link_to already_registered_materials_path, class: "min-w-75px min-h-30px font-bold mr-20px flex justify-center items-center rounded-md" do %>
         <div><%= t('.already_registered') %></div>
       <% end %>
       <%= link_to like_materials_path, class: "min-w-75px min-h-30px bg-pale-orange font-bold mr-20px flex justify-center items-center rounded-md" do %>
@@ -11,9 +11,9 @@
       <% end %>
     </div>
     <div class="flex flex-col items-center">
-      <div class="min-w-610px border-2 border-gray rounded-md p-30px mb-20px">
+      <div class="border-2 border-gray rounded-md p-30px mb-20px" style="width: 600px;">
         <div>いいねした教材がありません</div>
-        <div>下記より教材一覧画面に移動してお気に入りの教材を「いいね」して下さい</div>
+        <div>下記より教材一覧画面に移動して教材を「いいね」して下さい</div>
       </div>
       <%= link_to t('.material_index'), "#", class: "text-lg text-darkest-blue underline underline-offset-4" %>
     </div>

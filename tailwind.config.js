@@ -11,6 +11,7 @@ module.exports = {
 
         'pale-pink': '#FCC2C2',
         'dark-pink': '#FF9A9A',
+        'pale-yellow': '#FFD700',
         'thin-orange': '#FFDB7D',
         'pale-orange': '#FFCD4C',
         'dark-orange': '#FFB800',
@@ -49,18 +50,21 @@ module.exports = {
       width: {
         '100px': '100px',
         '300px': '300px',
+        '500px': '500px',
+        '600px': '600px',
+        '900px': '900px',
       },
       maxWidth: {
         '120px': '120px',
         '200px': '200px',
-        '610px': '610px',
+        '600px': '600px',
         '940px': '940px',
       },
       minWidth: {
         '75px': '75px',
         '100px': '100px',
         '150px': '150px',
-        '220px': '220px',
+        '200px': '200px',
         '300px': '300px',
         '610px': '610px',
         '700px': '700px',

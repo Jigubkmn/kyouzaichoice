@@ -1,20 +1,20 @@
 <div class="flex flex-row w-full">
   <%= render 'profile/side_bar' %>
-  <div class="flex flex-col m-30px">
+  <div class="flex flex-col">
     <h3 class="mt-30px text-28px font-bold"><%= t('.title') %></h3>
-    <div class="min-w-610px mt-5px border-2 border-gray rounded-md flex justify-center p-30px ">
+    <div class="mt-5px border-2 border-gray rounded-md p-30px" style="width: 600px;" >
       <%= form_with model: @user, url: profile_user_path, method: :put do |f| %>
         <div class= "mb-20px flex flex-col" >
           <%= f.label :name, class: "font-bold" %>
-          <%= f.text_field :name, class: "input input-bordered input-warning input-sm m-0 py-0 pr-0 pl-4", style: "width:550px;" %>
+          <%= f.text_field :name, class: "input input-bordered input-warning input-sm m-0 py-0 pr-0 pl-4" %>
         </div>
         <div class= "mb-20px flex flex-col" >
           <%= f.label :email, class: "font-bold" %>
-          <%= f.email_field :email, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "width:550px;" %>
+          <%= f.email_field :email, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4" %>
         </div>
         <div class= "mb-20px flex flex-col" >
           <%= f.label :introduction, class: "font-bold" %>
-          <%= f.text_area :introduction, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "width:550px; height:70px;" %>
+          <%= f.text_area :introduction, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "height:auto;", rows: 5 %>
         </div>
         <div class= "mb-20px flex flex-col">
           <%= f.label :image, class: "font-bold" %>

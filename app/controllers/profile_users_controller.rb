@@ -14,8 +14,6 @@ class ProfileUsersController < ApplicationController
     end
   end
 
-
-
   private
 
   def set_user

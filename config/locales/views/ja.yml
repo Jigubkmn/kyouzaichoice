@@ -47,8 +47,8 @@ ja:
       danger: ユーザー登録に失敗しました
   profile:
     user: ユーザー情報
-    qualification: 資格一覧
-    material: 教材一覧
+    qualification: 資格
+    material: 教材
   profile_users:
     update:
       success: ユーザー情報を更新しました
@@ -78,15 +78,17 @@ ja:
     new:
       title: 教材追加
     index:
-      title: 登録済み教材一覧
-      like: いいね
-      already_registered: 登録済み
-      material_addition: 教材を追加
+      title: 教材一覧   
     like:
-      title: いいねした教材一覧
+      title: いいねした教材
       like: いいね
       already_registered: 登録済み
       material_index: 教材一覧画面へ
+    already_registered:
+      title: 登録済み教材
+      like: いいね
+      already_registered: 登録済み
+      material_addition: 教材を追加
     search:
       name: 教材名
       title: 教材検索
@@ -96,8 +98,11 @@ ja:
       danger: 教材を登録出来ませんでした
     edit:
       title: 教材編集
+    update:
+      success: 教材を更新しました
+      danger: 教材を更新出来ませんでした
     destroy:
-      success: 登録した教材を削除されました
+      success: 教材を削除しました
 
 
       

@@ -9,7 +9,7 @@ class Material < ApplicationRecord
   # Material に関連するコメントを取得するメソッド
   def comments_by_user(user)
     material_evaluations.includes(:comments).flat_map do |evaluation|
-      evaluation.comments.where(user: user)
+      evaluation.comments.where(user: user) # rubocop:disable Style/HashSyntax
     end
   end
 end

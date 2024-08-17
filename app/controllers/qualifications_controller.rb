@@ -1,13 +1,13 @@
 class QualificationsController < ApplicationController
   before_action :require_login
-  before_action :set_qualification, only: [:edit, :update, :destroy]
-  
+  before_action :set_qualification, only: %i[edit update destroy]
+
   def new
     @qualification = Qualification.new
-  end  
+  end
 
   def index
-    @qualifications = Qualification.all
+    @qualifications = current_user.qualifications
   end
 
   def create
@@ -20,7 +20,7 @@ class QualificationsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-  
+
   def edit; end
 
   def update
@@ -39,7 +39,7 @@ class QualificationsController < ApplicationController
   end
 
   private
-  
+
   def set_qualification
     @qualification = Qualification.find(params[:id])
   end
@@ -47,5 +47,4 @@ class QualificationsController < ApplicationController
   def qualification_params
     params.require(:qualification).permit(:name, :progress, :year_acquired) # 必要に応じてフィールドを調整
   end
-
 end
