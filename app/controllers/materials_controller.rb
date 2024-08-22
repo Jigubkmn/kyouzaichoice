@@ -1,6 +1,6 @@
 class MaterialsController < ApplicationController
   before_action :require_login
-  before_action :set_material, only: %i[edit update destroy]
+  before_action :set_material, only: %i[edit show update destroy]
 
   def new
     @material = Material.new(material_params)
@@ -33,7 +33,21 @@ class MaterialsController < ApplicationController
   end
 
   def show
-    @material = Material.find(params[:id])
+    evaluations = @material.material_evaluations.includes(:comments)
+    @average_evaluation = evaluations.average(:evaluation).to_f.round(1) # 教材評価平均
+    @count_of_unique_evaluators = evaluations.select(:user_id).distinct.count # 教材評価者数
+    @unique_features = evaluations.flat_map(&:feature).reject { |f| f == 'true' }.uniq # 教材特徴（featureカラムのデータ）
+    # 各教材特徴(featureごとの個数と割合計算)
+    @feature_counts = @unique_features.each_with_object({}) do |feature, counts|
+      feature_count = evaluations.select { |e| e.feature.include?(feature) }.count
+      percentage = ((feature_count.to_f / @count_of_unique_evaluators) * 100).floor
+      counts[feature] = {
+        count: feature_count,
+        percentage: percentage
+      }
+    end
+    
+    @comments = evaluations.flat_map(&:comments)
   end
 
   # プロフィール(教材) 登録済み
@@ -111,17 +125,12 @@ class MaterialsController < ApplicationController
   end
 
   def edit
-    @material = Material.find(params[:id])
     # ログインユーザーに関連するMaterialEvaluationとコメントのみを読み込む
     @material_evaluations = @material.material_evaluations.where(user: current_user)
     @material_evaluations.each do |evaluation|
       # ログインユーザーに関連するコメントのみを読み込む
       evaluation.comments.build if evaluation.comments.where(user: current_user).empty?
     end
-    # 既存のmaterial_evaluationsとそのコメントを読み込む
-    #@material.material_evaluations.each do |evaluation|
-     # evaluation.comments.build if evaluation.comments.empty?
-    #end
   end
 
   def update
@@ -170,6 +179,5 @@ class MaterialsController < ApplicationController
 
   def set_material
     @material = Material.find(params[:id])
-    @material.material_evaluations.includes(:comments) # 関連するMaterialEvaluationとそのコメントを読み込む
   end
 end
