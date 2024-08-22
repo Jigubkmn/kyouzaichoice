@@ -1,23 +1,31 @@
 <div class="flex flex-row w-full">
   <%= render 'profile/side_bar' %>
-  <div class="flex flex-col max-w-940px">
+  <div class="flex flex-col max-w-940px ">
     <h3 class="mt-30px text-28px font-bold"><%= t('.title') %></h3>
-    <div class="mt-5px border-2 border-gray rounded-md p-30px" style="width: 940px;">
-      <%= form_with url: search_materials_path, local: true, method: :get do |f| %>
-        <div class="flex flex-col w-full">
-          <div class="font-bold"><%= t('.name') %></div>
-          <%= f.search_field :search, class: "input input-bordered input-accent input-sm mb-20px py-0", value: params[:search] %>
-          <div class="flex justify-end">
-            <div class="flex justify-center item-center mr-30px">
-              <%= link_to t('helpers.submit.cancel'), already_registered_materials_path, class: "btn bg-thin-gray hover:bg-pale-gray w-full text-xl text-white", style: "width: 150px;" %>
-            </div> 
-            <div class="flex justify-center item-center">
-              <%= f.submit t('helpers.submit.search'), class: "btn bg-pale-green hover:bg-dark-green text-xl text-white", style: "width: 150px;" %>
+    <div class="flex flex-col items-center">
+      <div class="mt-5px border-2 border-gray rounded-md p-30px mb-20px" style="width: 940px;">
+        <%= form_with url: search_materials_path, local: true, method: :get do |f| %>
+          <div class="flex flex-col w-full">
+            <div class="font-bold"><%= t('.name') %></div>
+            <%= f.search_field :search, class: "input input-bordered input-accent input-sm mb-20px py-0", value: params[:search] %>
+            <div class="flex justify-end">
+              <div class="flex justify-center items-center mr-30px">
+                <%= link_to t('helpers.submit.cancel'), already_registered_materials_path, class: "btn bg-thin-gray hover:bg-pale-gray w-full text-xl text-white", style: "width: 150px;" %>
+              </div> 
+              <div class="flex justify-center items-center btn bg-pale-green hover:bg-dark-green w-150px">
+                <button type="submit" class="flex justify-center items-center text-xl text-white">
+                  <%= t('helpers.submit.search') %>
+                  <i class="fa-solid fa-magnifying-glass ml-2" style="color: #ffffff;"></i>
+                </button>
+              </div>
             </div>
-          </div>
-        </div>   
-      <% end %>
+          </div>   
+        <% end %>
+      </div>
+      <%= link_to t('.material_index'), materials_path, class: "text-lg text-darkest-blue underline underline-offset-4" %>
     </div>
+    
+
     <% if @google_materials.present? %>
       <div class="my-30px">
         <!-- 検索した教材の情報を表示する -->

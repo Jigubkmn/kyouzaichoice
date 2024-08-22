@@ -6,7 +6,6 @@ ja:
       update: 更新
       login: ログイン
       cancel: キャンセル
-      qualification_addition: 資格を追加
       search: 検索
     label:
       email: メールアドレス
@@ -18,11 +17,10 @@ ja:
     new_registration: 新規登録
     material: 教材
     material_index: 教材一覧
-    material_new: 教材新規追加
+    material_new: 教材新規登録
     mypage_user: マイページ(ユーザー情報)
-    mypage_qualification: マイページ(資格一覧)
-    mypage_material: マイページ(教材一覧)
-    mypage_new_material: マイページ(教材追加)
+    mypage_qualification: マイページ(資格)
+    mypage_material: マイページ(教材)
   footer:
     term_of_service: 利用規約
     privacy_policy: プライバシーポリシー
@@ -61,24 +59,28 @@ ja:
       title: ユーザー情報編集
   qualifications:
     new:
-      title: 資格追加
+      title: 資格登録
     index:
       title: 資格一覧
+      qualification_addition: 資格を登録
     edit:
       title: 資格編集
     create:
-      success: 資格を作成しました
-      danger: 資格を作成出来ませんでした
+      success: 資格を登録しました
+      danger: 資格を登録出来ませんでした
     update:
-      success: 資格を更新されました
+      success: 資格を更新しました
       danger: 資格を更新出来ませんでした
     destroy:
       success: 資格を削除しました
   materials:
     new:
-      title: 教材追加
+      title: 教材登録
     index:
-      title: 教材一覧   
+      title: 教材一覧
+      material_addition: 教材を登録
+    show:
+      title: 教材詳細
     like:
       title: いいねした教材
       like: いいね
@@ -88,14 +90,16 @@ ja:
       title: 登録済み教材
       like: いいね
       already_registered: 登録済み
-      material_addition: 教材を追加
+      material_addition: 教材を登録
     search:
       name: 教材名
       title: 教材検索
       danger: 教材を選択出来ませんでした
+      material_index: 教材一覧画面へ
     create:
       success: 教材を登録しました
       danger: 教材を登録出来ませんでした
+      notice: 教材は既に登録済みのため新しく登録出来ませんでした。
     edit:
       title: 教材編集
     update:

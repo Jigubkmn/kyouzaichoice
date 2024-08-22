@@ -1,6 +1,7 @@
 <div class="mt-5px border-2 border-gray rounded-md" style="width: 600px;">
   <div class="p-30px">
     <%= form_with model: @material, local: true do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
       <!-- Materialの隠しフィールド -->
       <%= f.hidden_field :title, value: @material.title %>
       <%= f.hidden_field :image_link, value: @material.image_link %>
@@ -12,7 +13,8 @@
 
         <!-- MaterialEvaluationの入力フォーム -->
         <div class="ml-15px">
-          <%= f.fields_for :material_evaluations do |evaluation_f| %>
+          <%= f.fields_for :material_evaluations, @material_evaluations do |evaluation_f| %>
+            <%= render 'shared/error_messages', object: evaluation_f.object %>
             <div class= "mb-20px flex flex-col">
               <div class="font-bold">教材名</div>
               <div><%= @material.title %></div>

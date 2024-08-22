@@ -2,6 +2,7 @@
   <div class="w-full max-w-md">
     <h2 class="text-3xl my-30px text-center font-bold"><%= t('.title') %></h2>
     <%= form_with model: @user, local: true do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
       <div class= "mb-20px flex flex-col" >
         <%= f.label :name, class: "font-bold" %>
         <%= f.text_field :name, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4" %>

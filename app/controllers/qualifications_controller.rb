@@ -15,6 +15,7 @@ class QualificationsController < ApplicationController
     if @qualification.save
       redirect_to qualifications_path, success: t('qualifications.create.success')
     else
+      Rails.logger.debug @qualification.errors.full_messages
       @qualifications = Qualification.all
       flash.now['danger'] = t('qualifications.create.danger')
       render :new, status: :unprocessable_entity

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'user_sessions#destroy'
   resource :profile_user, only: %i[show edit update]
   resources :qualifications, only: %i[new index create edit update destroy]
-  resources :materials, only: %i[new index create edit update destroy] do
+  resources :materials, only: %i[new index show create edit update destroy] do
     collection { get :search } # 教材検索用
     collection { get :already_registered } # 「追加済み教材」表示用
     collection { get :like } # 「いいねした教材」表示用

@@ -1,5 +1,6 @@
 <div class="p-30px">
   <%= form_with model: @qualification, local: true do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
     <div class= "mb-20px flex flex-col">
       <%= f.label :name, class: "font-bold" %>
       <%= f.text_field :name, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "width:550px;" %>

@@ -3,8 +3,8 @@ class CreateMaterialEvaluations < ActiveRecord::Migration[7.0]
     create_table :material_evaluations do |t|
       t.references :user,     foreign_key: true
       t.references :material, foreign_key: true
-      t.string :evaluation,   null: false
-      t.string :feature
+      t.decimal :evaluation, precision: 3, scale: 1
+      t.string :feature, array: true, default: []
 
       t.timestamps
     end

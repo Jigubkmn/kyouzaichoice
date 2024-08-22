@@ -1,0 +1,66 @@
+  <div class="flex flex-col items-center w-full mb-30px">
+    <h3 class="text-28px font-bold mt-30px mb-30px"><%= t('.title') %></h3>
+    <% if @materials.present? %>
+      <!-- 登録済み教材を表示 -->
+      <div class="flex flex-col max-w-1220px">
+        <div class="flex flex-wrap justify-between gap-4">
+          <% @materials.each_with_index do |material, index| %>
+            <div class="flex flex-row border-2 border-gray rounded-md w-600px p-15px"> 
+              <div class="flex flex-row w-full">
+                <%= image_tag material.image_link, style: "width: 100px; max-width: 100px;" %>
+                <div class="flex flex-col w-full">
+                  <div class="ml-15px">
+                    <!-- タイトル -->
+                    <div class="font-bold text-xl text-darkest-blue mb-5px underline underline-offset-4">
+                      <%= link_to truncate(material.title, length: 20), material_path(material) %>
+                      <!-- <%= truncate(material.title, length: 20) %> -->
+                    </div>
+                    <!-- 公開日 -->
+                    <% if material.published_date.present? %>
+                      <%= material.published_date %>
+                    <% else %>
+                      <p>公開日不明</p>
+                    <% end %>
+                    <!-- 教材評価 -->
+                    <% material_with_details = @materials_with_details[index] %>
+                    <div class="mt-5px flex flex-row items-center">
+                      <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                      <div class="ml-5px"><%= material_with_details[:average_evaluation] %></div>
+                      <div class="ml-5px">(<%= material_with_details[:count_of_unique_evaluators] %>)</div>
+                    </div>
+                    <!-- 教材特徴 -->
+                    <div class="my-10px flex flex-wrap gap-2">
+                      <% material_with_details[:unique_features].each do |tag| %>
+                        <span class="bg-dark-gray text-white text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"><%= tag %></span>
+                      <% end %>
+                    </div>
+                    <!-- コメント(ロゴ コメント数) -->
+                    <div class="mt-5px flex flex-row items-center">
+                      <i class="fa-solid fa-message"></i>
+                      <div class="ml-5px">(<%= material_with_details[:comments_count] %>)</div>
+                    </div>
+                    
+                  </div>
+                </div>
+                <!-- 編集及び削除アイコン -->
+                <% if material.material_evaluations.exists?(user_id: current_user.id)  %>
+                  <div class="ml-auto flex flex-row justify-end mb-5px">
+                    <%= link_to edit_material_path(material), class:'flex justify-center items-center bg-thin-orange hover:bg-pale-orange h-7 w-7 rounded-full mr-10px' do %>
+                      <i class="fa-sharp fa-solid fa-pencil fa-lg"></i>
+                    <% end %>
+                    <%= link_to material_path(material), class:'flex justify-center items-center bg-pale-pink hover:bg-dark-pink h-7 w-7 rounded-full', data: { turbo_method: :delete } do %>
+                      <i class="fa-solid fa-trash"></i>
+                    <% end %>
+                  </div>
+                <% end %>
+                
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="mt-20px">
+          <%= link_to t('.material_addition'), search_materials_path, class: "btn bg-pale-blue hover:bg-dark-blue w-full max-w-200px text-xl text-white" %>
+        </div>
+      </div>
+    <% end %>  
+  </div>

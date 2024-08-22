@@ -23,7 +23,7 @@
           <% @materials.each do |material| %>
             <div class="flex flex-row border-2 border-gray rounded-md w-600px p-15px"> 
               <div class="flex flex-row w-full">
-                <%= image_tag material.image_link, style: "width: 100px; max-width: 100px;" %>
+                <%= image_tag material.image_link, style: "width: 100px; max-width: 100px; height: 150px;" %>
                 <div class="flex flex-col w-full">
                   <div class="ml-15px">
                     <!-- タイトル -->
@@ -34,7 +34,8 @@
                     <% else %>
                       <p>公開日不明</p>
                     <% end %>
-                    <% material.material_evaluations.each do |evaluation| %>
+                    <% user_evaluations = material.material_evaluations.where(user: current_user) %>
+                    <% user_evaluations.each do |evaluation| %>
                       <!-- 教材評価 -->
                       <div class="mt-5px flex flex-row items-center">
                         <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
@@ -44,7 +45,7 @@
                       <div class="my-10px flex flex-wrap gap-2">
                         <% evaluation.feature.each do |tag| %>
                           <% unless tag == "true" %>
-                            <span class="bg-darkest-blue text-white text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"><%= tag %></span>
+                            <span class="bg-dark-gray text-white text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"><%= tag %></span>
                           <% end %>  
                         <% end %>
                       </div>
@@ -72,7 +73,7 @@
         </div>
       </div>
     <% else %>
-      <div class="min-w-610px border-2 border-gray rounded-md p-30px">
+      <div class="min-w-600px border-2 border-gray rounded-md p-30px">
         <div>資格が登録されていません。</div>
         <div>下記ボタンより資格を追加してください</div>
       </div>

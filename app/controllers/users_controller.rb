@@ -10,7 +10,6 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to root_path, success: t('users.create.success')
     else
-      @user = User.new(session_params)
       flash.now[:danger] = t('users.create.danger')
       render :new, status: :unprocessable_entity
     end

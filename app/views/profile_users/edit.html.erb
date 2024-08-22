@@ -4,6 +4,7 @@
     <h3 class="mt-30px text-28px font-bold"><%= t('.title') %></h3>
     <div class="mt-5px border-2 border-gray rounded-md p-30px" style="width: 600px;" >
       <%= form_with model: @user, url: profile_user_path, method: :put do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
         <div class= "mb-20px flex flex-col" >
           <%= f.label :name, class: "font-bold" %>
           <%= f.text_field :name, class: "input input-bordered input-warning input-sm m-0 py-0 pr-0 pl-4" %>

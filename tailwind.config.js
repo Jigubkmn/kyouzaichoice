@@ -49,6 +49,7 @@ module.exports = {
       },
       width: {
         '100px': '100px',
+        '150px': '150px',
         '300px': '300px',
         '500px': '500px',
         '600px': '600px',
@@ -59,6 +60,7 @@ module.exports = {
         '200px': '200px',
         '600px': '600px',
         '940px': '940px',
+        '1220px': '1220px',
       },
       minWidth: {
         '75px': '75px',
@@ -66,7 +68,7 @@ module.exports = {
         '150px': '150px',
         '200px': '200px',
         '300px': '300px',
-        '610px': '610px',
+        '600px': '600px',
         '700px': '700px',
       },
       height: {
