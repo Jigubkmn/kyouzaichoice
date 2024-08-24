@@ -89,7 +89,7 @@ class MaterialsController < ApplicationController
       # バリデーションで、同じMaterialに複数のMaterialEvaluationが保存されないようにする
       if @material.material_evaluations.exists?(user: current_user)
         flash.now[:notice] = t('materials.create.notice')
-        render :new
+        render :new, status: :unprocessable_entity
         return
       end
 
@@ -101,9 +101,10 @@ class MaterialsController < ApplicationController
       if @material_evaluation.save
         redirect_to already_registered_materials_path, success: t('materials.create.success')
       else
-        Rails.logger.debug @material_evaluation.errors.full_messages
         flash.now[:danger] = t('materials.create.danger')
-        render :new
+        # コメントのフィールドが非表示にならないようにビルドする
+        @material_evaluation.comments.build if @material_evaluation.comments.empty?
+        render :new, status: :unprocessable_entity
       end
     else
       @material = Material.new(material_params)
@@ -119,7 +120,7 @@ class MaterialsController < ApplicationController
       else
         Rails.logger.debug @material.errors.full_messages
         flash.now[:danger] = t('materials.create.danger')
-        render :new
+        render :new, status: :unprocessable_entity
       end
     end
   end
@@ -138,7 +139,7 @@ class MaterialsController < ApplicationController
       redirect_to already_registered_materials_path, success: t('materials.update.success')
     else
       flash.now[:danger] = t('materials.update.danger')
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

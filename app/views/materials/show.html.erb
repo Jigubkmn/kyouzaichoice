@@ -25,27 +25,28 @@
             </div>
             <!-- 教材特徴 -->
             <% @feature_counts.each do |feature, data| %>
-              <div class="flex flex-row items-center my-10px" style="width: 200px;">
-                <div class="bg-dark-gray text-white text-xs font-semibold px-2.5 py-0.5 rounded">
+              <div class="flex flex-row items-center my-10px">
+              
+              <div class="flex flex-row items-center" style="width:370px;">
+                <!-- 教材特徴タグ -->
+                <div class="mr-auto bg-dark-gray text-white text-xs font-semibold px-2.5 py-0.5 rounded">
                   <%= feature %>
                 </div>
-                <div class="ml-5px flex ml-auto"><%= data[:percentage] %>%</div>
+                <!-- プログレス -->
+                <progress class="progress w-56 mr-10px" value="<%= data[:count].to_f %>" max="<%= @count_of_unique_evaluators %>"></progress>
+              </div>
+              <!-- 教材特徴割合 -->
+              <div><%= data[:percentage] %>%</div>
               </div>
             <% end %>
           </div>
         </div>
         <!-- 編集及び削除アイコン -->
-        <% if @material.material_evaluations.exists?(user_id: current_user.id)  %>
-          <div class="ml-auto flex flex-row justify-end mb-5px">
-            <%= link_to edit_material_path(@material), class:'flex justify-center items-center bg-thin-orange hover:bg-pale-orange h-7 w-7 rounded-full mr-10px' do %>
-              <i class="fa-sharp fa-solid fa-pencil fa-lg"></i>
-            <% end %>
-            <%= link_to material_path(@material), class:'flex justify-center items-center bg-pale-pink hover:bg-dark-pink h-7 w-7 rounded-full', data: { turbo_method: :delete } do %>
-              <i class="fa-solid fa-trash"></i>
-            <% end %>
-          </div>
-        <% end %>
+        <%= render 'edit_delete_buttons' %>
       </div>
     </div>
+    <% @comments.each do |comment| %>
+      <p><%= comment.body %></p>
+    <% end %> 
   </div>
 </div>

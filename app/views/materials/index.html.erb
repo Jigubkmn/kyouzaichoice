@@ -26,18 +26,18 @@
                     <div class="mt-5px flex flex-row items-center">
                       <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
                       <div class="ml-5px"><%= @average_evaluation %></div>
-                      <div class="ml-5px">(<%= material_with_details[:count_of_unique_evaluators] %>)</div>
+                      <div class="ml-5px">(<%= @count_of_unique_evaluators %>)</div>
                     </div>
                     <!-- 教材特徴 -->
                     <div class="my-10px flex flex-wrap gap-2">
-                      <% material_with_details[:unique_features].each do |tag| %>
+                      <% @unique_features.each do |tag| %>
                         <span class="bg-dark-gray text-white text-xs font-semibold px-2.5 py-0.5 rounded"><%= tag %></span>
                       <% end %>
                     </div>
                     <!-- コメント(ロゴ コメント数) -->
                     <div class="mt-5px flex flex-row items-center">
                       <i class="fa-solid fa-message"></i>
-                      <div class="ml-5px">(<%= material_with_details[:comments_count] %>)</div>
+                      <div class="ml-5px">(<%= @comments_count %>)</div>
                     </div>
                   </div>
                 </div>
