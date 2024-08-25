@@ -27,6 +27,7 @@ class MaterialsController < ApplicationController
   def show
     evaluations = @material.material_evaluations.includes(:comments)
     calculate_material_details(evaluations) # 教材評価平均、教材評価数、教材特徴
+    @comment = Comment.new
     @comments = evaluations.flat_map(&:comments)
   end
 
