@@ -8,7 +8,6 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-
         'pale-pink': '#FCC2C2',
         'dark-pink': '#FF9A9A',
         'pale-yellow': '#FFD700',
@@ -46,6 +45,7 @@ module.exports = {
         '20px': '20px',
         '25px': '25px',
         '30px': '30px',
+        '40px': '40px',
       },
       width: {
         '100px': '100px',

@@ -1,7 +1,7 @@
 <div class="flex flex-col items-center w-full mb-30px">
   <h3 class="text-28px font-bold mt-30px mb-30px"><%= t('.title') %></h3>
   <div class="flex flex-col", style="width: 800px;" >
-    <div class="flex flex-row border-2 border-gray rounded-md w-800px p-15px">
+    <div class="flex flex-col border-2 border-gray rounded-md w-800px p-15px">
       <div class="flex flex-row w-full">
         <!-- 教材画像 -->
         <%= image_tag @material.image_link, style: "width: 100px; max-width: 100px; height: 150px;" %>
@@ -18,13 +18,13 @@
               <p>公開日不明</p>
             <% end %>
             <!-- 教材評価 -->
-            <div class="mt-5px flex flex-row items-center">
+            <div class="flex flex-row items-center mt-5px">
               <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
               <div class="ml-5px"><%= @average_evaluation %></div>
               <div class="ml-5px">(<%= @count_of_unique_evaluators %>)</div>
             </div>
             <!-- 教材特徴 -->
-            <div class="flex flex-row items_center">
+            <div class="flex flex-row items_center mt-5px">
               <% @unique_features.each do |feature| %>
                 <div class="y-10px bg-dark-gray text-white text-xs mr-10px font-semibold px-2.5 py-0.5 rounded">
                   <%= feature %>
@@ -36,9 +36,65 @@
         <!-- 編集及び削除アイコン -->
         <%= render 'edit_delete_buttons' %>
       </div>
+      <!-- ログインユーザーのコメントを表示 -->
+      <% if @user_evaluation.present? %>
+        <div class="border-t-2 border-gray px-20px pt-20px flex flex-row items-center mt-10px">
+          <%= image_tag(current_user.image_url, class:"h-14 w-14 rounded-full") %>
+          <div class="ml-20px">
+            <!-- 教材評価 -->
+            <div class="flex flex-row items-center mb-10px">
+              <div class="font-bold mr-20px"><%= current_user.name %></div>
+              <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+              <div class="font-bold ml-5px"><%= @user_evaluation %></div>
+            </div>
+            <p><%= @user_comment.body %></p>
+          </div>
+        </div>
+      <% end %>
     </div>
-    <% @comments.each do |comment| %>
-      <p><%= comment.body %></p>
-    <% end %> 
+<% 
+=begin
+%>
+
+    <%= form_with model: @material, local: true do |f| %>
+      <%= f.fields_for :material_evaluations, @material_evaluations do |evaluation_f| %>
+        <%= render 'shared/error_messages', object: evaluation_f.object %>
+        <%= evaluation_f.fields_for :comments do |comment_f| %>
+          <%= render 'shared/error_messages', object: comment_f.object %>
+          <!-- 教材評価 -->
+          <div class= "mb-20px flex flex-col">
+            <%= evaluation_f.label :evaluation, class: "font-bold" %>
+            <%= evaluation_f.select :evaluation, options_for_select((0..10).map { |i| [sprintf('%.1f', i * 0.5), sprintf('%.1f', i * 0.5)] }, evaluation_f.object.evaluation),
+            {include_blank: true},class: "select select-warning select-sm w-full m-0 py-0 pr-0 pl-4", style: "width:200px;" %>
+          </div>
+          <!-- Commentの入力フォーム -->
+          <div class= "mb-20px flex flex-col">
+            <%= comment_f.label :body, class: "font-bold" %>
+            <%= comment_f.text_area :body, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "height:auto;", rows: 3 %>
+          </div>
+        <% end %>  
+      <% end %>
+      <%= f.submit "評価を保存", class: "btn btn-primary" %>
+    <% end %>
+<%
+=end
+%>
+
+    <!-- ログインユーザー以外のコメントを全て表示 -->
+    <% @other_evaluations.each do |evaluation| %>
+      <div class="border-b-2 border-gray pl-40px py-20px flex flex-row items-center mt-10px">
+        <%= image_tag(evaluation.user.image_url, class:"h-14 w-14 rounded-full") %>
+        <div class="ml-20px">
+          <!-- 教材評価 -->
+          <div class="flex flex-row items-center mb-10px">
+            <div class="font-bold mr-20px"><%= evaluation.user.name %></div>
+            <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+            <div class="font-bold ml-5px"><%= evaluation.evaluation %></div>
+          </div>
+          <p><%= evaluation.comments.map(&:body).join(", ") %></p>
+        </div>
+      </div>
+    <% end %>
+    
   </div>
 </div>

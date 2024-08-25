@@ -10,9 +10,9 @@ class MaterialsController < ApplicationController
   def index
     @materials = Material.includes(material_evaluations: :comments).all
     @materials_with_details = @materials.map do |material|
-      evaluations = material.material_evaluations
-      calculate_material_details(evaluations) # 教材評価平均、教材評価数、教材特徴
-      comments_count = evaluations.joins(:comments).count # 各教材に関連する評価のコメント数を計算
+      @evaluations = material.material_evaluations
+      calculate_material_details(@evaluations) # 教材評価平均、教材評価数、教材特徴
+      comments_count = @evaluations.joins(:comments).count # 各教材に関連する評価のコメント数を計算
 
       merged_data = material.as_json.merge(
         average_evaluation: @average_evaluation,
@@ -25,10 +25,15 @@ class MaterialsController < ApplicationController
   end
 
   def show
-    evaluations = @material.material_evaluations.includes(:comments)
-    calculate_material_details(evaluations) # 教材評価平均、教材評価数、教材特徴
-    @comment = Comment.new
-    @comments = evaluations.flat_map(&:comments)
+    @evaluations = @material.material_evaluations.includes(:comments)
+    calculate_material_details(@evaluations) # 教材評価平均、教材評価数、教材特徴
+    # @evaluation = Material.new(material_params)
+    # ログインユーザー教材情報(教材評価、コメント)
+    login_user_evaluation_information(@evaluations)
+    # ログインユーザー以外の教材評価とコメントを取得
+    @other_evaluations = @evaluations.reject { |evaluation| evaluation.user == current_user }
+
+    Rails.logger.debug "@other_evaluations: #{@other_evaluations.inspect}"
   end
 
   # プロフィール(教材) 登録済み
@@ -53,13 +58,13 @@ class MaterialsController < ApplicationController
     else
       url = 'https://www.googleapis.com/books/v1/volumes'
       text = params[:search]
-      res = Faraday.get(url, q: text, langRestrict: 'ja', maxResults: 20)
+      api_key = "AIzaSyCF4M_hTzqMlL8-jWMea55zHSFIEH-5dOc"
+      res = Faraday.get(url, q: text, langRestrict: 'ja', maxResults: 20, key: api_key)
       @google_materials = JSON.parse(res.body)
     end
   end
 
   def create
-    Rails.logger.debug "material_params: #{material_params.inspect}"
     # 既に同じMaterialが存在するかチェック
     existing_material = Material.find_by(title: material_params[:title], systemid: material_params[:systemid])
   
@@ -80,6 +85,7 @@ class MaterialsController < ApplicationController
         return
       end
 
+      # 教材は既に登録済み。教材情報のみ登録
       if @material_evaluation.save
         redirect_to already_registered_materials_path, success: t('materials.create.success')
       else
@@ -101,11 +107,7 @@ class MaterialsController < ApplicationController
         redirect_to already_registered_materials_path, success: t('materials.create.success')
       else
         flash.now[:danger] = t('materials.create.danger')
-        # コメントのフィールドが非表示にならないようにビルドする
-        @material.material_evaluations.each do |evaluation|
-          evaluation.comments.build if evaluation.comments.empty?
-        end
-        render :new, status: :unprocessable_entity
+        render :new, status: :unprocessable_entity 
       end
     end
   end
@@ -160,10 +162,21 @@ class MaterialsController < ApplicationController
 
   private
 
+  # indexとshow用
   def calculate_material_details(evaluations)
     @average_evaluation = evaluations.average(:evaluation).to_f.round(1) # 教材評価平均
     @count_of_unique_evaluators = evaluations.select(:user_id).distinct.count # 教材評価者数
     @unique_features = evaluations.flat_map(&:feature).reject { |f| f == 'true' }.uniq # 教材特徴
+  end
+
+  # show用
+  def login_user_evaluation_information(evaluations)
+    # ログインユーザーの評価を取得
+    user_evaluation = @evaluations.find { |evaluation| evaluation.user == current_user }
+    @user_evaluation = user_evaluation&.evaluation
+    # ログインユーザーの教材コメントを取得
+    @comments = @evaluations.flat_map(&:comments)
+    @user_comment = @comments.find { |comment| comment.user == current_user }
   end
 
   def material_params
