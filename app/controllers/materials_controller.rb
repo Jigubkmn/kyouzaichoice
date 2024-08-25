@@ -1,5 +1,5 @@
 class MaterialsController < ApplicationController
-  before_action :require_login
+  before_action :require_login, except: %i[index show]
   before_action :set_material, only: %i[edit show update destroy]
 
   def new
@@ -12,22 +12,21 @@ class MaterialsController < ApplicationController
     @materials_with_details = @materials.map do |material|
       evaluations = material.material_evaluations
       calculate_material_details(evaluations) # 教材評価平均、教材評価数、教材特徴
-      @comments_count = evaluations.joins(:comments).count # 各教材に関連する評価のコメント数を計算
+      comments_count = evaluations.joins(:comments).count # 各教材に関連する評価のコメント数を計算
+
+      merged_data = material.as_json.merge(
+        average_evaluation: @average_evaluation,
+        count_of_unique_evaluators: @count_of_unique_evaluators,
+        unique_features: @unique_features,
+        comments_count: comments_count
+      )
+      merged_data
     end
   end
 
   def show
     evaluations = @material.material_evaluations.includes(:comments)
     calculate_material_details(evaluations) # 教材評価平均、教材評価数、教材特徴
-    # 各教材特徴(featureごとの個数と割合計算)
-    @feature_counts = @unique_features.each_with_object({}) do |feature, counts|
-      feature_count = evaluations.select { |e| e.feature.include?(feature) }.count
-      percentage = ((feature_count.to_f / @count_of_unique_evaluators) * 100).floor
-      counts[feature] = {
-        count: feature_count,
-        percentage: percentage
-      }
-    end
     @comments = evaluations.flat_map(&:comments)
   end
 
@@ -59,6 +58,7 @@ class MaterialsController < ApplicationController
   end
 
   def create
+    Rails.logger.debug "material_params: #{material_params.inspect}"
     # 既に同じMaterialが存在するかチェック
     existing_material = Material.find_by(title: material_params[:title], systemid: material_params[:systemid])
   
@@ -119,12 +119,15 @@ class MaterialsController < ApplicationController
   end
 
   def update
-    # 更新時も同様にコメントのユーザーを設定
-    @material.material_evaluations.each do |evaluation|
-      evaluation.comments.each do |comment|
-        comment.user = current_user  # コメントのユーザーを設定
+    material_params[:material_evaluations_attributes]&.each do |_, evaluation_attrs|
+      if evaluation_attrs[:comments_attributes]
+        evaluation_attrs[:comments_attributes].each do |_, comment_attrs|
+          comment_attrs[:user_id] = current_user.id if comment_attrs[:user_id].blank?
+        end
       end
     end
+
+    puts material_params
 
     if @material.update(material_params)
       redirect_to already_registered_materials_path, success: t('materials.update.success')

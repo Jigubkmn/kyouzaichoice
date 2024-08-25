@@ -114,7 +114,6 @@ GEM
     faraday-net_http (3.1.1)
       net-http
     ffi (1.17.0-aarch64-linux-gnu)
-    ffi (1.17.0-x86_64-linux-gnu)
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashie (5.0.0)
@@ -167,8 +166,6 @@ GEM
       net-protocol
     nio4r (2.7.3)
     nokogiri (1.16.7-aarch64-linux)
-      racc (~> 1.4)
-    nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
     oauth (1.1.0)
       oauth-tty (~> 1.0, >= 1.0.1)
@@ -235,7 +232,7 @@ GEM
     regexp_parser (2.9.2)
     reline (0.5.9)
       io-console (~> 0.5)
-    rexml (3.3.5)
+    rexml (3.3.6)
       strscan
     rouge (4.3.0)
     rubocop (1.65.1)
@@ -253,10 +250,10 @@ GEM
       parser (>= 3.3.1.0)
     rubocop-checkstyle_formatter (0.6.0)
       rubocop (>= 1.14.0)
-    rubocop-rails (2.25.1)
+    rubocop-rails (2.26.0)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
-      rubocop (>= 1.33.0, < 2.0)
+      rubocop (>= 1.52.0, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
     ruby-progressbar (1.13.0)
     ruby-vips (2.2.2)
@@ -314,7 +311,6 @@ GEM
 
 PLATFORMS
   aarch64-linux
-  x86_64-linux
 
 DEPENDENCIES
   better_errors

@@ -7,9 +7,9 @@ class Material < ApplicationRecord
   accepts_nested_attributes_for :material_evaluations, reject_if: :all_blank, allow_destroy: true
 
   # Material に関連するコメントを取得するメソッド
-  def comments_by_user(user)
-    material_evaluations.includes(:comments).flat_map do |evaluation|
-      evaluation.comments.where(user: user)
-    end
-  end
+  # def comments_by_user(user)
+  #  material_evaluations.includes(:comments).flat_map do |evaluation|
+  #    evaluation.comments.where(user: user)
+  #  end
+  # end
 end
