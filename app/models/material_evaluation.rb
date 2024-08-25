@@ -4,7 +4,6 @@ class MaterialEvaluation < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
 
   validates :evaluation, presence: true
-  validates :feature, presence: true
 
   # データを同時に保存する
   accepts_nested_attributes_for :comments, allow_destroy: true
