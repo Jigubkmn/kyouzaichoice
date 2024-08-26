@@ -76,12 +76,12 @@ class MaterialsController < ApplicationController
   def create
     # 既に同じMaterialが存在するかチェック
     existing_material = Material.find_by(title: material_params[:title], systemid: material_params[:systemid])
-  
+    
     if existing_material
       # 既存のMaterialを使用し、関連するMaterialEvaluationとCommentを新規作成
       @material = existing_material
-      # @material_evaluation = @material.material_evaluations.build(material_params[:material_evaluations_attributes].values.first)
-      @material_evaluation = @material.material_evaluations.build(material_params[:material_evaluations_attributes].values.second)
+      Rails.logger.debug "@material111111: #{@material.inspect}"
+      @material_evaluation = @material.material_evaluations.build(material_params[:material_evaluations_attributes].values.first)
       Rails.logger.debug "@material_evaluation111111: #{@material_evaluation.inspect}"
       # 教材は既に登録済み。教材情報のみ登録
       if @material_evaluation.save
