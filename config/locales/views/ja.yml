@@ -99,7 +99,7 @@ ja:
     create:
       success: 教材を登録しました
       danger: 教材を登録出来ませんでした
-      notice: 教材は既に登録済みのため新しく登録出来ませんでした。
+      notice: 選択教材は既に登録済みのため新しく登録出来ません。
     edit:
       title: 教材編集
     update:

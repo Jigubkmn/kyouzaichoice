@@ -3,8 +3,20 @@ class MaterialsController < ApplicationController
   before_action :set_material, only: %i[edit show update destroy]
 
   def new
-    @material = Material.new(material_params)
-    @material.material_evaluations.build.comments.build
+    # 既に登録済みの教材かチェック
+    existing_material = Material.find_by(title: material_params[:title], systemid: material_params[:systemid])
+    # 既に登録済みの教材で評価済みかチェック
+    if existing_material && existing_material.material_evaluations.exists?(user: current_user)
+      login_material_evaluations # ログインユーザーに関連するMaterialEvaluationを取得
+      flash.now[:notice] = t('materials.create.notice')
+      render :already_registered, status: :unprocessable_entity
+      return
+    else
+      @material = Material.new(material_params)
+      Rails.logger.debug "@material111111: #{@material.inspect}"
+      @material_evaluation = @material.material_evaluations.build.comments.build
+      Rails.logger.debug "@material_evaluations_new: #{@material_evaluations.inspect}"
+    end
   end
 
   def index
@@ -38,10 +50,7 @@ class MaterialsController < ApplicationController
 
   # プロフィール(教材) 登録済み
   def already_registered
-    # ログインユーザーに関連するMaterialEvaluation を取得
-    material_evaluations = current_user.material_evaluations.includes(:material, :comments)
-    @materials = material_evaluations.map(&:material).uniq
-    @user_comments = material_evaluations.flat_map(&:comments)
+    login_material_evaluations # ログインユーザーに関連するMaterialEvaluationを取得
   end
 
   # プロフィール(教材) いいね
@@ -71,27 +80,14 @@ class MaterialsController < ApplicationController
     if existing_material
       # 既存のMaterialを使用し、関連するMaterialEvaluationとCommentを新規作成
       @material = existing_material
-      @material_evaluation = @material.material_evaluations.new(material_params[:material_evaluations_attributes].values.first)
-      @material_evaluation.user = current_user
-      # コメントのユーザーを設定
-      @material_evaluation.comments.each do |comment|
-        comment.user = current_user
-      end
-      
-      # バリデーションで、同じMaterialに複数のMaterialEvaluationが保存されないようにする
-      if @material.material_evaluations.exists?(user: current_user)
-        flash.now[:notice] = t('materials.create.notice')
-        render :new, status: :unprocessable_entity
-        return
-      end
-
+      # @material_evaluation = @material.material_evaluations.build(material_params[:material_evaluations_attributes].values.first)
+      @material_evaluation = @material.material_evaluations.build(material_params[:material_evaluations_attributes].values.second)
+      Rails.logger.debug "@material_evaluation111111: #{@material_evaluation.inspect}"
       # 教材は既に登録済み。教材情報のみ登録
       if @material_evaluation.save
         redirect_to already_registered_materials_path, success: t('materials.create.success')
       else
         flash.now[:danger] = t('materials.create.danger')
-        # コメントのフィールドが非表示にならないようにビルドする
-        @material_evaluation.comments.build if @material_evaluation.comments.empty?
         render :new, status: :unprocessable_entity
       end
     else
@@ -129,9 +125,6 @@ class MaterialsController < ApplicationController
         end
       end
     end
-
-    puts material_params
-
     if @material.update(material_params)
       redirect_to already_registered_materials_path, success: t('materials.update.success')
     else
@@ -177,6 +170,13 @@ class MaterialsController < ApplicationController
     # ログインユーザーの教材コメントを取得
     @comments = @evaluations.flat_map(&:comments)
     @user_comment = @comments.find { |comment| comment.user == current_user }
+  end
+
+  # new用、already_registered用
+  def login_material_evaluations
+    material_evaluations = current_user.material_evaluations.includes(:material, :comments)
+    @materials = material_evaluations.map(&:material).uniq
+    @user_comments = material_evaluations.flat_map(&:comments)
   end
 
   def material_params

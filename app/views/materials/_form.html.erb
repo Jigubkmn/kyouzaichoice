@@ -1,7 +1,7 @@
 <div class="mt-5px border-2 border-gray rounded-md" style="width: 600px;">
   <div class="p-30px">
     <%= form_with model: @material, local: true do |f| %>
-      <%= f.fields_for :material_evaluations, @material_evaluations do |evaluation_f| %>
+      <%= f.fields_for :material_evaluations do |evaluation_f| %>
         <%= render 'shared/error_messages', object: evaluation_f.object %>
         <%= evaluation_f.fields_for :comments do |comment_f| %>
           <%= render 'shared/error_messages', object: comment_f.object %>
@@ -43,7 +43,7 @@
                 <%= comment_f.text_area :body, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "height:auto;", rows: 3 %>
               </div>    
             </div>
-          </div> 
+          </div>  
         <% end %>
       <% end %>
       <!-- ボタン -->
