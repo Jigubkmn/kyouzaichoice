@@ -31,4 +31,10 @@ module ApplicationHelper
   def experience_levels
     %w[初学者 経験者 1冊で合格 資格合格最低限内容 深掘りした内容 問題数多め 解説が丁寧]
   end
+
+  # タイトル動的表示用
+  def page_title(title = '')
+    base_title = '資格取ろ！'
+    title.present? ? "#{title} | #{base_title}" : base_title
+  end
 end
