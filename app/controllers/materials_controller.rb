@@ -13,14 +13,14 @@ class MaterialsController < ApplicationController
       return
     else
       @material = Material.new(material_params)
-      Rails.logger.debug "@material111111: #{@material.inspect}"
+      # Rails.logger.debug "@material111111: #{@material.inspect}"
       @material_evaluation = @material.material_evaluations.build.comments.build
-      Rails.logger.debug "@material_evaluations_new: #{@material_evaluations.inspect}"
+      # Rails.logger.debug "@material_evaluations_new: #{@material_evaluations.inspect}"
     end
   end
 
   def index
-    @materials = Material.includes(material_evaluations: :comments).all
+    @materials = Material.includes(material_evaluations: :comments).page(params[:page]).per(10)
     @materials_with_details = @materials.map do |material|
       @evaluations = material.material_evaluations
       calculate_material_details(@evaluations) # 教材評価平均、教材評価数、教材特徴
@@ -50,7 +50,10 @@ class MaterialsController < ApplicationController
 
   # プロフィール(教材) 登録済み
   def already_registered
-    login_material_evaluations # ログインユーザーに関連するMaterialEvaluationを取得
+    # ログインユーザーに関連するMaterialEvaluationを取得
+    @material_evaluations = current_user.material_evaluations.includes(:material, :comments).page(params[:page]).per(8)
+    @materials = @material_evaluations.map(&:material).uniq
+    @user_comments = @material_evaluations.flat_map(&:comments)
   end
 
   # プロフィール(教材) いいね
@@ -89,6 +92,8 @@ class MaterialsController < ApplicationController
       else
         flash.now[:danger] = t('materials.create.danger')
         render :new, status: :unprocessable_entity
+        # redirect_to action: :new
+
       end
     else
       @material = Material.new(material_params)

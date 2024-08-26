@@ -14,7 +14,7 @@
         <% end %>
       </div>
       <% if @materials.size >= 4 %>
-        <%= link_to t('.material_addition'), search_materials_path, class: "btn bg-pale-blue hover:bg-dark-blue w-full max-w-200px text-xl text-white h-9", style: "height:36px; " %>
+        <%= link_to t('.material_addition'), search_materials_path, class: "btn bg-pale-blue hover:bg-dark-blue w-full max-w-200px text-xl text-white h-9", style: "height:36px;" %>
       <% end %>
     </div>
     <% if @materials.present? %>
@@ -82,6 +82,7 @@
     <div class="mt-20px">
       <%= link_to t('.material_addition'), search_materials_path, class: "btn bg-pale-blue hover:bg-dark-blue w-full max-w-200px text-xl text-white" %>
     </div>
+    <%= paginate @material_evaluations %>
   </div>
 </div>
 

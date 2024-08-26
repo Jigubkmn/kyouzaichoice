@@ -1,13 +1,16 @@
 <% content_for(:title, t('.title')) %>
-<div class="flex flex-col items-center w-full mb-30px">
-  <h3 class="text-28px font-bold mt-30px mb-30px"><%= t('.title') %></h3>
+<div class="flex flex-col mb-30px">
+  <div class="relative flex flex-col items-center w-full my-30px">
+    <h3 class="text-28px font-bold text-center"><%= t('.title') %></h3>
+    <%= link_to t('.material_addition'), search_materials_path, class: "btn bg-pale-blue hover:bg-dark-blue text-xl text-white absolute top-1/2 transform -translate-y-1/2", style:"left: calc(50% + 150px);" %>
+  </div>
   <% if @materials.present? %>
     <!-- 登録済み教材を表示 -->
-    <div class="flex flex-col items-center w-full max-w-1220px ">
-      <div class="flex flex-wrap justify-between gap-4 mb-20px">
+    <div class="flex flex-col items-center w-full max-w-1220px mx-auto">
+      <div class="flex flex-wrap justify-center gap-4 mb-20px">
         <% @materials.each_with_index do |material, index| %>
           <% material_with_details = @materials_with_details[index] %>
-          <div class="flex flex-row border-2 border-gray rounded-md w-600px p-15px">
+          <div class="flex flex-row border-2 border-gray rounded-md w-full max-w-600px p-15px">
             <div class="flex flex-row w-full">
               <%= image_tag material.image_link, style: "width: 100px; height: 150px;" %>
               <div class="flex flex-col w-full">
@@ -62,10 +65,11 @@
       <% unless current_user %>
         <div>教材を新規登録するには先に<%= link_to t('header.login'), login_path, class: "text-dark-green underline underline-offset-4" %>を行って下さい</div>
       <% end %>
-      <div>
-        <%= link_to t('.material_addition'), search_materials_path, class: "btn bg-pale-blue hover:bg-dark-blue w-full max-w-200px text-xl text-white" if current_user %>
+      <div class="flex justify-start w-full">
+        <%= link_to t('.material_addition'), search_materials_path, class: "btn bg-pale-blue hover:bg-dark-blue text-xl text-white" %>
       </div>
     </div>
   <% end %>
   
 </div>
+<%= paginate @materials %>
