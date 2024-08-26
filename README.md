@@ -223,15 +223,18 @@ erDiagram
   materials {
 		integer id PK
     string title "教材名"
-		integer page "ページ数"
-		string image "教材画像"
+		string image_link "教材画像"
+    date published_date "公開日"
+    text info_link "教材詳細"
+    string systemid "ISBN"
 	}
 
   material_evaluations {
 		integer id PK
     integer user_id FK
-    integer evaluation "教材評価"
-		string recommendation "オススメの人"
+    integer material_id FK
+    float evaluation "教材評価"
+		string feature "教材特徴"
 	}
 
   qualifications {
