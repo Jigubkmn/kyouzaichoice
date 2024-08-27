@@ -4,6 +4,7 @@
     <h3 class="text-28px font-bold text-center"><%= t('.title') %></h3>
     <%= link_to t('.material_addition'), search_materials_path, class: "btn bg-pale-blue hover:bg-dark-blue text-xl text-white absolute top-1/2 transform -translate-y-1/2", style:"left: calc(50% + 150px);" %>
   </div>
+  <%= render 'search_form', q: @q, url: materials_path %>
   <% if @materials.present? %>
     <!-- 登録済み教材を表示 -->
     <div class="flex flex-col items-center w-full max-w-1220px mx-auto">

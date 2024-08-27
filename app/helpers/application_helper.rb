@@ -27,7 +27,7 @@ module ApplicationHelper
     google_material['volumeInfo'].slice('title', 'authors', 'publishedDate', 'infoLink', 'image', 'systemid', 'canonicalVolumeLink')
   end
 
-  # 教材追加時のチェックボックス内容
+  # 教材登録時の教材特徴チェックボックス内容
   def experience_levels
     %w[初学者 経験者 1冊で合格 資格合格最低限内容 深掘りした内容 問題数多め 解説が丁寧]
   end

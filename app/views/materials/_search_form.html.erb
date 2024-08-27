@@ -1,0 +1,28 @@
+<%= search_form_for q, url: url do |f| %>
+  <div class="flex flex-row">
+    <!-- 教材名 -->
+    <div class="flex flex-col">
+      <%= f.label t('materials.index.title_cont'), class: "font-bold" %>
+      <%= f.search_field :title_cont, class: "input input-bordered input-accent input-sm pl-4 py-0 w-300px h-48px", placeholder: t('materials.index.title_cont') %>
+    </div>
+    <!-- 教材特徴 -->
+    <div class="flex flex-col">
+      <%= f.label t('materials.index.feature'), class: "font-bold" %>
+      <div class= "flex flex-row flex-wrap">
+        <% experience_levels.each_with_index do |level, index| %>
+          <div class= "mr-20px flex flex-row items-center">
+            <%= f.check_box :material_evaluations_feature_eq, { multiple: true }, level, nil %>
+            <%= f.label :feature, level, value: level %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <!-- <%= f.search_field :title_cont, class: "input input-bordered input-accent input-sm pl-4 py-0 w-300px h-48px", placeholder: t('materials.index.title_cont') %> -->
+    <div class="flex justify-center items-center btn bg-pale-green hover:bg-dark-green w-150px">
+      <button type="submit" class="flex justify-center items-center text-xl text-white">
+        <%= t('helpers.submit.search') %>
+        <i class="fa-solid fa-magnifying-glass ml-2" style="color: #ffffff;"></i>
+      </button>
+    </div>
+  </div>
+<% end %>

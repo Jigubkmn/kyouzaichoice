@@ -20,12 +20,25 @@ class MaterialsController < ApplicationController
   end
 
   def index
-    @materials = Material.includes(material_evaluations: :comments).page(params[:page]).per(10)
+    @q = Material.ransack(params[:q])
+
+    # 文字列リストとして扱う
+  features = params.dig(:q, :material_evaluations_feature_eq) || []
+
+  # PostgreSQL の配列形式に変換する
+  formatted_features = features.map { |feature| feature.to_s }
+
+  Rails.logger.debug "@q: #{@q.inspect}"
+  Rails.logger.debug "Features: #{features.inspect}"
+    # 教材と教材評価データを一度に取得
+    @materials = @q.result(distinct: true)
+                   .eager_load(material_evaluations: :comments)
+                   .page(params[:page])
+                   .per(10)
     @materials_with_details = @materials.map do |material|
       @evaluations = material.material_evaluations
       calculate_material_details(@evaluations) # 教材評価平均、教材評価数、教材特徴
       comments_count = @evaluations.joins(:comments).count # 各教材に関連する評価のコメント数を計算
-
       merged_data = material.as_json.merge(
         average_evaluation: @average_evaluation,
         count_of_unique_evaluators: @count_of_unique_evaluators,

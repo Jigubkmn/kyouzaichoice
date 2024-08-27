@@ -39,6 +39,9 @@ gem 'faraday'
 # ページネーション
 gem 'kaminari'
 
+# 検索機能
+gem 'ransack'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -73,6 +76,9 @@ group :development, :test do
 
   gem 'better_errors'
   gem 'binding_of_caller'
+  # デバッグ
+  gem 'pry-byebug'
+  gem 'pry-rails'
 end
 
 group :development do
