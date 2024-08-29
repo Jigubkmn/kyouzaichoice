@@ -13,23 +13,12 @@ class MaterialsController < ApplicationController
       return
     else
       @material = Material.new(material_params)
-      # Rails.logger.debug "@material111111: #{@material.inspect}"
       @material_evaluation = @material.material_evaluations.build.comments.build
-      # Rails.logger.debug "@material_evaluations_new: #{@material_evaluations.inspect}"
     end
   end
 
   def index
     @q = Material.ransack(params[:q])
-
-    # 文字列リストとして扱う
-  features = params.dig(:q, :material_evaluations_feature_eq) || []
-
-  # PostgreSQL の配列形式に変換する
-  formatted_features = features.map { |feature| feature.to_s }
-
-  Rails.logger.debug "@q: #{@q.inspect}"
-  Rails.logger.debug "Features: #{features.inspect}"
     # 教材と教材評価データを一度に取得
     @materials = @q.result(distinct: true)
                    .eager_load(material_evaluations: :comments)
@@ -52,21 +41,15 @@ class MaterialsController < ApplicationController
   def show
     @evaluations = @material.material_evaluations.includes(:comments)
     calculate_material_details(@evaluations) # 教材評価平均、教材評価数、教材特徴
-    # @evaluation = Material.new(material_params)
     # ログインユーザー教材情報(教材評価、コメント)
     login_user_evaluation_information(@evaluations)
     # ログインユーザー以外の教材評価とコメントを取得
     @other_evaluations = @evaluations.reject { |evaluation| evaluation.user == current_user }
-
-    Rails.logger.debug "@other_evaluations: #{@other_evaluations.inspect}"
   end
 
   # プロフィール(教材) 登録済み
   def already_registered
-    # ログインユーザーに関連するMaterialEvaluationを取得
-    @material_evaluations = current_user.material_evaluations.includes(:material, :comments).page(params[:page]).per(8)
-    @materials = @material_evaluations.map(&:material).uniq
-    @user_comments = @material_evaluations.flat_map(&:comments)
+    login_material_evaluations # ログインユーザーに関連するMaterialEvaluationを取得
   end
 
   # プロフィール(教材) いいね
@@ -96,27 +79,20 @@ class MaterialsController < ApplicationController
     if existing_material
       # 既存のMaterialを使用し、関連するMaterialEvaluationとCommentを新規作成
       @material = existing_material
-      Rails.logger.debug "@material111111: #{@material.inspect}"
       @material_evaluation = @material.material_evaluations.build(material_params[:material_evaluations_attributes].values.first)
-      Rails.logger.debug "@material_evaluation111111: #{@material_evaluation.inspect}"
+      process_features(@material_evaluation)  # 追加: featureカラム
+      uers_information(@material) # ユーザー情報を設定
       # 教材は既に登録済み。教材情報のみ登録
       if @material_evaluation.save
         redirect_to already_registered_materials_path, success: t('materials.create.success')
       else
         flash.now[:danger] = t('materials.create.danger')
         render :new, status: :unprocessable_entity
-        # redirect_to action: :new
-
       end
     else
       @material = Material.new(material_params)
-      # ユーザー情報を設定
-      @material.material_evaluations.each do |evaluation|
-        evaluation.user = current_user
-        evaluation.comments.each do |comment|
-          comment.user = current_user
-        end
-      end
+      uers_information(@material) # ユーザー情報を設定
+      process_features(@material.material_evaluations.first)  # 追加: featureカラムの処理
       if @material.save
         redirect_to already_registered_materials_path, success: t('materials.create.success')
       else
@@ -131,7 +107,8 @@ class MaterialsController < ApplicationController
     @material_evaluations = @material.material_evaluations.where(user: current_user)
     @material_evaluations.each do |evaluation|
       # ログインユーザーに関連するコメントのみを読み込む
-      evaluation.comments.build if evaluation.comments.where(user: current_user).empty?
+      evaluation.comments.build if evaluation.comments.where(user: current_user).empty?    #evaluation.feature: "初学者,資格合格最低限内容,問題数多め"
+      evaluation.feature = evaluation.feature.split(",") if evaluation.feature.is_a?(String) #evaluation.feature: "[\"初学者\", \"資格合格最低限内容\", \"問題数多め\"]"
     end
   end
 
@@ -177,7 +154,16 @@ class MaterialsController < ApplicationController
   def calculate_material_details(evaluations)
     @average_evaluation = evaluations.average(:evaluation).to_f.round(1) # 教材評価平均
     @count_of_unique_evaluators = evaluations.select(:user_id).distinct.count # 教材評価者数
-    @unique_features = evaluations.flat_map(&:feature).reject { |f| f == 'true' }.uniq # 教材特徴
+    features = evaluations.pluck(:feature).map { |f| f.split(',') }.flatten # 教材特徴
+    @unique_features = features.uniq
+  end
+  
+  # create用　featureをカンマ区切りで保存
+  def process_features(evaluation)
+    features = params[:material][:material_evaluations_attributes].values.first[:feature]
+    if features.present?
+      evaluation.feature = features.compact_blank.join(',')
+    end
   end
 
   # show用
@@ -192,17 +178,25 @@ class MaterialsController < ApplicationController
 
   # new用、already_registered用
   def login_material_evaluations
-    material_evaluations = current_user.material_evaluations.includes(:material, :comments)
-    @materials = material_evaluations.map(&:material).uniq
-    @user_comments = material_evaluations.flat_map(&:comments)
+    @material_evaluations = current_user.material_evaluations.includes(:material, :comments).page(params[:page]).per(8)
+    @materials = @material_evaluations.map(&:material).uniq # 対象materialデータ表示
+    @user_comments = @material_evaluations.flat_map(&:comments) # 対象commentデータ表示
+  end
+
+  def uers_information(material)
+    material.material_evaluations.each do |evaluation|
+      evaluation.user = current_user
+      evaluation.comments.each do |comment|
+        comment.user = current_user
+      end
+    end
   end
 
   def material_params
     params.require(:material).permit(
       :title, :image_link, :published_date, :info_link, :systemid,
       material_evaluations_attributes: [
-        :id, :evaluation, :_destroy,
-        { feature: [] },
+        :id, :evaluation, :_destroy, { feature: [] },
         { comments_attributes: %i[id body _destroy] }
       ]
     )

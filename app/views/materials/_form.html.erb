@@ -29,9 +29,11 @@
               <div class= "mb-20px">
                 <%= evaluation_f.label :feature, class: "font-bold" %>
                 <div class= "flex flex-row flex-wrap">
-                  <% experience_levels.each_with_index do |level, index| %>
+                  <!-- featureをカンマで分割して配列に変換 [a,b] → ["a", "b"] -->
+                  <% features_array = evaluation_f.object.feature.present? ? evaluation_f.object.feature.split(',') : [] %>
+                  <% experience_levels.each do |level| %>
                     <div class= "mr-20px flex flex-row items-center">
-                      <%= evaluation_f.check_box :feature, { multiple: true }, level, evaluation_f.object.feature.include?(level) %>
+                      <%= evaluation_f.check_box :feature, { multiple: true, checked: features_array.include?(level) }, level, nil %>
                       <%= evaluation_f.label :feature, level, value: level %>
                     </div>
                   <% end %>

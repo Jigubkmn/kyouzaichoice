@@ -44,10 +44,9 @@
                       </div>
                       <!-- 教材特徴 -->
                       <div class="my-10px flex flex-wrap gap-2">
-                        <% evaluation.feature.each do |tag| %>
-                          <% unless tag == "true" %>
-                            <span class="bg-dark-gray text-white text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"><%= tag %></span>
-                          <% end %>  
+                        <% feature_tags = evaluation.feature.present? ? evaluation.feature.split(',') : [] %>
+                        <% feature_tags.each do |tag| %>
+                          <span class="bg-dark-gray text-white text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"><%= tag %></span>
                         <% end %>
                       </div>
                     <% end %>
