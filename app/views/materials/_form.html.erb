@@ -1,7 +1,7 @@
 <div class="mt-5px border-2 border-gray rounded-md" style="width: 600px;">
   <div class="p-30px">
     <%= form_with model: @material, local: true do |f| %>
-      <%= f.fields_for :material_evaluations do |evaluation_f| %>
+      <%= f.fields_for :material_evaluations, @material_evaluations do |evaluation_f| %>
         <%= render 'shared/error_messages', object: evaluation_f.object %>
         <%= evaluation_f.fields_for :comments do |comment_f| %>
           <%= render 'shared/error_messages', object: comment_f.object %>
@@ -29,7 +29,7 @@
               <div class= "mb-20px">
                 <%= evaluation_f.label :feature, class: "font-bold" %>
                 <div class= "flex flex-row flex-wrap">
-                  <!-- featureをカンマで分割して配列に変換 [a,b] → ["a", "b"] -->
+                  <!-- featureをカンマで分割して配列に変換 -->
                   <% features_array = evaluation_f.object.feature.present? ? evaluation_f.object.feature.split(',') : [] %>
                   <% experience_levels.each do |level| %>
                     <div class= "mr-20px flex flex-row items-center">

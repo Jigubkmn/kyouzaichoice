@@ -19,11 +19,28 @@ class MaterialsController < ApplicationController
 
   def index
     @q = Material.ransack(params[:q])
+    # @material_evaluations = @material.material_evaluations
+    Rails.logger.debug "@q-1: #{@q.inspect}"
     # 教材と教材評価データを一度に取得
-    @materials = @q.result(distinct: true)
-                   .eager_load(material_evaluations: :comments)
-                   .page(params[:page])
-                   .per(10)
+    if params[:q].present? && params[:q][:material_evaluations_feature_eq].present?
+      # Rails.logger.debug "params[:q][:material_evaluations_feature_eq]: #{params[:q][:material_evaluations_feature_eq].inspect}"
+      # チェックボックスのチェック内容を表示
+      selected_features = params[:q][:material_evaluations_feature_eq].join(',').gsub('"', '')
+      # params[:q][:material_evaluations_feature_eq] = selected_features
+      # Rails.logger.debug "selected_features: #{selected_features}"
+     
+      # 教材評価で選択された特徴が含まれているものを検索
+      @materials = @q.result(distinct: true)
+                     .eager_load(material_evaluations: :comments)
+                     .where('material_evaluations.feature LIKE ?', "%#{selected_features}%")
+                     .page(params[:page])
+                     .per(10)
+    else
+      @materials = @q.result(distinct: true)
+                    .eager_load(material_evaluations: :comments)
+                    .page(params[:page])
+                    .per(10)
+    end
     @materials_with_details = @materials.map do |material|
       @evaluations = material.material_evaluations
       calculate_material_details(@evaluations) # 教材評価平均、教材評価数、教材特徴
@@ -80,7 +97,7 @@ class MaterialsController < ApplicationController
       # 既存のMaterialを使用し、関連するMaterialEvaluationとCommentを新規作成
       @material = existing_material
       @material_evaluation = @material.material_evaluations.build(material_params[:material_evaluations_attributes].values.first)
-      process_features(@material_evaluation)  # 追加: featureカラム
+      process_features(@material_evaluation)  # 配列をカンマ潜りの文字列に変換
       uers_information(@material) # ユーザー情報を設定
       # 教材は既に登録済み。教材情報のみ登録
       if @material_evaluation.save
@@ -108,19 +125,15 @@ class MaterialsController < ApplicationController
     @material_evaluations.each do |evaluation|
       # ログインユーザーに関連するコメントのみを読み込む
       evaluation.comments.build if evaluation.comments.where(user: current_user).empty?    #evaluation.feature: "初学者,資格合格最低限内容,問題数多め"
-      evaluation.feature = evaluation.feature.split(",") if evaluation.feature.is_a?(String) #evaluation.feature: "[\"初学者\", \"資格合格最低限内容\", \"問題数多め\"]"
+      # evaluation.feature = evaluation.feature.split(",") if evaluation.feature.is_a?(String) #evaluation.feature: "[\"初学者\", \"資格合格最低限内容\", \"問題数多め\"]"
     end
   end
 
   def update
-    material_params[:material_evaluations_attributes]&.each do |_, evaluation_attrs|
-      if evaluation_attrs[:comments_attributes]
-        evaluation_attrs[:comments_attributes].each do |_, comment_attrs|
-          comment_attrs[:user_id] = current_user.id if comment_attrs[:user_id].blank?
-        end
-      end
-    end
-    if @material.update(material_params)
+    @material_evaluations = @material.material_evaluations.find_by(user: current_user)
+    if @material_evaluations.update(material_evaluation_params)
+      process_features(@material_evaluations) # 配列をカンマ潜りの文字列に変換
+      @material_evaluations.save # 変換後のデータを保存
       redirect_to already_registered_materials_path, success: t('materials.update.success')
     else
       flash.now[:danger] = t('materials.update.danger')
@@ -159,10 +172,18 @@ class MaterialsController < ApplicationController
   end
   
   # create用　featureをカンマ区切りで保存
-  def process_features(evaluation)
-    features = params[:material][:material_evaluations_attributes].values.first[:feature]
-    if features.present?
-      evaluation.feature = features.compact_blank.join(',')
+  # def process_features(evaluation)
+  #  features = params[:material][:material_evaluations_attributes].values.first[:feature]
+  #  if features.present?
+  #    evaluation.feature = features.compact_blank.join(',')
+  #  end
+  # end
+
+  def process_features(material_evaluations)
+    if material_evaluations.feature.present?
+      # JSON配列形式の文字列をRubyの配列に変換し、その後カンマ区切りの文字列に変換
+      features_array = JSON.parse(material_evaluations.feature)
+      material_evaluations.feature = features_array.join(',')
     end
   end
 
@@ -200,6 +221,16 @@ class MaterialsController < ApplicationController
         { comments_attributes: %i[id body _destroy] }
       ]
     )
+  end
+
+  # update
+  def material_evaluation_params
+    params.require(:material).permit(
+      material_evaluations_attributes: [
+        :id, :evaluation, :_destroy, { feature: [] },
+        { comments_attributes: %i[id body _destroy] }
+      ]
+    )[:material_evaluations_attributes]["0"]
   end
 
   def set_material

@@ -9,7 +9,7 @@
     <div class="flex flex-col">
       <%= f.label t('materials.index.feature'), class: "font-bold" %>
       <div class= "flex flex-row flex-wrap">
-        <% experience_levels.each_with_index do |level, index| %>
+        <% experience_levels.each_with_index do |level| %>
           <div class= "mr-20px flex flex-row items-center">
             <%= f.check_box :material_evaluations_feature_eq, { multiple: true }, level, nil %>
             <%= f.label :feature, level, value: level %>
