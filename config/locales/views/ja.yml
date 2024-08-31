@@ -88,8 +88,6 @@ ja:
       title_cont : 教材名
       feature : 教材特徴
       material_addition: 教材を登録
-    show:
-      title: 教材詳細
     like:
       title: いいねした教材
       like: いいね
@@ -116,7 +114,12 @@ ja:
       danger: 教材を更新出来ませんでした
     destroy:
       success: 教材を削除しました
-
+  material_evaluations:
+    show:
+      title: 教材詳細
+    create: 
+      success: 教材評価を登録しました
+      danger: 教材評価を登録出来ませんでした 
 
       
     

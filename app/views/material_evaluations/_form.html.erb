@@ -1,0 +1,28 @@
+<div class="border-b-2 border-gray p-20px">
+  <%= form_with model: @material_evaluation, url: material_material_evaluations_path(@material), local: true do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= f.fields_for :comments do |comment_f| %>
+        <%= render 'shared/error_messages', object: comment_f.object %>
+
+        <!-- 教材評価 -->
+        <div class= "mb-20px flex flex-col">
+          <%= f.label :evaluation, class: "font-bold" %>
+          <%= f.select :evaluation, options_for_select((0..10).map { |i| [sprintf('%.1f', i * 0.5), sprintf('%.1f', i * 0.5)] }, f.object.evaluation),
+          {include_blank: true},class: "select select-warning select-sm w-full m-0 py-0 pr-0 pl-4", style: "width:200px;" %>
+        </div>
+        
+        <!-- Commentの入力フォーム -->
+        <div class= "mb-20px flex flex-col">
+          <%= comment_f.label :body, class: "font-bold" %>
+          <%= comment_f.text_area :body, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "height:auto;", rows: 3 %>
+        </div>
+      <% end %>  
+    <!-- ボタン -->
+    <div class="flex justify-end">
+      <div class="flex justify-center item-center mr-30px">
+        <%= link_to t('helpers.submit.cancel'), materials_path, class: "btn bg-thin-gray hover:bg-pale-gray w-full text-xl text-white", style: "width:150px;" %>
+      </div>
+      <div class="flex justify-center item-center"><%= f.submit "教材評価を登録", class: "btn bg-pale-blue hover:bg-dark-blue w-full text-xl text-white" %></div>
+    </div>
+  <% end %>
+</div>

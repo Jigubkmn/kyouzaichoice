@@ -18,7 +18,7 @@
                 <div class="ml-15px">
                   <!-- タイトル -->
                   <div class="font-bold text-xl text-darkest-blue mb-5px underline underline-offset-4">
-                    <%= link_to truncate(material.title, length: 20), material_path(material) %>
+                    <%= link_to truncate(material.title, length: 20), material_material_evaluation_path(material, material.material_evaluations.first) %>
                     <!-- <%= truncate(material.title, length: 20) %> -->
                   </div>
                   <!-- 公開日 -->

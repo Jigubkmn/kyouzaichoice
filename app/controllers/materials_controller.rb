@@ -1,5 +1,5 @@
 class MaterialsController < ApplicationController
-  before_action :require_login, except: %i[index show]
+  before_action :require_login, except: %i[index]
   before_action :set_material, only: %i[edit show update destroy]
 
   def new
@@ -53,15 +53,6 @@ class MaterialsController < ApplicationController
       )
       merged_data
     end
-  end
-
-  def show
-    @evaluations = @material.material_evaluations.includes(:comments)
-    calculate_material_details(@evaluations) # 教材評価平均、教材評価数、教材特徴
-    # ログインユーザー教材情報(教材評価、コメント)
-    login_user_evaluation_information(@evaluations)
-    # ログインユーザー以外の教材評価とコメントを取得
-    @other_evaluations = @evaluations.reject { |evaluation| evaluation.user == current_user }
   end
 
   # プロフィール(教材) 登録済み
@@ -163,7 +154,7 @@ class MaterialsController < ApplicationController
 
   private
 
-  # indexとshow用
+  # index用
   def calculate_material_details(evaluations)
     @average_evaluation = evaluations.average(:evaluation).to_f.round(1) # 教材評価平均
     @count_of_unique_evaluators = evaluations.select(:user_id).distinct.count # 教材評価者数
@@ -185,16 +176,6 @@ class MaterialsController < ApplicationController
       features_array = JSON.parse(material_evaluations.feature)
       material_evaluations.feature = features_array.join(',')
     end
-  end
-
-  # show用
-  def login_user_evaluation_information(evaluations)
-    # ログインユーザーの評価を取得
-    user_evaluation = @evaluations.find { |evaluation| evaluation.user == current_user }
-    @user_evaluation = user_evaluation&.evaluation
-    # ログインユーザーの教材コメントを取得
-    @comments = @evaluations.flat_map(&:comments)
-    @user_comment = @comments.find { |comment| comment.user == current_user }
   end
 
   # new用、already_registered用
