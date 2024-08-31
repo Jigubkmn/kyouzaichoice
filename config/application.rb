@@ -11,9 +11,9 @@ module Myapp
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
     # renderデプロイに必要
-    config.hosts << 'materialsharing.onrender.com'
+    config.hosts << 'qualificationtake.onrender.com'
     # Configuration for the application, engines, and railties goes here.
-    #
+
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
