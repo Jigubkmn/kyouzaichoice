@@ -8,7 +8,7 @@ class MaterialEvaluation < ApplicationRecord
   # データを同時に保存する
   accepts_nested_attributes_for :comments, allow_destroy: true
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["feature", "created_at", "id", "updated_at"]
+  def self.ransackable_attributes(_auth_object = nil)
+    %i[feature created_at id updated_at]
   end
 end

@@ -11,7 +11,6 @@ class MaterialEvaluationsController < ApplicationController
     login_user_evaluation_information(@evaluations)
     # ログインユーザー以外の教材評価とコメントを取得
     @other_evaluations = @evaluations.reject { |evaluation| evaluation.user == current_user }
-    
   end
 
   def create
@@ -42,7 +41,7 @@ class MaterialEvaluationsController < ApplicationController
     features = evaluations.pluck(:feature).map { |f| f.split(',') }.flatten # 教材特徴
     @unique_features = features.uniq
   end
-  
+
   # create用
   def uers_information(material_evaluation)
     material_evaluation.user = current_user
@@ -54,7 +53,7 @@ class MaterialEvaluationsController < ApplicationController
   # show用
   def login_user_evaluation_information(evaluations)
     # ログインユーザーの評価を取得
-    user_evaluation = @evaluations.find { |evaluation| evaluation.user == current_user }
+    user_evaluation = evaluations.find { |evaluation| evaluation.user == current_user }
     @user_evaluation = user_evaluation&.evaluation
     # ログインユーザーの教材コメントを取得
     @comments = @evaluations.flat_map(&:comments)
@@ -63,10 +62,11 @@ class MaterialEvaluationsController < ApplicationController
 
   # create用
   def material_evaluation_params
-    params.require(:material_evaluation).permit(:id, :evaluation, :_destroy, { feature: [] },
-    { comments_attributes: %i[id body _destroy] }
+    params.require(:material_evaluation).permit(
+      :id, :evaluation, :_destroy,
+      { feature: [] },
+      { comments_attributes: %i[id body _destroy] }
     )
-    
   end
 
   def set_material

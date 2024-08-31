@@ -3,7 +3,6 @@ module ApplicationHelper
     case type.to_sym
     when :success then 'bg-flash-messages-green'
     when :danger then 'bg-flash-messages-red'
-    when :notice then 'bg-flash-messages-red'
     when :error then 'bg-flash-messages-yellow'
     else 'bg-gray-500'
     end
@@ -34,7 +33,7 @@ module ApplicationHelper
 
   # タイトル動的表示用
   def page_title(title = '')
-    base_title = '資格取ろ！'
+    base_title = '教材シェア'
     title.present? ? "#{title} | #{base_title}" : base_title
   end
 end
