@@ -47,8 +47,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_01_173434) do
   end
 
   create_table "material_evalutions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "material_id"
+    t.float "evaluation"
+    t.string "feature", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["material_id"], name: "index_material_evalutions_on_material_id"
+    t.index ["user_id"], name: "index_material_evalutions_on_user_id"
   end
 
   create_table "materials", force: :cascade do |t|
@@ -87,5 +93,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_01_173434) do
   add_foreign_key "likes", "users"
   add_foreign_key "material_evaluations", "materials"
   add_foreign_key "material_evaluations", "users"
+  add_foreign_key "material_evalutions", "materials"
+  add_foreign_key "material_evalutions", "users"
   add_foreign_key "qualifications", "users"
 end
