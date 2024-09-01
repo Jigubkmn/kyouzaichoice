@@ -1,8 +1,10 @@
+<% content_for(:title, t('.title')) %>
 <div class="flex flex-row w-full">
   <%= render 'profile/side_bar' %>
   <div class="flex flex-col mb-30px">
     <div class="flex flex-row items-center mt-30px mb-5px">
       <h3 class="text-28px font-bold mr-50px"><%= t('.title') %></h3>
+      <!-- 「登録済み」及び「いいね」リンク -->
       <%= link_to already_registered_materials_path, class: "min-w-75px min-h-30px font-bold mr-20px flex justify-center items-center rounded-md" do %>
         <div><%= t('.already_registered') %></div>
       <% end %>
@@ -10,15 +12,75 @@
         <div><%= t('.like') %></div>
       <% end %>
     </div>
-    <div class="flex flex-col items-center">
-      <div class="border-2 border-gray rounded-md p-30px mb-20px" style="width: 600px;">
-        <div>いいねした教材がありません</div>
-        <div>下記より教材一覧画面に移動して教材を「いいね」して下さい</div>
+    <% if @like_materials.present? %>
+      <!-- 登録済み教材を表示 -->
+      <div class="flex flex-col">
+        <div class="flex flex-wrap gap-4">
+        <% @like_materials.each_with_index do |material, index| %>
+          <% material_with_details = @materials_with_details[index] %>
+          <div class="flex flex-row border-2 border-gray rounded-md w-full max-w-600px p-15px">
+            <div class="flex flex-row w-full">
+              <%= image_tag material.image_link, style: "width: 100px; height: 150px;" %>
+              <div class="flex flex-col w-full ml-15px">
+                <!-- タイトル -->
+                <div class="font-bold text-xl text-darkest-blue mb-5px underline underline-offset-4">
+                  <%= link_to truncate(material.title, length: 20), material_material_evaluation_path(material, material.material_evaluations.first) %>
+                  <!-- <%= truncate(material.title, length: 20) %> -->
+                </div>
+                <!-- 公開日 -->
+                <% if material.published_date.present? %>
+                  <%= material.published_date %>
+                <% else %>
+                  <p>公開日不明</p>
+                <% end %>
+                <!-- 教材評価 -->
+                <div class="mt-5px flex flex-row items-center">
+                  <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                  <div class="ml-5px"><%= material_with_details[:average_evaluation] %></div>
+                  <div class="ml-5px">(<%= material_with_details[:count_of_unique_evaluators] %>)</div>
+                </div>
+                <!-- 教材特徴 -->
+                <div class="my-10px flex flex-wrap gap-2">
+                  <% material_with_details[:unique_features].each do |feature| %>
+                    <span class="bg-dark-gray text-white text-xs font-semibold px-2.5 py-0.5 rounded"><%= feature %></span>
+                  <% end %>
+                </div>
+                <div class="flex flex-row mt-5px">
+                  <!-- コメント(ロゴ コメント数) -->
+                  <div class="flex flex-row items-center mr-20px">
+                    <i class="fa-solid fa-message"></i>
+                    <div class="ml-5px">(<%= material_with_details[:comments_count] %>)</div>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <!-- ログインユーザーが教材をいいねしているか -->
+                    <% if current_user.like?(material) %>
+                      <%= render 'unlike', material: material, material: material, material_with_details: material_with_details %>
+                    <% else %>
+                      <%= render 'like', material: material, material_with_details: material_with_details %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <!-- 編集及び削除アイコン -->
+                <% if material.material_evaluations.exists?(user_id: current_user.id) %>
+                  <%= render 'edit_delete_buttons', material: material %>
+                <% end %>
+            </div>
+          </div>
+        <% end %>
+        </div>
       </div>
-      <%= link_to t('.material_index'), materials_path, class: "text-lg text-darkest-blue underline underline-offset-4" %>
-    </div>
-    
-
+    <% else %>
+      <div class="flex flex-col items-center">
+        <div class="border-2 border-gray rounded-md p-30px mb-20px" style="width: 600px;">
+          <div>
+            <p>いいねした教材がありません</p>
+            <p>下記より教材一覧画面に移動して教材を「いいね」して下さい</p>
+          </div>
+        </div>
+        <%= link_to t('.material_index'), materials_path, class: "text-lg text-darkest-blue underline underline-offset-4" %>
+      </div>
+    <% end %>
   </div>
 </div>
-
+<%= paginate @like_materials %>

@@ -1,0 +1,4 @@
+<%= link_to like_path(id: current_user.likes.find_by(commentable_id: material.id, commentable_type: 'Material').id), data: { turbo_method: :delete } do %>
+  <i class="fa-solid fa-heart" style="color: #ff5fb5;"></i>
+  (<%= material_with_details[:like_count] %>)
+<% end %>

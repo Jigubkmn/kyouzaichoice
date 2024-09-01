@@ -18,13 +18,14 @@ ja:
       next: <i class="fas fa-angle-right"></i>
       truncate: "&hellip;"
   header:
-    logo: 教材シェア
+    logo: 資格ノート
     login: ログイン
     logout: ログアウト
     new_registration: 新規登録
     material: 教材
-    material_index: 教材一覧
     material_new: 教材新規登録
+    material_index: 教材一覧
+    material_like: いいねした教材
     mypage_user: マイページ(ユーザー情報)
     mypage_qualification: マイページ(資格)
     mypage_material: マイページ(教材)
@@ -32,6 +33,9 @@ ja:
     term_of_service: 利用規約
     privacy_policy: プライバシーポリシー
     inquiry: お問い合わせ
+  top:
+    index: 
+      title: 資格ノート
   user_sessions:
     new:
       title: ログイン

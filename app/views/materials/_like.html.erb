@@ -1,0 +1,4 @@
+<%= link_to material_likes_path(material_id: material.id), data: { turbo_method: :post } do %>
+  <i class="fa-regular fa-heart" style="color: #bcb7b7;"></i>
+  (<%= material_with_details[:like_count] %>)
+<% end %>

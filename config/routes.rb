@@ -14,5 +14,6 @@ Rails.application.routes.draw do
     resources :material_evaluations, only: %i[create show] do
       resources :comments, only: %i[create edit destroy], shallow: true
     end
+    resources :likes, only: %i[create destroy], shallow: true
   end
 end

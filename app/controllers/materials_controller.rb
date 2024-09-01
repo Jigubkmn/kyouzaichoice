@@ -19,21 +19,9 @@ class MaterialsController < ApplicationController
 
   def index
     @q = Material.ransack(params[:q])
-    @materials = @q.result(distinct: true)
-                   .eager_load(material_evaluations: :comments)
-                   .page(params[:page])
-                   .per(10)
+    @materials = @q.result(distinct: true).eager_load(material_evaluations: :comments).page(params[:page]).per(10)
     @materials_with_details = @materials.map do |material|
-      @evaluations = material.material_evaluations
-      calculate_material_details(@evaluations) # 教材評価平均、教材評価数、教材特徴
-      comments_count = @evaluations.joins(:comments).count # 各教材に関連する評価のコメント数を計算
-      merged_data = material.as_json.merge(
-        average_evaluation: @average_evaluation,
-        count_of_unique_evaluators: @count_of_unique_evaluators,
-        unique_features: @unique_features,
-        comments_count:
-      )
-      merged_data
+      material_contents(material)
     end
   end
 
@@ -44,7 +32,11 @@ class MaterialsController < ApplicationController
 
   # プロフィール(教材) いいね
   def like
-    @materials = Material.all
+    @q = current_user.like_materials.ransack(params[:q])
+    @like_materials = @q.result(distinct: true).eager_load(material_evaluations: :comments).page(params[:page]).per(10)
+    @materials_with_details = @like_materials.map do |material|
+      material_contents(material)
+    end
   end
 
   def search
@@ -97,7 +89,6 @@ class MaterialsController < ApplicationController
     @material_evaluations.each do |evaluation|
       # ログインユーザーに関連するコメントのみを読み込む
       evaluation.comments.build if evaluation.comments.where(user: current_user).empty? # evaluation.feature: "初学者,資格合格最低限内容,問題数多め"
-      # evaluation.feature = evaluation.feature.split(",") if evaluation.feature.is_a?(String) # evaluation.feature: "[\"初学者\", \"資格合格最低限内容\", \"問題数多め\"]"
     end
   end
 
@@ -150,7 +141,7 @@ class MaterialsController < ApplicationController
 
   # new用、already_registered用
   def login_material_evaluations
-    @material_evaluations = current_user.material_evaluations.includes(:material, :comments).page(params[:page]).per(8)
+    @material_evaluations = current_user.material_evaluations.includes(:material, :comments).page(params[:page]).per(10)
     @materials = @material_evaluations.map(&:material).uniq # 対象materialデータ表示
     @user_comments = @material_evaluations.flat_map(&:comments) # 対象commentデータ表示
   end
@@ -183,6 +174,21 @@ class MaterialsController < ApplicationController
         { comments_attributes: %i[id body _destroy] }
       ]
     )[:material_evaluations_attributes]['0']
+  end
+
+  # index、like用
+  def material_contents(material)
+    @evaluations = material.material_evaluations
+    calculate_material_details(@evaluations) # 教材評価平均、教材評価数、教材特徴
+    comments_count = @evaluations.joins(:comments).count # 各教材に関連する評価のコメント数を計算
+    like_count = Like.where(commentable_id: material.id, commentable_type: 'Material').count
+    material.as_json.merge(
+      average_evaluation: @average_evaluation,
+      count_of_unique_evaluators: @count_of_unique_evaluators,
+      unique_features: @unique_features,
+      comments_count:,
+      like_count:
+    )
   end
 
   def set_material

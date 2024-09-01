@@ -1,7 +1,10 @@
 <header class= "mb-72px">
   <nav class= "flex justify-between w-full items-center h-72px bg-thin-orange fixed top-0 left-0">
-    <div class= "text-3xl ml-9">
-      <%= link_to t('header.logo'), '/' %>
+    <div class= "flex items-center text-3xl ml-9">
+      <%= link_to '/', class: 'flex items-center' do %>
+        <%= image_tag 'note.png', class: 'h-8 w-8 mr-10px' %>
+        <%= link_to t('header.logo') %>
+      <% end %>
     </div>
     <div class="flex space-x-8 mr-9 items-center">
       <div class= "dropdown dropdown-hover dropdown-bottom dropdown-end">
@@ -9,6 +12,7 @@
         <ul tabindex="0" class= "dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
           <li><%= link_to t('header.material_new'), search_materials_path, class: "hover:bg-slate-200 rounded-md" %></li>
           <li><%= link_to t('header.material_index'), materials_path, class: "hover:bg-slate-200 rounded-md" %></li>
+          <li><%= link_to t('header.material_like'), like_materials_path, class: "hover:bg-slate-200 rounded-md" %></li>
         </ul>
       </div>
       <%= link_to t('header.logout'), logout_path, data: { turbo_method: :delete }, class:"text-lg m-1 py-2 px-2 hover:bg-slate-200 rounded-md" %>

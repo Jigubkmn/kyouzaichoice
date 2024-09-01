@@ -1,0 +1,38 @@
+<div class="flex flex-row border-2 border-gray rounded-md w-600px p-15px"> 
+  <div class="flex flex-row w-full">
+    <%= image_tag material.image_link, style: "width: 100px; max-width: 100px; height: 150px;" %>
+    <div class="flex flex-col w-full ml-15px">
+      <!-- タイトル -->
+      <div class="font-bold text-xl mb-5px"><%= truncate(material.title, length: 20) %></div>
+      <!-- 公開日 -->
+      <% if material.published_date.present? %>
+        <%= material.published_date %>
+      <% else %>
+        <p>公開日不明</p>
+      <% end %>
+      <% user_evaluations = material.material_evaluations.where(user: current_user) %>
+      <% user_evaluations.each do |evaluation| %>
+        <!-- 教材評価 -->
+        <div class="mt-5px flex flex-row items-center">
+          <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+          <div class="ml-5px"><%= evaluation.evaluation %></div>
+        </div>
+        <!-- 教材特徴 -->
+        <div class="my-10px flex flex-wrap gap-2">
+          <% feature_tags = evaluation.feature.present? ? evaluation.feature.split(',') : [] %>
+          <% feature_tags.each do |tag| %>
+            <span class="bg-dark-gray text-white text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"><%= tag %></span>
+          <% end %>
+        </div>
+      <% end %>
+      <!-- コメント -->
+      <% material.material_evaluations.each do |evaluation| %>
+        <% evaluation.comments.where(user: current_user).each do |comment| %>
+          <p><%= comment.body %></p>
+        <% end %>
+      <% end %>
+    </div>
+    <!-- 編集及び削除アイコン -->
+    <%= render 'edit_delete_buttons', material: material %>
+  </div>
+</div>
