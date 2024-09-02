@@ -6,3 +6,6 @@ bundle install
 bundle exec rails assets:precompile
 bundle exec rails assets:clean
 bundle exec rails db:migrate
+
+# マイグレーションの実行
+bin/rails db:migrate RAILS_ENV=production
