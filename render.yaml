@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: kyouzaichoice
+    env: ruby
+    plan: free
+    buildCommand: bundle install && bundle exec rake assets:precompile
+    startCommand: bin/rails server -b 0.0.0.0
+    migrateCommand: bin/rails db:migrate
