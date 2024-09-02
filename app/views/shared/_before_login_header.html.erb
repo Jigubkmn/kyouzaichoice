@@ -1,7 +1,10 @@
 <header class= "mb-72px"> 
   <nav class= "flex justify-between w-full items-center h-72px bg-thin-orange fixed top-0 left-0">
     <div class= "text-3xl ml-9">
-    <%= link_to t('header.logo'), '/' %>
+      <%= link_to '/', class: 'flex items-center' do %>
+        <%= image_tag 'note.png', class: 'h-8 w-8 mr-10px' %>
+        <%= t('header.logo') %>
+      <% end %>
     </div>
     <div class="space-x-8 mr-9">
       <%= link_to t('header.material_index'), materials_path, class: "text-lg m-1 py-2 px-2 hover:bg-slate-200 rounded-md" %>

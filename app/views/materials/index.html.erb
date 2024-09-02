@@ -45,7 +45,7 @@
                   </div>
                   <div class="flex flex-row items-center">
                     <!-- ログインユーザーが教材をいいねしているか -->
-                    <% if current_user.like?(material) %>
+                    <% if current_user && current_user.like?(material) %>
                       <%= render 'unlike', material: material, material: material, material_with_details: material_with_details %>
                     <% else %>
                       <%= render 'like', material: material, material_with_details: material_with_details %>
@@ -54,7 +54,7 @@
                 </div>       
               </div>
               <!-- 編集及び削除アイコン -->
-                <% if material.material_evaluations.exists?(user_id: current_user.id) %>
+                <% if current_user && material.material_evaluations.exists?(user_id: current_user.id) %>
                   <%= render 'edit_delete_buttons', material: material %>
                 <% end %>
             </div>
