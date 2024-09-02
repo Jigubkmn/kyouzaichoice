@@ -33,7 +33,7 @@ module ApplicationHelper
 
   # タイトル動的表示用
   def page_title(title = '')
-    base_title = '資格ノート'
+    base_title = '教材チョイス'
     title.present? ? "#{title} | #{base_title}" : base_title
   end
 end
