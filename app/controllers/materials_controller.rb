@@ -4,16 +4,24 @@ class MaterialsController < ApplicationController
 
   def new
     # 既に登録済みの教材かチェック
-    existing_material = Material.find_by(title: material_params[:title], systemid: material_params[:systemid])
-    # 既に登録済みの教材で評価済みかチェック
-    if existing_material&.material_evaluations&.exists?(user: current_user)
+    @existing_material = Material.find_by(title: material_params[:title], systemid: material_params[:systemid])
+    Rails.logger.debug "@existing_material: #{@existing_material.inspect}"
+    # 既に登録済みの教材&ログインユーザーが評価済みの場合
+    if @existing_material&.material_evaluations&.exists?(user: current_user)
       login_material_evaluations # ログインユーザーに関連するMaterialEvaluationを取得
       flash.now[:danger] = t('materials.new.danger')
       render :already_registered, status: :unprocessable_entity
       return
+    # 対象教材が他のユーザーによって登録されている場合
+    elsif @existing_material
+      @material = @existing_material
+      @material_evaluation = @material.material_evaluations.build(user: current_user)
+      @material_evaluation.comments.build
+      redirect_to new_material_material_evaluation_path(@material.id) # MaterialEvaluationコントローラーのnewアクションにリクエストする
     else
       @material = Material.new(material_params)
-      @material_evaluation = @material.material_evaluations.build.comments.build
+      @material_evaluation = @material.material_evaluations.build(user: current_user)
+      @material_evaluation.comments.build
     end
   end
 
@@ -55,38 +63,21 @@ class MaterialsController < ApplicationController
   end
 
   def create
-    # 既に同じMaterialが存在するかチェック
-    existing_material = Material.find_by(title: material_params[:title], systemid: material_params[:systemid])
-    if existing_material
-      # 既存のMaterialを使用し、関連するMaterialEvaluationとCommentを新規作成
-      @material = existing_material
-      @material_evaluation = @material.material_evaluations.build(material_params[:material_evaluations_attributes].values.first)
-      process_features(@material_evaluation) # 配列をカンマ潜りの文字列に変換
-      uers_information(@material)
-      # 教材は既に登録済み。教材情報のみ登録
-      if @material_evaluation.save
-        redirect_to already_registered_materials_path, success: t('materials.create.success')
-      else
-        flash.now[:danger] = t('materials.create.danger')
-        render :new, status: :unprocessable_entity
-      end
+    @material = Material.new(material_params)
+    uers_information(@material)
+    process_features(@material.material_evaluations.first) # featureカラムの処理
+    if @material.save
+      redirect_to already_registered_materials_path, success: t('materials.create.success')
     else
-      @material = Material.new(material_params)
-      uers_information(@material)
-      process_features(@material.material_evaluations.first) # featureカラムの処理
-      if @material.save
-        redirect_to already_registered_materials_path, success: t('materials.create.success')
-      else
-        flash.now[:danger] = t('materials.create.danger')
-        render :new, status: :unprocessable_entity
-      end
+      flash.now[:danger] = t('materials.create.danger')
+      render :new, status: :unprocessable_entity
     end
   end
 
   def edit
     # ログインユーザーに関連するMaterialEvaluationとコメントのみを読み込む
-    @material_evaluations = @material.material_evaluations.where(user: current_user)
-    @material_evaluations.each do |evaluation|
+    @material_evaluation = @material.material_evaluations.where(user: current_user)
+    @material_evaluation.each do |evaluation|
       # ログインユーザーに関連するコメントのみを読み込む
       evaluation.comments.build if evaluation.comments.where(user: current_user).empty? # evaluation.feature: "初学者,資格合格最低限内容,問題数多め"
     end
@@ -133,7 +124,6 @@ class MaterialsController < ApplicationController
   # create、update用
   def process_features(material_evaluations)
     return unless material_evaluations.feature.present?
-
     # JSON配列形式の文字列をRubyの配列に変換し、その後カンマ区切りの文字列に変換
     features_array = JSON.parse(material_evaluations.feature)
     material_evaluations.feature = features_array.join(',')

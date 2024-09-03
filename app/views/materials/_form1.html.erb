@@ -1,6 +1,7 @@
 <div class="mt-5px border-2 border-gray rounded-md" style="width: 600px;">
   <div class="p-30px">
     <%= form_with model: @material, local: true do |f| %>
+      <% @material_evaluations ||= [@material.material_evaluations.build] %> 
       <%= f.fields_for :material_evaluations, @material_evaluation do |evaluation_f| %>
         <%= render 'shared/error_messages', object: evaluation_f.object %>
         <%= evaluation_f.fields_for :comments do |comment_f| %>

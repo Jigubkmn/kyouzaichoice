@@ -119,6 +119,8 @@ ja:
     destroy:
       success: 教材を削除しました
   material_evaluations:
+    new:
+      title: 教材登録
     show:
       title: 教材詳細
     create: 

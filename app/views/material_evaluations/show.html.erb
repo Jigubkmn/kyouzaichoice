@@ -54,7 +54,7 @@
       <% end %>
     </div>
     <% if @user_evaluation.nil? %>
-      <%= render 'form' %>
+      <%= render 'show_form' %>
     <% end %>
 
     <!-- ログインユーザー以外のコメントを全て表示 -->
@@ -72,6 +72,5 @@
         </div>
       </div>
     <% end %>
-    
   </div>
 </div>

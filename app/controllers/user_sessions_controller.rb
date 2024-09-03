@@ -6,7 +6,7 @@ class UserSessionsController < ApplicationController
   def create
     @user = login(params[:email], params[:password])
     if @user
-      redirect_to root_path, success: t('user_sessions.create.success')
+      redirect_to materials_path, success: t('user_sessions.create.success')
     else
       @user = User.new(email: params[:email])
       flash.now[:danger] = t('user_sessions.create.danger')
