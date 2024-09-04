@@ -23,8 +23,11 @@
           <%= f.file_field :image, class: "file-input file-input-bordered file-input-warning file-input-sm w-full max-w-xs", accept: 'image/*' %>
           <%= f.hidden_field :image_cache %>
         </div>
-        <div class="flex justify-center">
-          <%= f.submit t('helpers.submit.update'), class: "btn bg-pale-blue hover:bg-dark-blue w-full max-w-200px text-xl text-white" %>
+        <div class="flex justify-end">
+          <div class="flex justify-center item-center mr-30px">
+            <%= link_to t('helpers.submit.cancel'), profile_user_path, class: "btn bg-thin-gray hover:bg-pale-gray w-full text-xl text-white", style: "width:150px;" %>
+          </div> 
+          <%= f.submit t('helpers.submit.update'), class: "btn bg-pale-blue hover:bg-dark-blue w-full text-xl text-white", style: "width:150px;" %>
         </div>
       <% end %>
     </div>  
