@@ -169,7 +169,7 @@ https://www.figma.com/design/NltzbyZwRW21ovXWFdcWqG/%E7%94%BB%E9%9D%A2%E9%81%B7%
 
 
 ### ER図
-https://app.diagrams.net/#G1Xn-EkriCBAvjoMeqydluJepcw_i_OKGv#%7B%22pageId%22%3A%2298cLOuYJEfNTKJwegvlt%22%7D
+https://drive.google.com/file/d/1Xn-EkriCBAvjoMeqydluJepcw_i_OKGv/view?usp=sharing
 
 ```mermaid
 erDiagram
@@ -180,11 +180,12 @@ erDiagram
   users ||--o{ qualifications : "1人のユーザーは複数の資格を持つ"
 	posts ||--o{ comments : "1つの投稿に複数のコメントを持つ"
 	posts ||--o{ likes : "1つの投稿に複数のいいねを持つ"	
-	material_evaluations ||--o{ likes : "1つの教材に複数のいいねを持つ"
+	posts ||--|| materials : "1つの投稿に1つの教材がある"	
+	posts ||--|| qualifications : "1つの投稿に1つの資格がある"	
 	material_evaluations ||--o{ comments : "1つの教材に複数のコメントを持つ"
+  materials ||--o{ likes : "1つの教材に複数のいいねを持つ"
 	materials ||--o{ material_evaluations : "1つの教材に複数の評価を持つ"
-	materials ||--o{ posts : "1つの教材が複数の投稿を持つ"
-	qualifications ||--o{ posts : "1つの資格が複数の投稿を持つ"
+
 
 	users {
 		integer id PK 
@@ -198,25 +199,26 @@ erDiagram
 
 	posts {
 		integer id PK 
-		integer user_id FK
-		integer material_id FK
-		integer qualification_id FK
-		integer study_time "学習時間"
+		bigint user_id FK
+		bigint material_id FK
+		bigint qualification_id FK
+		date study_time "学習時間"
 		text body "内容"
 		string image "画像"
 	}
 
 	likes {
 		integer id PK 
-		integer commentable_id FK
+    bigint user_id FK
+		bigint commentable_id FK
 		string  commentable_type
 	}
 
 	comments {
 		integer id PK
-    integer commentable_id FK
+    bigint user_id FK
+    bigint commentable_id FK
     string commentable_type
-		integer user_id FK
 		text body "内容"
 	}
 
@@ -231,15 +233,16 @@ erDiagram
 
   material_evaluations {
 		integer id PK
-    integer user_id FK
-    integer material_id FK
+    bigint user_id FK
+    bigint material_id FK
     float evaluation "教材評価"
+		string qualification "教材の対象資格"
 		string feature "教材特徴"
 	}
 
   qualifications {
 		integer id PK
-    integer user_id FK
+    bigint user_id FK
     string name "資格名"
 		string progress "進捗状況"
 		integer year_acquired "取得年"
