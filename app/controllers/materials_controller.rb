@@ -124,6 +124,7 @@ class MaterialsController < ApplicationController
   # create、update用
   def process_features(material_evaluations)
     return unless material_evaluations.feature.present?
+
     # JSON配列形式の文字列をRubyの配列に変換し、その後カンマ区切りの文字列に変換
     features_array = JSON.parse(material_evaluations.feature)
     material_evaluations.feature = features_array.join(',')
