@@ -23,7 +23,8 @@ class UserSessionsController < ApplicationController
     rondom_value = SecureRandom.alphanumeric(10) + Time.zone.now.to_i.to_s
     @guest_user = User.create(
       name: 'GuestUser',
-      email: rondom_value + '@example.com',
+      # email: rondom_value + '@example.com',
+      email: "#{rondom_value}@example.com",
       password: 'password',
       password_confirmation: 'password'
     )
