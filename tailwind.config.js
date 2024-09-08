@@ -39,7 +39,6 @@ module.exports = {
         '75px': '75px',
         '100px': '100px',
         '130px': '130px',
-        '210px': '210px',
       },
       padding: {
         '10px': '10px',
@@ -52,6 +51,7 @@ module.exports = {
       width: {
         '100px': '100px',
         '150px': '150px',
+        '200px': '200px',
         '300px': '300px',
         '500px': '500px',
         '600px': '600px',
@@ -93,7 +93,7 @@ module.exports = {
         '28px': '28px',
       },
       spacing: {
-        '50px': '50px',
+        '40px': '40px',
       },
     },
   }, 
