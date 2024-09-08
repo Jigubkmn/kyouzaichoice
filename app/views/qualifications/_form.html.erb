@@ -18,13 +18,11 @@
         <span class="ml-2">年</span>
       </div>
     </div>
-    <div class="flex justify-end">
-      <div class="flex justify-center item-center mr-30px">
-        <%= link_to t('helpers.submit.cancel'), qualifications_path, class: "btn bg-thin-gray hover:bg-pale-gray w-full text-xl text-white", style: "width:150px;" %>
-      </div> 
-      <div class="flex justify-center item-center">
-        <%= f.submit nil, class: "btn bg-pale-blue hover:bg-dark-blue w-full text-xl text-white", style: "width:150px;" %>
+    <div class="flex justify-end"> 
+      <div class="bg-thin-gray hover:bg-pale-gray rounded-md mr-30px", style= "width:150px; height:38px;">
+        <%= link_to t('helpers.submit.cancel'), qualifications_path, class: "flex items-center justify-center w-full h-full text-xl text-white font-bold" %>
       </div>
+      <%= f.submit nil, class: "bg-pale-blue hover:bg-dark-blue w-full text-xl text-white font-bold rounded-md", style: "width:150px; height:38px;" %>
     </div>
   <% end %>
 </div>

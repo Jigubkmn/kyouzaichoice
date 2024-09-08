@@ -10,14 +10,12 @@
             <div class="font-bold"><%= t('.name') %></div>
             <%= f.search_field :search, class: "input input-bordered input-accent input-sm mb-20px py-0", value: params[:search] %>
             <div class="flex justify-end">
-              <div class="flex justify-center items-center mr-30px">
-                <%= link_to t('helpers.submit.cancel'), already_registered_materials_path, class: "btn bg-thin-gray hover:bg-pale-gray w-full text-xl text-white", style: "width: 150px;" %>
-              </div> 
-              <div class="flex justify-center items-center btn bg-pale-green hover:bg-dark-green w-150px">
-                <button type="submit" class="flex justify-center items-center text-xl text-white">
-                  <%= t('helpers.submit.search') %>
-                  <i class="fa-solid fa-magnifying-glass ml-2" style="color: #ffffff;"></i>
-                </button>
+              <div class="bg-thin-gray hover:bg-pale-gray rounded-md mr-30px", style= "width:150px; height:38px;">
+                <%= link_to t('helpers.submit.cancel'), already_registered_materials_path, class: "flex items-center justify-center w-full h-full text-xl text-white font-bold" %>
+              </div>
+              <div class="flex flex-row justify-center items-center bg-pale-green hover:bg-dark-green rounded-md cursor-pointer", style= "width:150px; height:38px;">
+                <%= f.submit t('helpers.submit.search'), class: "text-xl text-white font-bold rounded-md cursor-pointer" %>
+                <i class="fa-solid fa-magnifying-glass ml-2" style="color: #ffffff;"></i>
               </div>
             </div>
           </div>   
@@ -44,10 +42,10 @@
                     <%= hidden_field_tag 'material[info_link]', google_material_params(google_material)["canonicalVolumeLink"] %>
                     <%= hidden_field_tag 'material[image_link]', google_material_params(google_material)["image"] %>
                     <%= hidden_field_tag 'material[systemid]', google_material_params(google_material)["systemid"] %>
-                    <%= button_tag type: "submit" do %>
-                      <div class="btn bg-pale-blue hover:bg-dark-blue w-full text-xl text-white h-30px leading-30px">選択</div>
+                    <div class="mt-10px">
+                      <%= f.submit '選択', class: "bg-pale-blue hover:bg-dark-blue w-full text-xl text-white font-bold rounded-md", style: "width:100px; height:38px;" %>
+                    </div>
                     <% end %>
-                  <% end %>
                 </div>
               </div>
             </div>

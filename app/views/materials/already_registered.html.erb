@@ -14,7 +14,9 @@
         <% end %>
       </div>
       <% if @materials.size >= 4 %>
-        <%= link_to t('.material_addition'), search_materials_path, class: "btn bg-pale-blue hover:bg-dark-blue w-full max-w-200px text-xl text-white h-9", style: "height:36px;" %>
+        <div class="bg-pale-blue hover:bg-dark-blue rounded-md", style= "width:200px; height:38px;">
+          <%= link_to t('.material_addition'), search_materials_path, class: "flex items-center justify-center w-full h-full text-xl text-white font-bold" %>
+        </div>
       <% end %>
     </div>
     <% if @materials.present? %>
@@ -32,8 +34,8 @@
         <div>下記ボタンより資格を追加してください</div>
       </div>
     <% end %>
-    <div class="mt-20px">
-      <%= link_to t('.material_addition'), search_materials_path, class: "btn bg-pale-blue hover:bg-dark-blue w-full max-w-200px text-xl text-white" %>
+    <div class="bg-pale-blue hover:bg-dark-blue rounded-md mt-20px", style= "width:200px; height:38px;">
+      <%= link_to t('.material_addition'), search_materials_path, class: "flex items-center justify-center w-full h-full text-xl text-white font-bold" %>
     </div>
     <%= paginate @material_evaluations %>
   </div>
