@@ -2,14 +2,16 @@ name: Run Rubocop
 
 on:
   push:
+  pull_request:
 
 jobs:
   rubocop:
-    # ジョブが実行されるランナー(仮想デバイス)の種類
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      # Rubyをセットアップする
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
