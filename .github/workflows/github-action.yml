@@ -1,0 +1,13 @@
+name: Run Rubocop
+
+on:
+  push:
+
+jobs:
+  rubocop:
+    # ジョブが実行されるランナー(仮想デバイス)の種類
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Run rubocop
+        run: bundle exec rubocop
