@@ -3,5 +3,5 @@ sorcery:
 
 default_url_options:
   protcol: 'https'
-  host: 'https://www.kyouzaichoice.com'
+  host: 'www.kyouzaichoice.com'
 
