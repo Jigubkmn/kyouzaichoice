@@ -13,7 +13,7 @@ class OauthsController < ApplicationController
       redirect_to root_path, success: "#{provider.titleize}アカウントでログインしました"
     else
       begin
-        # ユーザーが存在しない場合はプロバイダ情報を元に新規ユーザーを作成し、ログイン
+        # ユーザーが存在しない場合はプロバイダ情報を元に新規ユーザーを作成し、ログインする
         signup_and_login(provider)
         redirect_to root_path, success: "#{provider.titleize}アカウントでログインしました"
       rescue StandardError
