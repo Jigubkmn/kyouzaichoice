@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :like_materials, -> { where(likes: { commentable_type: 'Material' }) }, through: :likes, source: :commentable, source_type: 'Material'
-  has_many :authentications, :dependent => :destroy
+  has_many :authentications, dependent: :destroy
   accepts_nested_attributes_for :authentications
 
   validates :password, length: { minimum: 4 }, if: -> { new_record? || changes[:crypted_password] }
