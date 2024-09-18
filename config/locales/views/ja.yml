@@ -50,7 +50,7 @@ ja:
   users:
     new:
       title: ユーザー新規登録
-      to_login_page: ログインページへ
+      to_login_page: ログインページはこちら
     create:
       success: ユーザー登録が完了しました
       danger: ユーザー登録に失敗しました

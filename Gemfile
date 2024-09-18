@@ -60,6 +60,9 @@ gem "bootsnap", require: false
 gem 'sorcery', '0.16.5'
 
 gem 'rails-i18n', '~> 7.0.0'
+
+# 環境別に管理(Google認証)
+gem 'config'
 # Use Sass to process CSS
 # gem "sassc-rails"
 

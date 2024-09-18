@@ -4,7 +4,7 @@
 # Available submodules are: :user_activation, :http_basic_auth, :remember_me,
 # :reset_password, :session_timeout, :brute_force_protection, :activity_logging,
 # :magic_login, :external
-Rails.application.config.sorcery.submodules = []
+Rails.application.config.sorcery.submodules = [:external]
 
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
@@ -81,7 +81,12 @@ Rails.application.config.sorcery.configure do |config|
   # Default: `[]`
   #
   # config.external_providers =
-
+  config.external_providers = %i[google]
+  config.google.key = Rails.application.credentials.dig(:google, :google_client_id)
+  config.google.secret = Rails.application.credentials.dig(:google, :google_client_secret)
+  config.google.callback_url = "http://localhost:3000/oauth/callback?provider=google"
+  # config.google.callback_url = Settings.sorcery[:google_callback_url]
+  config.google.user_info_mapping = { email: "email", name: "name" }
   # You can change it by your local ca_file. i.e. '/etc/pki/tls/certs/ca-bundle.crt'
   # Path to ca_file. By default use a internal ca-bundle.crt.
   # Default: `'path/to/ca_file'`
@@ -544,6 +549,9 @@ Rails.application.config.sorcery.configure do |config|
     # Default: `nil`
     #
     # user.authentications_class =
+    
+    #外部サービスとの認証情報を保存するモデルを指定
+    user.authentications_class = Authentication
 
     # User's identifier in the `authentications` class.
     # Default: `:user_id`
