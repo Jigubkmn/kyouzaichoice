@@ -20,4 +20,9 @@ Rails.application.routes.draw do
     end
     resources :likes, only: %i[create destroy], shallow: true
   end
+
+  get 'term_of_service', to: "top#term_of_service"
+  get 'privacy_policy', to: "top#privacy_policy"
+  get 'inquiry', to: "top#inquiry"
+
 end

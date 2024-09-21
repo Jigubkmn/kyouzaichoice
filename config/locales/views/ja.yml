@@ -36,6 +36,12 @@ ja:
   top:
     index: 
       title: 教材チョイス
+    term_of_service:
+      title: 利用規約
+    privacy_policy:
+      title: プライバシーポリシー
+    inquiry:
+      title: お問い合わせ
   user_sessions:
     new:
       title: ログイン
