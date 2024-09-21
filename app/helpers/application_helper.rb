@@ -49,7 +49,7 @@ module ApplicationHelper
       separator: '|',
       icon: [
         { href: image_url('favicon.ico') },
-        { href: image_url('OGP.jpg'), rel: 'apple-touch-icon', sizes: '180x180', type: 'image/jpg' },
+        { href: image_url('OGP.jpg'), rel: 'apple-touch-icon', sizes: '180x180', type: 'image/jpg' }
       ],
       og: {
         # site_name: :site,
@@ -57,14 +57,14 @@ module ApplicationHelper
         description: '自分に合った教材を見つけれるサービスです',
         type: 'website',
         url: request.original_url,
-        image: image_url('OGP.jpg'),# 配置するパスやファイル名によって変更する
-        local: 'ja-JP',
+        image: image_url('OGP.jpg'), # 配置するパスやファイル名によって変更する
+        local: 'ja-JP'
       },
       twitter: {
         title: '教材チョイス',
         card: 'summary_large_image', # Twitterで表示する場合は大きいカードに変更
         site: '@bkmn31519', # アプリの公式Twitterアカウントがあれば、アカウント名を記載
-        image: image_url('OGP.jpg'),# 配置するパスやファイル名によって変更
+        image: image_url('OGP.jpg') # 配置するパスやファイル名によって変更
       }
     }
   end
