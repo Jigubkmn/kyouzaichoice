@@ -30,6 +30,9 @@ gem "cssbundling-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+# OGP用
+gem 'meta-tags'
+
 # 画像アップロード 
 gem 'carrierwave', '~> 3.0'
 
