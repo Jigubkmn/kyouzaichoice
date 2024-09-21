@@ -36,4 +36,36 @@ module ApplicationHelper
     base_title = '教材チョイス'
     title.present? ? "#{title} | #{base_title}" : base_title
   end
+
+  def default_meta_tags
+    {
+      site: '',
+      title: '',
+      reverse: true,
+      charset: 'utf-8',
+      description: '自分に合った教材を見つけれるサービスです',
+      keywords: '教材、テキスト、資格、チョイス',
+      canonical: request.original_url,
+      separator: '|',
+      icon: [
+        { href: image_url('favicon.ico') },
+        { href: image_url('OGP.jpg'), rel: 'apple-touch-icon', sizes: '180x180', type: 'image/jpg' },
+      ],
+      og: {
+        # site_name: :site,
+        title: :title,
+        description: '自分に合った教材を見つけれるサービスです',
+        type: 'website',
+        url: request.original_url,
+        image: image_url('OGP.jpg'),# 配置するパスやファイル名によって変更する
+        local: 'ja-JP',
+      },
+      twitter: {
+        title: '教材チョイス',
+        card: 'summary_large_image', # Twitterで表示する場合は大きいカードに変更
+        site: '@bkmn31519', # アプリの公式Twitterアカウントがあれば、アカウント名を記載
+        image: image_url('OGP.jpg'),# 配置するパスやファイル名によって変更
+      }
+    }
+  end
 end
