@@ -23,6 +23,5 @@ Rails.application.routes.draw do
 
   get 'term_of_service', to: "top#term_of_service"
   get 'privacy_policy', to: "top#privacy_policy"
-  get 'inquiry', to: "top#inquiry"
 
 end
