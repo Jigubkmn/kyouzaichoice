@@ -1,0 +1,23 @@
+<% content_for(:title, t('.title')) %>
+<div class="flex justify-center">
+  <div class="w-full max-w-md mb-50px">
+    <h2 class="text-3xl mt-30px mb-50px text-center font-bold"><%= t('.title') %></h2>
+   <%= form_with model: @user, url: password_reset_path(@token), local: true do |f| %>
+      <div class="mb-20px">
+        <%= f.label :email, class: "font-bold" %>
+        <p><%= @user.email %></p>
+      </div>
+      <div class="mb-20px">
+        <%= f.label :password, class: "font-bold" %>
+        <%= f.password_field :password, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4" %>
+      </div>
+      <div class="mb-20px">
+        <%= f.label :password_confirmation, class: "font-bold" %>
+        <%= f.password_field :password_confirmation, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4" %>
+      </div>
+      <div class="flex justify-center">
+        <%= f.submit t('helpers.submit.password_change'), class: "bg-pale-blue hover:bg-dark-blue text-xl text-white font-bold rounded-md px-4", style: "height:38px;" %>
+      </div>
+    <% end %>
+  </div>
+</div>

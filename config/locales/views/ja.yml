@@ -7,6 +7,7 @@ ja:
       login: ログイン
       cancel: キャンセル
       search: 検索
+      password_change: パスワード変更
     label:
       email: メールアドレス
       password: パスワード
@@ -53,6 +54,17 @@ ja:
       danger: ログインに失敗しました
     destroy:
       success: ログアウトしました
+  password_resets:
+    new: 
+      title: パスワードリセット申請
+      submit: 送信
+    edit:
+      title: パスワードリセット
+    create:
+      success: パスワードリセットのメールを送信しました
+    update:
+      success: パスワードリセットに成功しました
+      danger: パスワードリセットに失敗しました
   users:
     new:
       title: ユーザー新規登録

@@ -20,7 +20,7 @@
         <%= f.label :password_confirmation, class: "font-bold" %>
         <%= f.password_field :password_confirmation, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4" %>
       </div>
-      <div class= "mb-20px flex flex-col">
+      <div class= "mb-40px flex flex-col">
         <%= f.label :image, class: "font-bold" %>
         <%= f.file_field :image, class: "file-input file-input-bordered file-input-warning file-input-sm w-full max-w", accept: 'image/*' %>
         <%= f.hidden_field :image_cache %>
@@ -30,7 +30,7 @@
       </div>
     <% end %>
     <div class="flex justify-center mb-40px">
-      <%= link_to t('.to_login_page'), login_path, class: "text-lg text-dark-green underline underline-offset-4 " %>
+      <%= link_to t('.to_login_page'), login_path, class: "text-lg text-dark-green underline underline-offset-4 hover:font-bold" %>
     </div>
 
     <div class="py-3 flex items-center text-sm text-gray-400 uppercase before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6 dark:text-neutral-500 dark:before:border-neutral-600 dark:after:border-neutral-600">Or</div> 

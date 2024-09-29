@@ -64,7 +64,7 @@ gem 'sorcery', '0.16.5'
 
 gem 'rails-i18n', '~> 7.0.0'
 
-# 環境別に管理(Google認証)
+# 環境別に管理
 gem 'config'
 # Use Sass to process CSS
 # gem "sassc-rails"
@@ -96,6 +96,8 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  
+  gem 'letter_opener_web', '~> 2.0'  
 end
 
 group :test do
