@@ -1,0 +1,6 @@
+<!-- 楽天アイコン -->
+<div class="mt-10px">
+  <%= link_to "https://search.rakuten.co.jp/search/mall/#{CGI.escape(@material.title)}", target: "_blank", rel: "noopener", style: "display: inline-block;" do %>
+    <%= image_tag 'rakuten.png', class: 'h-10 w-10' %>
+  <% end %>
+</div>
