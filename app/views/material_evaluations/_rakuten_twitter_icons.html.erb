@@ -1,6 +1,15 @@
 <!-- 楽天アイコン -->
-<div class="mt-10px">
+<div class="flex flex-row items-center mt-10px">
   <%= link_to "https://search.rakuten.co.jp/search/mall/#{CGI.escape(@material.title)}", target: "_blank", rel: "noopener", style: "display: inline-block;" do %>
-    <%= image_tag 'rakuten.png', class: 'h-10 w-10' %>
+    <%= image_tag 'rakuten.jpg', class: "h-10 w-10" %>
   <% end %>
+  <!-- Twitterアイコン -->
+  <div class="ml-10px">
+    <% x_url = "https://twitter.com/share?url=#{material_url(@material)}&text=#{ERB::Util.url_encode("登録した教材は\n「#{@material.title}」\n")}&hashtags=教材チョイス" %>
+    <%= link_to x_url, title: 'Xで共有', target: '_blank', data: { toggle: "tooltip", placement: "bottom" },
+        class: "bg-slate-950 text-white py-2 px-2.5 rounded-[5px] text-lg", rel: 'noopener noreferrer' do %>
+      <i class="fa-brands fa-x-twitter"></i>
+    <% end %>
+  </div>
 </div>
+

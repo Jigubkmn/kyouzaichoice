@@ -54,7 +54,7 @@ module ApplicationHelper
       og: {
         # site_name: :site,
         title: :title,
-        description: '自分に合った教材を見つけれるサービスです',
+        description: '自分に合った教材を見つけられるサービスです',
         type: 'website',
         url: request.original_url,
         image: image_url('OGP.jpg'), # 配置するパスやファイル名によって変更する
@@ -63,7 +63,7 @@ module ApplicationHelper
       twitter: {
         title: '教材チョイス',
         card: 'summary_large_image', # Twitterで表示する場合は大きいカードに変更
-        site: '@bkmn31519', # アプリの公式Twitterアカウントがあれば、アカウント名を記載
+        site: '@', # アプリの公式Twitterアカウントがあれば、アカウント名を記載
         image: image_url('OGP.jpg') # 配置するパスやファイル名によって変更
       }
     }
