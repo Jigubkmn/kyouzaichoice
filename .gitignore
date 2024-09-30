@@ -25,6 +25,7 @@
 !/tmp/storage/
 !/tmp/storage/.keep
 
+# GitHubに上げない
 .env
 
 /public/assets
