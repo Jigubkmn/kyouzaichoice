@@ -39,32 +39,27 @@ module ApplicationHelper
 
   def default_meta_tags
     {
-      site: '',
-      title: '',
+      site: '教材チョイス',
+      title: '教材チョイス',
       reverse: true,
       charset: 'utf-8',
-      description: '自分に合った教材を見つけれるサービスです',
+      description: '自分に合った教材を見つけられるサービスです',
       keywords: '教材、テキスト、資格、チョイス',
       canonical: request.original_url,
       separator: '|',
-      icon: [
-        { href: image_url('favicon.ico') },
-        { href: image_url('OGP.jpg'), rel: 'apple-touch-icon', sizes: '180x180', type: 'image/jpg' }
-      ],
       og: {
-        # site_name: :site,
-        title: :title,
+        site_name: '',
+        title: '教材チョイス',
         description: '自分に合った教材を見つけられるサービスです',
         type: 'website',
         url: request.original_url,
-        image: image_url('OGP.jpg'), # 配置するパスやファイル名によって変更する
-        local: 'ja-JP'
+        image: image_url('ogp.png'), # 配置するパスやファイル名によって変更する
+        locale: 'ja-JP',
       },
       twitter: {
-        title: '教材チョイス',
         card: 'summary_large_image', # Twitterで表示する場合は大きいカードに変更
         site: '@', # アプリの公式Twitterアカウントがあれば、アカウント名を記載
-        image: image_url('OGP.jpg') # 配置するパスやファイル名によって変更
+        image: image_url('ogp.png') # 配置するパスやファイル名によって変更
       }
     }
   end
