@@ -11,5 +11,12 @@
       <i class="fa-brands fa-x-twitter"></i>
     <% end %>
   </div>
+  <div class="ml-10px">
+    <%= link_to "https://twitter.com/share?url=#{material_url(@material)}&text=#{CGI.escape("登録した教材は#{@material.title} 
+      https://www.kyouzaichoice.com/")}", 
+                target: '_blank', data: { toggle: "tooltip", placement: "bottom"}, title: "Xでシェア" do %>
+      曲をXでシェアする
+    <% end %>
+  </div>
 </div>
 
