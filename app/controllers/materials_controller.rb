@@ -38,7 +38,7 @@ class MaterialsController < ApplicationController
   # プロフィール(教材) いいね
   def like
     @q = current_user.like_materials.ransack(params[:q])
-    @like_materials = @q.result(distinct: true).eager_load(material_evaluations: :comments).page(params[:page]).per(10)
+    @like_materials = @q.result(distinct: true).eager_load(material_evaluations: [:user]).page(params[:page]).per(10)
     @materials_with_details = @like_materials.map do |material|
       material_contents(material)
     end
