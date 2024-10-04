@@ -16,9 +16,7 @@ Rails.application.routes.draw do
     collection { get :search } # 教材検索用
     collection { get :already_registered } # 「追加済み教材」表示用
     collection { get :like } # 「いいねした教材」表示用
-    resources :material_evaluations, only: %i[new create show] do
-      resources :comments, only: %i[create edit destroy], shallow: true
-    end
+    resources :material_evaluations, only: %i[new create show]
     resources :likes, only: %i[create destroy], shallow: true
   end
 

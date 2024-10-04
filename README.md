@@ -98,16 +98,11 @@ https://drive.google.com/file/d/1Xn-EkriCBAvjoMeqydluJepcw_i_OKGv/view?usp=shari
 
 ```mermaid
 erDiagram
-  users ||--o{ posts : "1人のユーザーは複数の投稿を持つ"
 	users ||--o{ likes : "1人のユーザーは複数のいいねを持つ"
   users ||--o{ comments : "1人のユーザーは複数のコメントを持つ"
   users ||--o{ material_evaluations : "1人のユーザーは複数の教材評価を持つ"
   users ||--o{ qualifications : "1人のユーザーは複数の資格を持つ"
-	posts ||--o{ comments : "1つの投稿に複数のコメントを持つ"
-	posts ||--o{ likes : "1つの投稿に複数のいいねを持つ"	
-	posts ||--|| materials : "1つの投稿に1つの教材がある"	
-	posts ||--|| qualifications : "1つの投稿に1つの資格がある"	
-	material_evaluations ||--o{ comments : "1つの教材に複数のコメントを持つ"
+	materials ||--o{ comments : "1つの教材に複数のコメントを持つ"
   materials ||--o{ likes : "1つの教材に複数のいいねを持つ"
 	materials ||--o{ material_evaluations : "1つの教材に複数の評価を持つ"
 
@@ -122,29 +117,16 @@ erDiagram
 		string image "プロフィール画像"
 	}
 
-	posts {
-		integer id PK 
-		bigint user_id FK
-		bigint material_id FK
-		bigint qualification_id FK
-		date study_time "学習時間"
-		text body "内容"
-		string image "画像"
-	}
-
 	likes {
 		integer id PK 
     bigint user_id FK
-		bigint commentable_id FK
-		string  commentable_type
+    bigint material_id FK
 	}
 
 	comments {
 		integer id PK
     bigint user_id FK
-    bigint commentable_id FK
-    string commentable_type
-		text body "内容"
+    bigint material_id FK
 	}
 
   materials {

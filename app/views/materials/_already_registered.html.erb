@@ -24,12 +24,8 @@
             <span class="bg-dark-gray text-white text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"><%= tag %></span>
           <% end %>
         </div>
-      <% end %>
-      <!-- コメント -->
-      <% material.material_evaluations.each do |evaluation| %>
-        <% evaluation.comments.where(user: current_user).each do |comment| %>
-          <p><%= comment.body %></p>
-        <% end %>
+        <!-- コメント -->
+        <p><%= evaluation.body %></p>
       <% end %>
     </div>
     <!-- 編集及び削除アイコン -->

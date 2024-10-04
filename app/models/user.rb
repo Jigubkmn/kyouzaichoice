@@ -3,7 +3,6 @@ class User < ApplicationRecord
 
   has_many :qualifications, dependent: :destroy
   has_many :material_evaluations, dependent: :destroy
-  has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :like_materials, -> { where(likes: { commentable_type: 'Material' }) }, through: :likes, source: :commentable, source_type: 'Material'
   has_many :authentications, dependent: :destroy

@@ -3,8 +3,6 @@
     <%= form_with model: @material, local: true do |f| %>
       <%= f.fields_for :material_evaluations, @material_evaluation do |evaluation_f| %>
         <%= render 'shared/error_messages', object: evaluation_f.object %>
-        <%= evaluation_f.fields_for :comments do |comment_f| %>
-          <%= render 'shared/error_messages', object: comment_f.object %>
           <!-- Materialの隠しフィールド -->
           <%= f.hidden_field :title, value: @material.title %>
           <%= f.hidden_field :image_link, value: @material.image_link %>
@@ -13,12 +11,13 @@
           <%= f.hidden_field :systemid, value: @material.systemid %>
           <div class="flex flex-row">
             <%= image_tag @material.image_link, style: "width: 100px; height: 150px; max-width: 100px;" %>
-            <!-- MaterialEvaluationの入力フォーム -->
-            <div class="ml-15px">      
+            <div class="ml-15px">
               <div class= "mb-20px">
                 <p class="font-bold">教材名</p>
                 <%= @material.title %>
               </div>
+
+              <!-- MaterialEvaluationの入力フォーム -->
               <!-- 教材評価 -->
               <div class= "mb-20px flex flex-col">
                 <%= evaluation_f.label :evaluation, class: "font-bold" %>
@@ -39,19 +38,19 @@
                   <% end %>
                 </div>
               </div>
-              <!-- Commentの入力フォーム -->
               <div class= "mb-20px flex flex-col">
-                <%= comment_f.label :body, class: "font-bold" %>
-                <%= comment_f.text_area :body, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "height:auto;", rows: 3 %>
-              </div>    
+                <%= evaluation_f.label :body, class: "font-bold" %>
+                <%= evaluation_f.text_area :body, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "height:auto;", rows: 3 %>
+              </div> 
             </div>
-          </div>  
-        <% end %>
+          </div>
       <% end %>
       <!-- ボタン -->
       <div class="flex justify-end">
         <div class="bg-thin-gray hover:bg-pale-gray rounded-md mr-30px", style= "width:150px; height:38px;">
-          <%= link_to t('helpers.submit.cancel'), search_materials_path, class: "flex items-center justify-center w-full h-full text-xl text-white font-bold" %>
+          <%= link_to t('helpers.submit.cancel'), 
+          params[:action] == 'edit' ? already_registered_materials_path : search_materials_path,
+          class: "flex items-center justify-center w-full h-full text-xl text-white font-bold" %>
         </div>
         <%= f.submit nil, class: "bg-pale-blue hover:bg-dark-blue w-full text-xl text-white font-bold rounded-md", style: "width:150px; height:38px;" %></div>
       </div>

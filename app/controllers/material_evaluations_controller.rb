@@ -4,7 +4,6 @@ class MaterialEvaluationsController < ApplicationController
 
   def new
     @material_evaluation = @material.material_evaluations.build(user: current_user)
-    @material_evaluation.comments.build
   end
 
   def show
@@ -20,17 +19,17 @@ class MaterialEvaluationsController < ApplicationController
 
   def create
     @material_evaluation = @material.material_evaluations.build(material_evaluation_params)
-    uers_information(@material_evaluation) # ユーザー情報を設定
+    @material_evaluation.user = current_user # ユーザー情報を設定
     process_features(@material_evaluation) # featureカラムの処理
     # 教材は既に登録済み。教材情報のみ登録
     if @material_evaluation.save
       redirect_to materials_path, success: t('material_evaluations.create.success')
     else
       source_view = params[:material_evaluation][:source_view]
-      if source_view == 'new'
+      if source_view == 'new' # 登録済み教材ページから教材登録する場合
         flash.now[:danger] = t('material_evaluations.create.danger')
         render :new, status: :unprocessable_entity
-      elsif source_view == 'show'
+      elsif source_view == 'show' # 教材詳細ページから教材登録する場合
         @evaluations = @material.material_evaluations.includes(:comments)
         calculate_material_details(@evaluations) # 教材評価平均、教材評価数、教材特徴
         # ログインユーザー教材情報(教材評価、コメント)
@@ -53,14 +52,6 @@ class MaterialEvaluationsController < ApplicationController
     @unique_features = features.uniq
   end
 
-  # create用
-  def uers_information(material_evaluation)
-    material_evaluation.user = current_user
-    material_evaluation.comments.each do |comment|
-      comment.user = current_user
-    end
-  end
-
   # show用
   def login_user_evaluation_information(evaluations)
     # ログインユーザーの評価を取得
@@ -74,9 +65,8 @@ class MaterialEvaluationsController < ApplicationController
   # create用
   def material_evaluation_params
     params.require(:material_evaluation).permit(
-      :id, :evaluation, :_destroy,
-      { feature: [] },
-      { comments_attributes: %i[id body _destroy] }
+      :id, :evaluation, :body, :_destroy,
+      { feature: [] }
     )
   end
 

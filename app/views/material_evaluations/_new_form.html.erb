@@ -1,9 +1,7 @@
 <div class="mt-5px border-2 border-gray rounded-md" style="width: 600px;">
   <div class="p-30px">
-    <%= form_with model: @material_evaluation, url: material_material_evaluations_path(@material),  local: true do |f| %>
+    <%= form_with model: @material_evaluation, url: material_material_evaluations_path(@material), local: true do |f| %>
         <%= render 'shared/error_messages', object: f.object %>
-        <%= f.fields_for :comments do |comment_f| %>
-          <%= render 'shared/error_messages', object: comment_f.object %>
           <%= f.hidden_field :source_view, value: 'new' %>
           <div class="flex flex-row">
             <%= image_tag @material.image_link, style: "width: 100px; height: 150px; max-width: 100px;" %>
@@ -34,12 +32,11 @@
               </div>
               <!-- Commentの入力フォーム -->
               <div class= "mb-20px flex flex-col">
-                <%= comment_f.label :body, class: "font-bold" %>
-                <%= comment_f.text_area :body, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "height:auto;", rows: 3 %>
+                <%= f.label :body, class: "font-bold" %>
+                <%= f.text_area :body, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "height:auto;", rows: 3 %>
               </div>   
             </div>
-          </div>
-        <% end %>  
+          </div> 
       <!-- ボタン -->
       <div class="flex justify-end">
         <div class="bg-thin-gray hover:bg-pale-gray rounded-md mr-30px", style= "width:150px; height:38px;">
