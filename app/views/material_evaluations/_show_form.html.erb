@@ -1,22 +1,19 @@
 <div class="border-b-2 border-gray p-20px">
   <%= form_with model: @material_evaluation, url: material_material_evaluations_path(@material), local: true do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
-      <%= f.fields_for :comments do |comment_f| %>
-        <%= render 'shared/error_messages', object: comment_f.object %>
-        <%= f.hidden_field :source_view, value: 'show' %>
-        <!-- 教材評価 -->
-        <div class= "mb-20px flex flex-col">
-          <%= f.label :evaluation, class: "font-bold" %>
-          <%= f.select :evaluation, options_for_select((0..10).map { |i| [sprintf('%.1f', i * 0.5), sprintf('%.1f', i * 0.5)] }, f.object.evaluation),
-          {include_blank: true},class: "select select-warning select-sm w-full m-0 py-0 pr-0 pl-4", style: "width:200px;" %>
-        </div>
-        
-        <!-- Commentの入力フォーム -->
-        <div class= "mb-20px flex flex-col">
-          <%= comment_f.label :body, class: "font-bold" %>
-          <%= comment_f.text_area :body, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "height:auto;", rows: 3 %>
-        </div>
-      <% end %>  
+      <%= f.hidden_field :source_view, value: 'show' %>
+      <!-- 教材評価 -->
+      <div class= "mb-20px flex flex-col">
+        <%= f.label :evaluation, class: "font-bold" %>
+        <%= f.select :evaluation, options_for_select((0..10).map { |i| [sprintf('%.1f', i * 0.5), sprintf('%.1f', i * 0.5)] }, f.object.evaluation),
+        {include_blank: true},class: "select select-warning select-sm w-full m-0 py-0 pr-0 pl-4", style: "width:200px;" %>
+      </div>
+      
+      <!-- Commentの入力フォーム -->
+      <div class= "mb-20px flex flex-col">
+        <%= f.label :body, class: "font-bold" %>
+        <%= f.text_area :body, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "height:auto;", rows: 3 %>
+      </div> 
     <!-- ボタン -->
     <div class="flex justify-end">
       <div class="bg-thin-gray hover:bg-pale-gray rounded-md mr-30px", style= "width:150px; height:38px;">

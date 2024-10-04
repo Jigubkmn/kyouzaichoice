@@ -50,7 +50,7 @@
               <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
               <div class="font-bold ml-5px"><%= @user_evaluation %></div>
             </div>
-            <p><%= @user_comment.body %></p>
+            <p><%= @user_body %></p>
           </div>
         </div>
       <% end %>
@@ -70,7 +70,7 @@
             <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
             <div class="font-bold ml-5px"><%= evaluation.evaluation %></div>
           </div>
-          <p><%= evaluation.comments.map(&:body).join(", ") %></p>
+          <p><%= evaluation.body %></p>
         </div>
       </div>
     <% end %>

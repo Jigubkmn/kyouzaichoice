@@ -7,9 +7,9 @@ class MaterialEvaluationsController < ApplicationController
   end
 
   def show
-    @evaluations = @material.material_evaluations.includes(:comments)
     @material_evaluation = @material.material_evaluations.build
-    @material_evaluation.comments.build
+    @evaluations = @material.material_evaluations.includes(:user)
+    # @material_evaluation.comments.build
     calculate_material_details(@evaluations) # 教材評価平均、教材評価数、教材特徴
     # ログインユーザー教材情報(教材評価、コメント)
     login_user_evaluation_information(@evaluations)
@@ -30,7 +30,7 @@ class MaterialEvaluationsController < ApplicationController
         flash.now[:danger] = t('material_evaluations.create.danger')
         render :new, status: :unprocessable_entity
       elsif source_view == 'show' # 教材詳細ページから教材登録する場合
-        @evaluations = @material.material_evaluations.includes(:comments)
+        @evaluations = @material.material_evaluations.includes(:user)
         calculate_material_details(@evaluations) # 教材評価平均、教材評価数、教材特徴
         # ログインユーザー教材情報(教材評価、コメント)
         login_user_evaluation_information(@evaluations)
@@ -57,9 +57,9 @@ class MaterialEvaluationsController < ApplicationController
     # ログインユーザーの評価を取得
     user_evaluation = evaluations.find { |evaluation| evaluation.user == current_user }
     @user_evaluation = user_evaluation&.evaluation
-    # ログインユーザーの教材コメントを取得
-    @comments = @evaluations.flat_map(&:comments)
-    @user_comment = @comments.find { |comment| comment.user == current_user }
+
+    @body = evaluations.map(&:body) # すべての評価のbodyを配列で取得
+    @user_body = user_evaluation&.body # ログインユーザーの評価のbodyを取得
   end
 
   # create用
