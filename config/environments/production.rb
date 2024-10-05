@@ -105,5 +105,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.hosts << "www.kyouzaichoice.com"
-  config.hosts << "qualificationtake.onrender.com
+  config.hosts << "qualificationtake.onrender.com"
 end
