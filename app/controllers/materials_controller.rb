@@ -118,7 +118,6 @@ class MaterialsController < ApplicationController
     @evaluations = material.material_evaluations
     calculate_material_details(@evaluations) # 教材評価平均、教材評価数、教材特徴
     comments_count = @evaluations.where.not(body: nil).count # 各教材に関連する評価のコメント数を計算
-    # like_count = Like.where(material.id: material.id).count
     like_count = material.likes.count # いいね数
     material.as_json.merge(
       average_evaluation: @average_evaluation,

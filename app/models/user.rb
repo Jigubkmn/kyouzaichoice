@@ -22,12 +22,12 @@ class User < ApplicationRecord
   def like(material)
     like_materials << material
   end
-  
+
   # 特定の教材をいいねリストから削除する
   def unlike(material)
     like_materials.destroy(material)
   end
-  
+
   # いいねリストに特定の教材が含まれているかチェックしている
   def like?(material)
     like_materials.include?(material)

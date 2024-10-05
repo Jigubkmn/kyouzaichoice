@@ -54,9 +54,9 @@
                 </div>       
               </div>
               <!-- 編集及び削除アイコン -->
-                <% if current_user && material.material_evaluations.exists?(user_id: current_user.id) %>
-                  <%= render 'edit_delete_buttons', material: material %>
-                <% end %>
+              <% if current_user && material.material_evaluations.exists?(user_id: current_user.id) %>
+                <%= render 'edit_delete_buttons', material: material %>
+              <% end %>
             </div>
           </div>
         <% end %>

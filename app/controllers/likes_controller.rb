@@ -8,10 +8,9 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    # ログインユーザーが所有するブックマークの中から特定のIDを持つブックマークを探し、そのブックマークに関する掲示板を取得する
-    # @material = current_user.likes.find(params[:id]).commentable
+    # ログインユーザーが所有するいいねの中から特定のIDを持ついいねを探し、そのいいねに関する教材を取得する
     @material = current_user.likes.find(params[:id]).material
-    # ブックマークを解除するメソッド　Userモデルに定義されている
+    # いいねを解除するメソッド　Userモデルに定義されている
     current_user.unlike(@material)
     redirect_to materials_path, status: :see_other
   end
