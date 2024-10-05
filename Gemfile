@@ -36,6 +36,8 @@ gem 'meta-tags'
 # 画像アップロード 
 gem 'carrierwave', '~> 3.0'
 
+gem 'fog-aws'
+
 # AWS S3
 gem 'aws-sdk-s3', require: false
 
