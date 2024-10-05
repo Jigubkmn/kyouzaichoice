@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         'pale-pink': '#FCC2C2',
         'dark-pink': '#FF9A9A',
+        'like-pink': '#FF5FB5',
         'pale-yellow': '#FCE29E',
         'thin-orange': '#FFDB7D',
         'pale-orange': '#FFCD4C',
