@@ -36,6 +36,9 @@ gem 'meta-tags'
 # 画像アップロード 
 gem 'carrierwave', '~> 3.0'
 
+# AWS S3
+gem 'aws-sdk-s3', require: false
+
 # Net::HTTPを使用してコードが煩雑になることを防ぐため、より簡潔にコードが記載できる
 gem 'faraday'
 
