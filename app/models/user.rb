@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :qualifications, dependent: :destroy
   has_many :material_evaluations, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_many :like_materials, -> { where(likes: { commentable_type: 'Material' }) }, through: :likes, source: :commentable, source_type: 'Material'
+  has_many :like_materials, through: :likes, source: :material
   has_many :authentications, dependent: :destroy
   accepts_nested_attributes_for :authentications
 
@@ -18,14 +18,17 @@ class User < ApplicationRecord
   mount_uploader :image, UserImageUploader
   validates :email, presence: true, uniqueness: true
 
+  # 特定の教材をいいねリストに追加する
   def like(material)
     like_materials << material
   end
-
+  
+  # 特定の教材をいいねリストから削除する
   def unlike(material)
     like_materials.destroy(material)
   end
-
+  
+  # いいねリストに特定の教材が含まれているかチェックしている
   def like?(material)
     like_materials.include?(material)
   end

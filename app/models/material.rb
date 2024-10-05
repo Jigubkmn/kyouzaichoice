@@ -1,6 +1,7 @@
 class Material < ApplicationRecord
   has_many :material_evaluations, dependent: :destroy
-  has_many :likes, as: :commentable, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  # has_many :likes, as: :commentable, dependent: :destroy
 
   validates :title, presence: true, uniqueness: true
   validates :image_link, presence: true, uniqueness: true
