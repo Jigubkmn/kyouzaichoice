@@ -44,11 +44,18 @@
                     <div class="ml-5px">(<%= material_with_details[:comments_count] %>)</div>
                   </div>
                   <div class="flex flex-row items-center">
-                    <!-- ログインユーザーが教材をいいねしているか -->
-                    <% if current_user && current_user.like?(material) %>
-                      <%= render 'unlike', material: material, material: material, material_with_details: material_with_details %>
+                    <!-- いいねアイコン表示 -->
+                    <% if current_user %>
+                      <% if current_user.like?(material) %>
+                        <%= render 'unlike', material: material, material: material, material_with_details: material_with_details %>
+                      <% else %>
+                        <%= render 'like', material: material, material_with_details: material_with_details %>
+                      <% end %>
                     <% else %>
-                      <%= render 'like', material: material, material_with_details: material_with_details %>
+                      <div class="flex flex-row items-center">
+                        <i class="fa-regular fa-heart" style="color: #bcb7b7;"></i>
+                        <div class="ml-5px">(<%= material_with_details[:like_count] %>)</div>
+                      </div>
                     <% end %>
                   </div>
                 </div>       

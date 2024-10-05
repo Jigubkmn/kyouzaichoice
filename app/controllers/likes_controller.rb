@@ -12,6 +12,6 @@ class LikesController < ApplicationController
     @material = current_user.likes.find(params[:id]).material
     # いいねを解除するメソッド　Userモデルに定義されている
     current_user.unlike(@material)
-    redirect_to materials_path, status: :see_other
+    redirect_to request.referer, status: :see_other
   end
 end
