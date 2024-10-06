@@ -27,6 +27,10 @@ module.exports = {
         'flash-messages-red': '#EA8585',
         'flash-messages-yellow': '#F3F65D',
       },
+      borderColor: { 
+        'pale-gray': '#BEBEBE',
+        'darkest-blue': '#1E91E4',
+      },
       margin: {
         '5px': '5px',
         '10px': '10px',
@@ -55,6 +59,7 @@ module.exports = {
         '150px': '150px',
         '200px': '200px',
         '300px': '300px',
+        '400px': '400px',
         '500px': '500px',
         '600px': '600px',
         '800px': '800px',

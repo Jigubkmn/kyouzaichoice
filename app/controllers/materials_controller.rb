@@ -35,6 +35,8 @@ class MaterialsController < ApplicationController
                    @materials.order_by_published_date # 公開日の新しい順
                  when 'evaluation'
                    @materials.order_by_evaluation_average # 評価が高い順
+                 else
+                  @materials
                  end
 
     @materials_with_details = @materials.map do |material|
