@@ -24,7 +24,12 @@ class MaterialsController < ApplicationController
 
   def index
     @q = Material.ransack(params[:q])
-    @materials = @q.result(distinct: true).eager_load(:material_evaluations).page(params[:page]).per(10)
+    @materials = @q.result(distinct: true)
+                   .includes(:material_evaluations)
+                   .select('materials.*, published_date IS NULL AS is_null')
+                   .page(params[:page])
+                   .per(10)
+                   .order(Arel.sql('is_null, published_date DESC')) # published_dateがnilのデータは並び替えで一番最後に表示させる
     @materials_with_details = @materials.map do |material|
       material_contents(material)
     end
@@ -38,7 +43,12 @@ class MaterialsController < ApplicationController
   # プロフィール(教材) いいね
   def like
     @q = current_user.like_materials.ransack(params[:q])
-    @like_materials = @q.result(distinct: true).eager_load(material_evaluations: [:user]).page(params[:page]).per(10)
+    @like_materials = @q.result(distinct: true)
+                        .includes(material_evaluations: [:user])
+                        .select('materials.*, published_date IS NULL AS is_null')
+                        .page(params[:page])
+                        .per(10)
+                        .order(Arel.sql('is_null, published_date DESC')) # published_dateがnilのデータは並び替えで一番最後に表示させる
     @materials_with_details = @like_materials.map do |material|
       material_contents(material)
     end
@@ -139,7 +149,12 @@ class MaterialsController < ApplicationController
 
   # new用、already_registered用
   def login_material_evaluations
-    @material_evaluations = current_user.material_evaluations.includes(:material).page(params[:page]).per(10)
+    @material_evaluations = current_user.material_evaluations
+                                        .joins(:material)
+                                        .select('material_evaluations.*, materials.*, published_date IS NULL AS is_null')
+                                        .page(params[:page])
+                                        .per(10)
+                                        .order(Arel.sql('is_null, published_date DESC')) # published_dateがnilのデータは並び替えで一番最後に表示させる
     @materials = @material_evaluations.map(&:material).uniq # 対象materialデータ表示
   end
 
