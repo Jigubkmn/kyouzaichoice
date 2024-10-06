@@ -36,9 +36,8 @@ class MaterialsController < ApplicationController
                  when 'evaluation'
                    @materials.order_by_evaluation_average # 評価が高い順
                  else
-                  @materials
+                   @materials
                  end
-
     @materials_with_details = @materials.map do |material|
       material_contents(material)
     end
