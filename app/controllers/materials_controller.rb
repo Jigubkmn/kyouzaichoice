@@ -51,13 +51,13 @@ class MaterialsController < ApplicationController
   # プロフィール(教材) いいね
   def like
     @q = current_user.like_materials.ransack(params[:q])
-    @like_materials = @q.result(distinct: true)
-                        .includes(material_evaluations: [:user])
-                        .select('materials.*, published_date IS NULL AS is_null')
-                        .page(params[:page])
-                        .per(10)
-                        .order(Arel.sql('is_null, published_date DESC')) # published_dateがnilのデータは並び替えで一番最後に表示させる
-    @materials_with_details = @like_materials.map do |material|
+    @materials = @q.result(distinct: true)
+                   .includes(material_evaluations: [:user])
+                   .select('materials.*, published_date IS NULL AS is_null')
+                   .page(params[:page])
+                   .per(10)
+                   .order(Arel.sql('is_null, published_date DESC')) # published_dateがnilのデータは並び替えで一番最後に表示させる
+    @materials_with_details = @materials.map do |material|
       material_contents(material)
     end
   end
