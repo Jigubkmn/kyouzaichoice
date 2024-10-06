@@ -29,7 +29,14 @@ class MaterialsController < ApplicationController
                    .select('materials.*, published_date IS NULL AS is_null')
                    .page(params[:page])
                    .per(10)
-                   .order(Arel.sql('is_null, published_date DESC')) # published_dateがnilのデータは並び替えで一番最後に表示させる
+    # 並び替え処理
+    @materials = case params[:sort]
+                 when 'published_date'
+                   @materials.order_by_published_date # 公開日の新しい順
+                 when 'evaluation'
+                   @materials.order_by_evaluation_average # 評価が高い順
+                 end
+
     @materials_with_details = @materials.map do |material|
       material_contents(material)
     end
