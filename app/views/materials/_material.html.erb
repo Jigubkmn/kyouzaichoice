@@ -33,11 +33,11 @@
             <i class="fa-solid fa-message"></i>
             <div class="ml-5px">(<%= material_with_details[:comments_count] %>)</div>
           </div>
-          <!-- いいねアイコン表示 -->
+          <!-- いいねアイコン -->
           <div class="flex flex-row items-center">
             <% if current_user %>
               <% if current_user.like?(material) %>
-                <%= render 'unlike', material: material, material: material, material_with_details: material_with_details %>
+                <%= render 'unlike', material: material, material_with_details: material_with_details %>
               <% else %>
                 <%= render 'like', material: material, material_with_details: material_with_details %>
               <% end %>

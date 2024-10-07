@@ -4,7 +4,7 @@ class LikesController < ApplicationController
     @material = Material.find(params[:material_id])
     # いいねを追加するメソッド　Userモデルに定義されている
     current_user.like(@material)
-    redirect_to materials_path
+    redirect_to request.referer, status: :see_other
   end
 
   def destroy
