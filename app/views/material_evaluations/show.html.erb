@@ -10,7 +10,7 @@
           <div class="ml-15px">
             <!-- タイトル -->
             <div class="font-bold text-xl mb-5px">
-              <%= link_to truncate(@material.title, length: 28), material_path(@material) %>
+              <%= truncate(@material.title, length: 28) %>
             </div>
             <!-- 公開日 -->
             <% if @material.published_date.present? %>
