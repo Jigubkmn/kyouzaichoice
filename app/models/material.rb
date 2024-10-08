@@ -4,7 +4,6 @@ class Material < ApplicationRecord
 
   validates :title, presence: true, uniqueness: true
   validates :image_link, presence: true, uniqueness: true
-  validates :description, presence: true
 
   # データを同時に保存する
   accepts_nested_attributes_for :material_evaluations, allow_destroy: true
