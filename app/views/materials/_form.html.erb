@@ -9,6 +9,8 @@
           <%= f.hidden_field :published_date, value: @material.published_date %>
           <%= f.hidden_field :info_link, value: @material.info_link %>
           <%= f.hidden_field :systemid, value: @material.systemid %>
+          <%= f.hidden_field :publisher, value: @material.publisher %>
+          <%= f.hidden_field :description, value: @material.description %>
           <div class="flex flex-row">
             <%= image_tag @material.image_link, style: "width: 100px; height: 150px; max-width: 100px;" %>
             <div class="ml-15px">

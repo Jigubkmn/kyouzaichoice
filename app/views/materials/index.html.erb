@@ -13,7 +13,7 @@
         <div class="ml-4">
           <select class="select border-pale-gray hover:border-darkest-blue hover:border-2 select-sm rounded-md w-full w-200px h-38px" onchange="location = this.value;">
             <option value="" disabled selected hidden>標準</option>
-            <option value="<%= materials_path(sort: 'published_date') %>" <%= 'selected' if params[:sort] == 'published_date' %>>公開日が新しい順</option>
+            <option value="<%= materials_path(sort: 'published_date') %>" <%= 'selected' if params[:sort] == 'published_date' %>>発売日が早い順</option>
             <option value="<%= materials_path(sort: 'evaluation') %>" <%= 'selected' if params[:sort] == 'evaluation' %>>評価が高い順</option>
           </select>
         </div>

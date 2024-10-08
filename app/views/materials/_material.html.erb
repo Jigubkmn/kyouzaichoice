@@ -2,25 +2,37 @@
   <% material_with_details = @materials_with_details[index] %>
   <div class="flex flex-row border-2 border-gray rounded-md w-full max-w-600px p-15px">
     <div class="flex flex-row w-full">
-      <%= image_tag material.image_link, style: "width: 100px; height: 150px;" %>
-      <div class="flex flex-col w-full ml-15px">
-        <!-- タイトル -->
-        <div class="text-xl text-darkest-blue hover:font-bold mb-5px underline underline-offset-4">
-          <%= link_to truncate(material.title, length: 20), material_material_evaluation_path(material, material.material_evaluations.first) %>
-          <!-- <%= truncate(material.title, length: 20) %> -->
-        </div>
-        <!-- 公開日 -->
-        <% if material.published_date.present? %>
-          <%= material.published_date %>
-        <% else %>
-          <p>公開日不明</p>
-        <% end %>
+      <div class="flex flex-col">
+        <%= image_tag material.image_link, style: "width: 100px; max-width: 100px; height: 150px;" %>
         <!-- 教材評価 -->
-        <div class="mt-5px flex flex-row items-center">
+        <div class="mt-5px flex flex-row items-center justify-center">
           <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
           <div class="ml-5px"><%= material_with_details[:average_evaluation] %></div>
           <div class="ml-5px">(<%= material_with_details[:count_of_unique_evaluators] %>)</div>
         </div>
+      </div>
+      <div class="flex flex-col w-full ml-15px">
+        <!-- タイトル -->
+        <div class="text-xl text-darkest-blue hover:font-bold mb-5px underline underline-offset-4">
+          <%= link_to truncate(material.title, length: 20), material_material_evaluation_path(material, material.material_evaluations.first) %>
+        </div>
+        <!-- 発売日 -->
+        <% if material.published_date.present? %>
+          <div>発売日:<%= material.published_date %></div>
+        <% else %>
+          <p>発売日:不明</p>
+        <% end %>
+        <!-- 出版社 -->
+        <% if material.publisher.present? %>
+          <div>出版社:<%= material.publisher %></div>
+        <% else %>
+          <p>出版社:不明</p>
+        <% end %>
+        <!-- 内容説明 -->
+        <details>
+          <summary class="text-blue-500 underline hover:font-bold">【内容説明】</summary>
+            <p><%= material.description %></p>
+        </details>
         <!-- 教材特徴 -->
         <div class="my-10px flex flex-wrap gap-2">
           <% material_with_details[:unique_features].each do |feature| %>

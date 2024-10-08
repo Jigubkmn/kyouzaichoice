@@ -23,7 +23,7 @@ module ApplicationHelper
     google_material['volumeInfo']['systemid'] = isbn_identifier['identifier'] if isbn_identifier
 
     # volumeInfoの中が必要な項目のみになるようsliceを使って絞りこむ
-    google_material['volumeInfo'].slice('title', 'authors', 'publishedDate', 'infoLink', 'image', 'systemid', 'canonicalVolumeLink')
+    google_material['volumeInfo'].slice('title', 'authors', 'publishedDate', 'infoLink', 'image', 'systemid', 'canonicalVolumeLink', 'publisher', 'description')
   end
 
   # 教材登録時の教材特徴チェックボックス内容

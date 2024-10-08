@@ -1,10 +1,11 @@
 <% content_for(:title, t('.title')) %>
 <div class="flex flex-row w-full">
   <%= render 'profile/side_bar' %>
-  <div class="flex flex-col max-w-940px ">
+  <div class="flex flex-col" style="width: 1000px;">
     <h2 class="mt-30px text-3xl font-bold"><%= t('.title') %></h3>
-    <div class="flex flex-col items-center">
-      <div class="mt-5px border-2 border-gray rounded-md p-30px mb-20px" style="width: 940px;">
+    <div class="flex flex-col">
+      <!-- 教材検索フォーム -->
+      <div class="mt-5px border-2 border-gray rounded-md p-30px mb-20px" style="width: 1000px;">
         <%= form_with url: search_materials_path, local: true, method: :get do |f| %>
           <div class="flex flex-col w-full">
             <div class="font-bold"><%= t('.name') %></div>
@@ -21,31 +22,43 @@
           </div>   
         <% end %>
       </div>
-      <%= link_to t('.material_index'), materials_path, class: "text-lg text-darkest-blue hover:font-bold underline underline-offset-4" %>
+      <!-- 教材一覧ページへ -->
+      <%= link_to t('.material_index'), materials_path, class: "flex justify-center text-lg text-darkest-blue hover:font-bold underline underline-offset-4" %>
     </div>
     
     <% if @google_materials.present? %>
       <div class="my-30px">
-        <!-- 検索した教材の情報を表示する -->
+        <!-- 検索した教材情報を表示 -->
         <div class="flex flex-wrap gap-4">
           <% @google_materials['items']&.each do |google_material| %>
-            <div class="flex flex-row border-2 border-gray rounded-md" style="width: 300px; max-width: 300px; height: 170px;" >
+            <div class="flex flex-row border-2 border-gray rounded-md" style="width: 1000px; max-width: 1000px;" >
               <div class="flex flex-row m-10px">
                 <div class="mr-10px"><%= image_tag google_material_thumbnail(google_material), style: "width: 100px; max-width: 100px;" %></div>
                 <div class="flex flex-col">
-                  <div class="mt-5px"><%= truncate(google_material['volumeInfo']['title'], length: 20) %></div>
-                  <div><%= google_material['volumeInfo']['publishedDate'] %></div>
+                  <div class="mt-5px text-xl font-bold"><%= google_material['volumeInfo']['title'] %></div>
+                  <div>発売日:<%= google_material['volumeInfo']['publishedDate'] %></div>
+                  <% if google_material['volumeInfo']['publisher'].present? %>
+                    <div>出版社:<%= google_material['volumeInfo']['publisher'] %></div>
+                  <% else %>
+                    <div>出版社:不明</div>
+                  <% end %>
+                  <details>
+                    <summary class="text-blue-500 underline hover:font-bold">【内容説明】</summary>
+                      <p><%= google_material['volumeInfo']['description'] %></p>
+                  </details>
                   <!-- 選択ボタンを押したらhidden_fieldを使用してnew.html.erbに値が送信される -->
                   <%= form_with url: new_material_path, local: true, method: :get do |f| %>
-                    <%= hidden_field_tag 'material[title]', google_material_params(google_material)["title"] %>
-                    <%= hidden_field_tag 'material[published_date]', google_material_params(google_material)["publishedDate"] %>
-                    <%= hidden_field_tag 'material[info_link]', google_material_params(google_material)["canonicalVolumeLink"] %>
-                    <%= hidden_field_tag 'material[image_link]', google_material_params(google_material)["image"] %>
-                    <%= hidden_field_tag 'material[systemid]', google_material_params(google_material)["systemid"] %>
+                    <%= hidden_field_tag 'material[title]', google_material_params(google_material)['title'] %>
+                    <%= hidden_field_tag 'material[published_date]', google_material_params(google_material)['publishedDate'] %>
+                    <%= hidden_field_tag 'material[info_link]', google_material_params(google_material)['infoLink'] %>
+                    <%= hidden_field_tag 'material[image_link]', google_material_params(google_material)['image'] %>
+                    <%= hidden_field_tag 'material[systemid]', google_material_params(google_material)['systemid'] %>
+                    <%= hidden_field_tag 'material[publisher]', google_material_params(google_material)['publisher'] %>
+                    <%= hidden_field_tag 'material[description]', google_material_params(google_material)['description'] %>
                     <div class="mt-10px">
                       <%= f.submit '選択', class: "bg-pale-blue hover:bg-dark-blue w-full text-xl text-white font-bold rounded-md", style: "width:100px; height:38px;" %>
                     </div>
-                    <% end %>
+                  <% end %>
                 </div>
               </div>
             </div>
