@@ -42,10 +42,12 @@
                   <% else %>
                     <div>出版社:不明</div>
                   <% end %>
-                  <details>
-                    <summary class="text-blue-500 underline hover:font-bold">【内容説明】</summary>
-                      <p><%= google_material['volumeInfo']['description'] %></p>
-                  </details>
+                  <% if google_material['volumeInfo']['description'].present? %>
+                    <details>
+                      <summary class="text-darkest-blue underline hover:font-bold">【内容説明】</summary>
+                        <p><%= google_material['volumeInfo']['description'] %></p>
+                    </details>
+                  <% end %>
                   <!-- 選択ボタンを押したらhidden_fieldを使用してnew.html.erbに値が送信される -->
                   <%= form_with url: new_material_path, local: true, method: :get do |f| %>
                     <%= hidden_field_tag 'material[title]', google_material_params(google_material)['title'] %>

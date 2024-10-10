@@ -29,10 +29,21 @@
           <p>出版社:不明</p>
         <% end %>
         <!-- 内容説明 -->
-        <details>
-          <summary class="text-blue-500 underline hover:font-bold">【内容説明】</summary>
-            <p><%= material.description %></p>
-        </details>
+        <% if material.description.present? %>
+          <button class="flex justify-start text-darkest-blue underline" onclick="document.getElementById('modal_<%= index %>').showModal()">【内容説明】</button>
+          <dialog id="modal_<%= index %>" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box w-7xl">
+              <h3 class="text-lg font-bold">【内容説明】</h3>
+              <div><%= material.description %></div>
+              <div class="modal-action">
+                <form method="dialog">
+                  <!-- if there is a button in form, it will close the modal -->
+                  <button class="btn">Close</button>
+                </form>
+              </div>
+            </div>
+          </dialog>
+        <% end %>
         <!-- 教材特徴 -->
         <div class="my-10px flex flex-wrap gap-2">
           <% material_with_details[:unique_features].each do |feature| %>

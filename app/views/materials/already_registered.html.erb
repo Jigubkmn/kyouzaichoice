@@ -23,9 +23,7 @@
       <!-- 登録済み教材を表示 -->
       <div class="flex flex-col">
         <div class="flex flex-wrap gap-4">
-          <% @materials.each do |material| %>
-            <%= render 'already_registered', material: material %>
-          <% end %>
+          <%= render 'already_registered' %>
         </div>
       </div>
     <% else %>

@@ -1,50 +1,63 @@
-<div class="flex flex-row border-2 border-gray rounded-md w-600px p-15px"> 
-  <div class="flex flex-row w-full">
-    <% user_evaluations = material.material_evaluations.where(user: current_user) %>
-      <% user_evaluations.each do |evaluation| %>
-        <div class="flex flex-col">
-          <%= image_tag material.image_link, style: "width: 100px; max-width: 100px; height: 150px;" %>
-          <!-- 教材評価 -->
-          <div class="mt-5px flex flex-row items-center justify-center">
-            <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-            <div class="ml-5px"><%= evaluation.evaluation %></div>
+<% @materials.each_with_index do |material, index| %>
+  <div class="flex flex-row border-2 border-gray rounded-md w-600px p-15px"> 
+    <div class="flex flex-row w-full">
+      <% user_evaluations = material.material_evaluations.where(user: current_user) %>
+        <% user_evaluations.each do |evaluation| %>
+          <div class="flex flex-col">
+            <%= image_tag material.image_link, style: "width: 100px; max-width: 100px; height: 150px;" %>
+            <!-- 教材評価 -->
+            <div class="mt-5px flex flex-row items-center justify-center">
+              <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+              <div class="ml-5px"><%= evaluation.evaluation %></div>
+            </div>
           </div>
-        </div>
-        <div class="flex flex-col w-full ml-15px">
-          <!-- タイトル -->
-          <div class="text-xl text-darkest-blue hover:font-bold mb-5px underline underline-offset-4">
-            <%= link_to truncate(material.title, length: 20), material_material_evaluation_path(material, material.material_evaluations.first) %>
-            <!-- <%= truncate(material.title, length: 20) %> -->
-          </div>
-          <!-- 発売日 -->
-          <% if material.published_date.present? %>
-            <div>発売日:<%= material.published_date %></div>
-          <% else %>
-            <p>発売日:不明</p>
-          <% end %>
-          <!-- 出版社 -->
-          <% if material.publisher.present? %>
-            <div>出版社:<%= material.publisher %></div>
-          <% else %>
-            <p>出版社:不明</p>
-          <% end %>
-          <!-- 内容説明 -->
-          <details>
-            <summary class="text-blue-500 underline hover:font-bold">【内容説明】</summary>
-              <p><%= material.description %></p>
-          </details>   
-          <!-- 教材特徴 -->
-          <div class="my-10px flex flex-wrap gap-2">
-            <% feature_tags = evaluation.feature.present? ? evaluation.feature.split(',') : [] %>
-            <% feature_tags.each do |tag| %>
-              <span class="bg-dark-gray text-white text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"><%= tag %></span>
+          <div class="flex flex-col w-full ml-15px">
+            <!-- タイトル -->
+            <div class="text-xl text-darkest-blue hover:font-bold mb-5px underline underline-offset-4">
+              <%= link_to truncate(material.title, length: 20), material_material_evaluation_path(material, material.material_evaluations.first) %>
+              <!-- <%= truncate(material.title, length: 20) %> -->
+            </div>
+            <!-- 発売日 -->
+            <% if material.published_date.present? %>
+              <div>発売日:<%= material.published_date %></div>
+            <% else %>
+              <p>発売日:不明</p>
             <% end %>
+            <!-- 出版社 -->
+            <% if material.publisher.present? %>
+              <div>出版社:<%= material.publisher %></div>
+            <% else %>
+              <p>出版社:不明</p>
+            <% end %>
+            <!-- 内容説明 -->
+            <% if material.description.present? %>
+              <button class="flex justify-start text-darkest-blue underline" onclick="document.getElementById('modal_<%= index %>').showModal()">【内容説明】</button>
+              <dialog id="modal_<%= index %>" class="modal modal-bottom sm:modal-middle">
+                <div class="modal-box w-7xl">
+                  <h3 class="text-lg font-bold">【内容説明】</h3>
+                  <div><%= material.description %></div>
+                  <div class="modal-action">
+                    <form method="dialog">
+                      <!-- if there is a button in form, it will close the modal -->
+                      <button class="btn">Close</button>
+                    </form>
+                  </div>
+                </div>
+              </dialog>
+            <% end %>
+            <!-- 教材特徴 -->
+            <div class="my-10px flex flex-wrap gap-2">
+              <% feature_tags = evaluation.feature.present? ? evaluation.feature.split(',') : [] %>
+              <% feature_tags.each do |tag| %>
+                <span class="bg-dark-gray text-white text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"><%= tag %></span>
+              <% end %>
+            </div>
+            <!-- コメント -->
+            <p><%= evaluation.body %></p>
           </div>
-          <!-- コメント -->
-          <p><%= evaluation.body %></p>
-        </div>
-      <% end %>
-    <!-- 編集及び削除アイコン -->
-    <%= render 'edit_delete_buttons', material: material %>
+        <% end %>
+      <!-- 編集及び削除アイコン -->
+      <%= render 'edit_delete_buttons', material: material %>
+    </div>
   </div>
-</div>
+<% end %>
