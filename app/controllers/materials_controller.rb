@@ -69,9 +69,9 @@ class MaterialsController < ApplicationController
       flash.now[:danger] = t('materials.search.danger')
       return
     else
-      url = ENV['GOOGLE_BOOKS_API_URL']
+      url = ENV.fetch('GOOGLE_BOOKS_API_URL')
       text = params[:search]
-      api_key = ENV['GOOGLE_BOOKS_API_KEY']
+      api_key = ENV.fetch('GOOGLE_BOOKS_API_KEY')
       res = Faraday.get(url, q: text, langRestrict: 'ja', maxResults: 20, key: api_key)
       @google_materials = JSON.parse(res.body)
     end
