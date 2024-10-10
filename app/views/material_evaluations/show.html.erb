@@ -4,25 +4,44 @@
   <div class="flex flex-col", style="width: 800px;" >
     <div class="flex flex-col border-2 border-gray rounded-md w-800px p-15px">
       <div class="flex flex-row w-full">
-        <!-- 教材画像 -->
-        <%= image_tag @material.image_link, style: "width: 100px; max-width: 100px; height: 150px;" %>
+        <div class="flex flex-col">
+          <!-- 教材画像 -->
+          <%= image_tag @material.image_link, style: "width: 100px; max-width: 100px; height: 150px;" %>
+          <!-- 教材評価 -->
+          <div class="flex flex-row items-center justify-center mt-5px">
+            <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+            <div class="ml-5px"><%= @average_evaluation %></div>
+            <div class="ml-5px">(<%= @count_of_unique_evaluators %>)</div>
+          </div>
+        </div>
         <div class="flex flex-col w-full">
           <div class="ml-15px">
             <!-- タイトル -->
             <div class="font-bold text-xl mb-5px">
               <%= truncate(@material.title, length: 28) %>
             </div>
-            <!-- 公開日 -->
-            <% if @material.published_date.present? %>
-              <%= @material.published_date %>
-            <% else %>
-              <p>公開日不明</p>
-            <% end %>
-            <!-- 教材評価 -->
-            <div class="flex flex-row items-center mt-5px">
-              <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-              <div class="ml-5px"><%= @average_evaluation %></div>
-              <div class="ml-5px">(<%= @count_of_unique_evaluators %>)</div>
+            <!-- 発売日 -->
+            <div class="mb-5px">
+              <% if @material.published_date.present? %>
+                <%= @material.published_date %>
+              <% else %>
+                <p>発売日:不明</p>
+              <% end %>
+            </div>
+            <!-- 出版社 -->
+            <div class="mb-5px">
+              <% if @material.publisher.present? %>
+                <div>出版社:<%= @material.publisher %></div>
+              <% else %>
+                <p>出版社:不明</p>
+              <% end %>
+            </div>
+            <!-- 内容説明 -->
+            <div class="flex flex-col mb-5px">
+              <% if @material.description.present? %>
+                <p class="font-bold">【内容説明】</p>
+                <div><%= @material.description %></div>
+              <% end %>
             </div>
             <!-- 教材特徴 -->
             <div class="flex flex-row items_center mt-5px">
