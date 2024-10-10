@@ -31,7 +31,7 @@
             <% end %>
             <!-- 内容説明 -->
             <% if material.description.present? %>
-              <button class="flex justify-start text-darkest-blue underline" onclick="document.getElementById('modal_<%= index %>').showModal()">【内容説明】</button>
+              <button class="flex justify-start text-darkest-blue underline hover:font-bold" onclick="document.getElementById('modal_<%= index %>').showModal()">【内容説明】</button>
               <dialog id="modal_<%= index %>" class="modal modal-bottom sm:modal-middle">
                 <div class="modal-box w-7xl">
                   <h3 class="text-lg font-bold">【内容説明】</h3>
