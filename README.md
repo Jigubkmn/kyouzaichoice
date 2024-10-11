@@ -1,4 +1,4 @@
-# 教材チョイス
+ # 教材チョイス
 
 ## サービス概要
 「教材チョイス」は、自分に合った教材を見つけれるサービスです。また、学習記録を投稿してユーザーと交流できます。
@@ -99,12 +99,11 @@ https://drive.google.com/file/d/1Xn-EkriCBAvjoMeqydluJepcw_i_OKGv/view?usp=shari
 ```mermaid
 erDiagram
 	users ||--o{ likes : "1人のユーザーは複数のいいねを持つ"
-  users ||--o{ comments : "1人のユーザーは複数のコメントを持つ"
   users ||--o{ material_evaluations : "1人のユーザーは複数の教材評価を持つ"
   users ||--o{ qualifications : "1人のユーザーは複数の資格を持つ"
-	materials ||--o{ comments : "1つの教材に複数のコメントを持つ"
-  materials ||--o{ likes : "1つの教材に複数のいいねを持つ"
-	materials ||--o{ material_evaluations : "1つの教材に複数の評価を持つ"
+  materials ||--o{ likes : "1つの教材には複数のいいねを持つ"
+	materials ||--o{ material_evaluations : "1つの教材には複数の評価を持つ"
+	materials ||--|| qualifications  : "1つの教材には1つの資格を持つ"
 
 
 	users {
@@ -123,19 +122,18 @@ erDiagram
     bigint material_id FK
 	}
 
-	comments {
-		integer id PK
-    bigint user_id FK
-    bigint material_id FK
-	}
 
   materials {
 		integer id PK
+		bigint qualification_id FK
     string title "教材名"
 		string image_link "教材画像"
-    date published_date "公開日"
+    date published_date "発売日"
+    string publisher "出版社"
+    string description "説明"
     text info_link "教材詳細"
     string systemid "ISBN"
+    string qualification "対象資格"
 	}
 
   material_evaluations {
@@ -143,8 +141,8 @@ erDiagram
     bigint user_id FK
     bigint material_id FK
     float evaluation "教材評価"
-		string qualification "教材の対象資格"
 		string feature "教材特徴"
+		text body "教材評価コメント"
 	}
 
   qualifications {
