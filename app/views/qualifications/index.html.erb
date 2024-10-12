@@ -8,8 +8,8 @@
         <!-- 作成した資格を表示 -->
         <% @qualifications.each do |qualification| %>
           <div class="flex flex-row items-center border-b-2 border-gray py-10px">
-            <div class="font-bold ml-20px mr-30px"><%= qualification.name %></div>
-            <div class="mr-30px"><%= qualification.progress %></div>
+            <div class="font-bold ml-20px"><%= qualification.name %></div>
+            <div class="absolute left-4 mr-30px"><%= qualification.progress %></div>
             <% if qualification.year_acquired.present? %>
               <div class="mr-30px">取得年数：<%= qualification.year_acquired %>年</div>
             <% end %>

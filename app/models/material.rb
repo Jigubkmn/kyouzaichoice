@@ -1,6 +1,9 @@
 class Material < ApplicationRecord
   has_many :material_evaluations, dependent: :destroy
   has_many :likes, dependent: :destroy
+  # 中間テーブル
+  has_many :material_qualifications, dependent: :destroy
+  has_many :qualification, through: :material_qualifications
 
   validates :title, presence: true, uniqueness: true
   validates :image_link, presence: true, uniqueness: true
