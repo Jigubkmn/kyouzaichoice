@@ -31,6 +31,9 @@ module.exports = {
         'pale-gray': '#BEBEBE',
         'darkest-blue': '#1E91E4',
       },
+      backgroundSize: {
+        '50px': '50px',
+      },
       margin: {
         '5px': '5px',
         '10px': '10px',

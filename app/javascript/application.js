@@ -3,3 +3,4 @@ import "@hotwired/turbo-rails"
 import "./controllers"
 import "./year_acquired/application";
 import "./material_description/application";
+import "./show_hide";

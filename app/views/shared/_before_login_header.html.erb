@@ -1,15 +1,30 @@
-<header class= "mb-72px"> 
-  <nav class= "flex justify-between w-full items-center h-72px bg-thin-orange fixed top-0 left-0">
-    <div class= "text-3xl ml-9">
-      <%= link_to '/', class: 'flex items-center' do %>
-        <%= image_tag 'book.png', class: 'h-8 w-8 mr-10px' %>
-        <%= t('header.logo') %>
-      <% end %>
+<header class= "flex justify-between w-full items-center h-72px bg-thin-orange fixed top-0 left-0">
+  <div class= "text-3xl ml-9">
+    <%= link_to t('header.logo'), '/', class: 'flex items-center' %>
+  </div>
+  <nav>
+    <div class= "dropdown dropdown-bottom dropdown-end md:hidden">
+      <!-- ドロップダウンのトリガーとしてbarsアイコンを使用 -->
+      <label tabindex="0" class= "flex items-center justify-center mr-20px hover:bg-slate-200 rounded-full px-2.5 py-5">
+        <i id="bars" class="fa-solid fa-bars fa-xl"></i>
+      </label>
+      <!-- ドロップダウンメニューの内容 -->
+      <ul tabindex="0" class= "dropdown-content menu bg-base-100 mr-20px rounded-box z-[1] w-52 p-2 shadow">
+        <%= link_to t('header.material_index'), materials_path, class: "p-2 mt-10px hover:bg-slate-200 rounded-md" %>
+        <%= link_to t('header.new_registration'), new_user_path, class: "p-2 mt-10px hover:bg-slate-200 rounded-md" %>
+        <%= link_to t('header.login'), login_path, class: "p-2 mt-10px hover:bg-slate-200 rounded-md" %>
+      </ul>
     </div>
-    <div class="space-x-8 mr-9">
+
+    <ul id="menu" class="fixed top-0 left-0 z-10 w-full bg-thin-orange text-center font-bold translate-x-full transition ease-linear">
+      <li class="p-3"><i class="fa-solid fa-list"></i><%= link_to t('header.material_index'), materials_path, class: 'hover:text-gray-500 ml-2' %></li>
+      <li class="p-3"><i class="fa-solid fa-user-plus"></i><%= link_to t('header.new_registration'), new_user_path, class: 'hover:text-gray-500 ml-2' %></li>
+      <li class="p-3"><i class="fa-solid fa-arrow-right-to-bracket"></i><%= link_to t('header.login'), login_path, class: 'hover:text-gray-500 ml-2' %></li>
+    </ul>
+    <div class="space-x-8 mr-9 md:flex hidden md:block">
       <%= link_to t('header.material_index'), materials_path, class: "text-lg m-1 py-2 px-2 hover:bg-slate-200 rounded-md" %>
-      <%= link_to t('header.login'), login_path, class: "text-lg m-1 py-2 px-2 hover:bg-slate-200 rounded-md" %>
       <%= link_to t('header.new_registration'), new_user_path, class: "text-lg m-1 py-2 px-2 hover:bg-slate-200 rounded-md" %>
+      <%= link_to t('header.login'), login_path, class: "text-lg m-1 py-2 px-2 hover:bg-slate-200 rounded-md" %>
     </div>
   </nav>
 </header>
