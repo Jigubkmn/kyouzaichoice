@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_15_112405) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_15_115803) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -63,7 +63,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_15_112405) do
     t.datetime "updated_at", null: false
     t.string "publisher"
     t.text "description"
-    t.bigint "qualification_id"
     t.string "qualification"
   end
 
@@ -74,7 +73,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_15_112405) do
     t.integer "year_acquired"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "material_id"
     t.index ["user_id"], name: "index_qualifications_on_user_id"
   end
 
@@ -101,7 +99,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_15_112405) do
   add_foreign_key "material_evaluations", "users"
   add_foreign_key "material_qualifications", "materials"
   add_foreign_key "material_qualifications", "qualifications"
-  add_foreign_key "materials", "qualifications"
-  add_foreign_key "qualifications", "materials"
   add_foreign_key "qualifications", "users"
 end
