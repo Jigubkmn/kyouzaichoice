@@ -176,7 +176,7 @@ class MaterialsController < ApplicationController
 
   def material_params
     params.require(:material).permit(
-      :title, :image_link, :published_date, :info_link, :systemid, :publisher, :description,
+      :title, :image_link, :published_date, :info_link, :systemid, :publisher, :description, :qualification,
       material_evaluations_attributes: [
         :id, :evaluation, :body, :_destroy, { feature: [] }
       ]
