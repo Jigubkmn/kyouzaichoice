@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_07_160209) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_15_112405) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,6 +44,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_07_160209) do
     t.index ["user_id"], name: "index_material_evaluations_on_user_id"
   end
 
+  create_table "material_qualifications", force: :cascade do |t|
+    t.bigint "material_id"
+    t.bigint "qualification_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_id"], name: "index_material_qualifications_on_material_id"
+    t.index ["qualification_id"], name: "index_material_qualifications_on_qualification_id"
+  end
+
   create_table "materials", force: :cascade do |t|
     t.string "title", null: false
     t.string "image_link"
@@ -54,6 +63,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_07_160209) do
     t.datetime "updated_at", null: false
     t.string "publisher"
     t.text "description"
+    t.bigint "qualification_id"
+    t.string "qualification"
   end
 
   create_table "qualifications", force: :cascade do |t|
@@ -63,6 +74,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_07_160209) do
     t.integer "year_acquired"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "material_id"
     t.index ["user_id"], name: "index_qualifications_on_user_id"
   end
 
@@ -87,5 +99,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_07_160209) do
   add_foreign_key "likes", "users"
   add_foreign_key "material_evaluations", "materials"
   add_foreign_key "material_evaluations", "users"
+  add_foreign_key "material_qualifications", "materials"
+  add_foreign_key "material_qualifications", "qualifications"
+  add_foreign_key "materials", "qualifications"
+  add_foreign_key "qualifications", "materials"
   add_foreign_key "qualifications", "users"
 end
