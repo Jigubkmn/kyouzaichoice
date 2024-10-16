@@ -78,7 +78,7 @@
         </div>
       <% end %>
     </div>
-    <% if @user_evaluation.nil? %>
+    <% if @user_evaluation.nil? && current_user %>
       <%= render 'show_form' %>
     <% end %>
 

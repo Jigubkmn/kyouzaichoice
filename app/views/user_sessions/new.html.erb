@@ -16,20 +16,20 @@
       </div>
     <% end %>
     <div class="flex justify-center mb-20px">
-      <%= link_to t('.password_forget'), new_password_reset_path, class: "text-lg underline underline-offset-4 hover:font-bold" %>
+      <%= link_to t('.password_forget'), new_password_reset_path, class: "text-lg underline underline-offset-4 hover:text-dark-gray" %>
     </div>
-    <div class="flex justify-center mb-40px">
-      <%= link_to t('.to_register_page'), new_user_path, class: "text-lg text-dark-green underline underline-offset-4 hover:font-bold" %>
+    <div class="flex justify-center mb-20px">
+      <%= link_to t('.to_register_page'), new_user_path, class: "text-lg text-dark-green underline underline-offset-4 hover:text-dark-gray" %>
     </div>
     
     <div class="py-3 flex items-center text-sm text-gray-400 uppercase before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6 dark:text-neutral-500 dark:before:border-neutral-600 dark:after:border-neutral-600">Or</div> 
     <!-- ゲストログイン -->
-    <div class="flex flex-col space-x-1 mb-20px w-full">
+    <div class="flex flex-col mb-20px w-full">
       <p class="text-center mb-5px">ゲストユーザーとしてログインする</p>
       <%= button_to 'ゲストログイン', guest_login_path, class: "bg-thin-orange hover:bg-pale-orange w-full text-xl text-white font-bold rounded-md", style: "height:38px" %>
     </div>
     <!-- Google認証 -->
-    <%= link_to auth_at_provider_path(provider: :google), class: "w-full py-2 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" do %>
+    <%= link_to auth_at_provider_path(provider: :google), class: "w-full py-2 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border bg-white shadow-sm hover:bg-ultra_thin_gray disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" do %>
       <svg class="w-4 h-auto" width="47" height="47" viewBox="0 0 46 47" fill="none">
         <path d="M46 24.0287C46 22.09 45.8533 20.68 45.5013 19.2112H23.4694V27.9356H36.4069C36.1429 30.1094 34.7347 33.37 31.5957 35.5731L31.5663 35.8669L38.5191 41.2719L38.9885 41.3306C43.4477 37.2181 46 31.1669 46 24.0287Z" fill="#4285F4"/>
         <path d="M23.4694 47C29.8061 47 35.1161 44.9144 39.0179 41.3012L31.625 35.5437C29.6301 36.9244 26.9898 37.8937 23.4987 37.8937C17.2793 37.8937 12.0281 33.7812 10.1505 28.1412L9.88649 28.1706L2.61097 33.7812L2.52296 34.0456C6.36608 41.7125 14.287 47 23.4694 47Z" fill="#34A853"/>

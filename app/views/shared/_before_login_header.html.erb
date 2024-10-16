@@ -1,6 +1,6 @@
 <header class= "flex justify-between w-full items-center h-72px bg-thin-orange fixed top-0 left-0">
   <div class= "text-3xl ml-9">
-    <%= link_to t('header.logo'), '/', class: 'flex items-center' %>
+    <%= link_to t('header.logo'), '/', class: 'font-bold' %>
   </div>
   <nav>
     <div class= "dropdown dropdown-bottom dropdown-end md:hidden">
@@ -10,15 +10,15 @@
       </label>
       <!-- ドロップダウンメニューの内容 -->
       <ul tabindex="0" class= "dropdown-content menu bg-base-100 mr-20px rounded-box z-[1] w-52 p-2 shadow">
-        <%= link_to t('header.material_index'), materials_path, class: "p-2 mt-10px hover:bg-slate-200 rounded-md" %>
-        <%= link_to t('header.new_registration'), new_user_path, class: "p-2 mt-10px hover:bg-slate-200 rounded-md" %>
-        <%= link_to t('header.login'), login_path, class: "p-2 mt-10px hover:bg-slate-200 rounded-md" %>
+        <%= link_to t('header.material_index'), materials_path, class: "p-2 mt-10px hover:bg-gray rounded-md" %>
+        <%= link_to t('header.new_registration'), new_user_path, class: "p-2 mt-10px hover:bg-gray rounded-md" %>
+        <%= link_to t('header.login'), login_path, class: "p-2 mt-10px hover:bg-gray rounded-md" %>
       </ul>
     </div>
     <div class="space-x-8 mr-9 md:flex hidden md:block">
-      <%= link_to t('header.material_index'), materials_path, class: "text-lg m-1 py-2 px-2 hover:bg-slate-200 rounded-md" %>
-      <%= link_to t('header.new_registration'), new_user_path, class: "text-lg m-1 py-2 px-2 hover:bg-slate-200 rounded-md" %>
-      <%= link_to t('header.login'), login_path, class: "text-lg m-1 py-2 px-2 hover:bg-slate-200 rounded-md" %>
+      <%= link_to t('header.material_index'), materials_path, class: "text-lg m-1 py-2 px-2 font-bold hover:bg-gray rounded-md" %>
+      <%= link_to t('header.new_registration'), new_user_path, class: "text-lg m-1 py-2 px-2 font-bold hover:bg-gray rounded-md" %>
+      <%= link_to t('header.login'), login_path, class: "text-lg m-1 py-2 px-2 font-bold hover:bg-gray rounded-md" %>
     </div>
   </nav>
 </header>
