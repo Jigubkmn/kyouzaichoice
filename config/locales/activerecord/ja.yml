@@ -17,7 +17,9 @@ ja:
         name: 資格名
         progress: 進捗状況
         year_acquired: 取得年
+      material:
+        qualification: 対象資格
       material_evaluation:
-        evaluation: 教材評価
         feature: 教材の特徴
+        evaluation: 教材評価
         body: 教材評価コメント

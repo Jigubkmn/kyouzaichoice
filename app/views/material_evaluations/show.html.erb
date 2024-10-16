@@ -21,36 +21,40 @@
               <%= truncate(@material.title, length: 28) %>
             </div>
             <!-- 発売日 -->
-            <div class="mb-5px">
-              <% if @material.published_date.present? %>
-                <%= @material.published_date %>
-              <% else %>
-                <p>発売日:不明</p>
-              <% end %>
-            </div>
+            <% if @material.published_date.present? %>
+              <div>発売日：<%= @material.published_date %></div>
+            <% else %>
+              <p>発売日：不明</p>
+            <% end %>
             <!-- 出版社 -->
             <div class="mb-5px">
               <% if @material.publisher.present? %>
-                <div>出版社:<%= @material.publisher %></div>
+                <div>出版社：<%= @material.publisher %></div>
               <% else %>
-                <p>出版社:不明</p>
+                <p>出版社：不明</p>
               <% end %>
             </div>
             <!-- 内容説明 -->
-            <div class="flex flex-col mb-5px">
-              <% if @material.description.present? %>
-                <p class="font-bold">【内容説明】</p>
-                <div><%= @material.description %></div>
-              <% end %>
-            </div>
+            <% if @material.description.present? %>
+              <p class="font-bold mb-5px">【内容説明】</p>
+              <div><%= @material.description %></div>
+            <% end %>
+            <!-- 資格 -->
+            <% if @material.qualification.present? %>
+              <div class="mb-10px ">
+                <span class="bg-purple text-white text-xs font-semibold px-2.5 py-0.5 rounded self-start"><%= @material.qualification %></span>
+              </div>
+            <% end %>
             <!-- 教材特徴 -->
-            <div class="flex flex-row items_center mt-5px">
-              <% @unique_features.each do |feature| %>
-                <div class="y-10px bg-dark-gray text-white text-xs mr-10px font-semibold px-2.5 py-0.5 rounded">
-                  <%= feature %>
-                </div>
-              <% end %>
-            </div>
+            <% if @unique_features.present? %>
+              <div class="flex flex-row mb-10px">
+                <% @unique_features.each do |feature| %>
+                  <div class="y-10px bg-dark-gray text-white text-xs mr-10px font-semibold px-2.5 py-0.5 rounded">
+                    <%= feature %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
             <!-- 楽天及びX(旧Twitter)アイコンを -->
             <%= render 'rakuten_twitter_icons' %>  
           </div>

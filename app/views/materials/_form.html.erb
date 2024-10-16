@@ -18,14 +18,19 @@
                 <p class="font-bold">教材名</p>
                 <%= @material.title %>
               </div>
-
-              <!-- MaterialEvaluationの入力フォーム -->
-              <!-- 教材評価 -->
-              <div class= "mb-20px flex flex-col">
-                <%= evaluation_f.label :evaluation, class: "font-bold" %>
-                <%= evaluation_f.select :evaluation, options_for_select((0..10).map { |i| [sprintf('%.1f', i * 0.5), sprintf('%.1f', i * 0.5)] }, evaluation_f.object.evaluation),
-                {include_blank: true},class: "select select-warning select-sm w-full m-0 py-0 pr-0 pl-4", style: "width:200px;" %>
+              <!-- 対象資格 -->
+              <div class= "flex flex-col mb-20px">
+                <%= f.label :qualification, class: "font-bold" %>
+                <!-- チェックボックス -->
+                <div class="flex items-center mb-10px">
+                  <%= f.check_box :has_qualification, id: 'has_qualification', name: nil, onclick: "toggleCheckboxes(this)", checked: true %>
+                  <%= f.label :has_qualification, "有", class: "ml-2 font-bold" %>
+                  <%= f.check_box :no_qualification, id: 'no_qualification', class: 'ml-20px', name: nil, onclick: "toggleCheckboxes(this)" %>
+                  <%= f.label :no_qualification, "無", class: "ml-2 font-bold" %>
+                </div>
+                <%= f.select :qualification, options_for_select(@qualifications || []), { include_blank: true }, id: 'select_qualification' ,class: "select select-warning select-sm w-full m-0 py-0 pr-0 pl-4" %>
               </div>
+              <!-- MaterialEvaluationの入力フォーム -->
               <!-- 教材特徴 -->
               <div class= "mb-20px">
                 <%= evaluation_f.label :feature, class: "font-bold" %>
@@ -40,6 +45,13 @@
                   <% end %>
                 </div>
               </div>
+              <!-- 教材評価 -->
+              <div class= "mb-20px flex flex-col">
+                <%= evaluation_f.label :evaluation, class: "font-bold" %>
+                <%= evaluation_f.select :evaluation, options_for_select((0..10).map { |i| [sprintf('%.1f', i * 0.5), sprintf('%.1f', i * 0.5)] }, evaluation_f.object.evaluation),
+                {include_blank: true}, class: "select select-warning select-sm w-full m-0 py-0 pr-0 pl-4", style: "width:200px;" %>
+              </div>
+              <!-- 教材評価コメント -->
               <div class= "mb-20px flex flex-col">
                 <%= evaluation_f.label :body, class: "font-bold" %>
                 <%= evaluation_f.text_area :body, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "height:auto;", rows: 3 %>

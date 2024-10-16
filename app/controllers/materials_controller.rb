@@ -19,6 +19,7 @@ class MaterialsController < ApplicationController
     else
       @material = Material.new(material_params)
       @material.material_evaluations.build(user: current_user)
+      @qualifications = Qualification.pluck(:name) # Qualificationテーブルのnameを配列として取得
     end
   end
 
@@ -87,6 +88,7 @@ class MaterialsController < ApplicationController
       redirect_to already_registered_materials_path, success: t('materials.create.success')
     else
       flash.now[:danger] = t('materials.create.danger')
+      @qualifications = Qualification.pluck(:name) # Qualificationテーブルのnameを配列として取得
       render :new, status: :unprocessable_entity
     end
   end
@@ -94,16 +96,22 @@ class MaterialsController < ApplicationController
   def edit
     # ログインユーザーに関連するMaterialEvaluationとコメントのみを読み込む
     @material_evaluation = @material.material_evaluations.where(user: current_user)
+    @qualifications = Qualification.pluck(:name) # Qualificationテーブルのnameを配列として取得
   end
 
   def update
     @material_evaluations = @material.material_evaluations.find_by(user: current_user)
-    if @material_evaluations.update(material_evaluation_params)
+    features = material_evaluation_params[:feature] || [] # material_evaluation_paramsからfeatureを取得し、デフォルトは空配列
+    if features.empty? # featureが空の場合は空文字列を追加
+      @material_evaluations.feature = '' # 空文字列を@material_evaluationsに設定
+    end
+    if @material.update(material_params) && @material_evaluations.update(material_evaluation_params)
       process_features(@material_evaluations) # 配列をカンマ潜りの文字列に変換
       @material_evaluations.save # 変換後のデータを保存
       redirect_to already_registered_materials_path, success: t('materials.update.success')
     else
       flash.now[:danger] = t('materials.update.danger')
+      @qualifications = Qualification.pluck(:name) # Qualificationテーブルのnameを配列として取得
       render :edit, status: :unprocessable_entity
     end
   end
@@ -174,6 +182,7 @@ class MaterialsController < ApplicationController
     end
   end
 
+  # new,create,update用
   def material_params
     params.require(:material).permit(
       :title, :image_link, :published_date, :info_link, :systemid, :publisher, :description, :qualification,
