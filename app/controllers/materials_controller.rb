@@ -19,7 +19,7 @@ class MaterialsController < ApplicationController
     else
       @material = Material.new(material_params)
       @material.material_evaluations.build(user: current_user)
-      @qualifications = Qualification.pluck(:name) # Qualificationテーブルのnameを配列として取得
+      @qualifications = Qualification.where(user: current_user).pluck(:name) # Qualificationテーブルのnameを配列として取得
     end
   end
 
@@ -88,7 +88,7 @@ class MaterialsController < ApplicationController
       redirect_to already_registered_materials_path, success: t('materials.create.success')
     else
       flash.now[:danger] = t('materials.create.danger')
-      @qualifications = Qualification.pluck(:name) # Qualificationテーブルのnameを配列として取得
+      @qualifications = Qualification.where(user: current_user).pluck(:name) # Qualificationテーブルのnameを配列として取得
       render :new, status: :unprocessable_entity
     end
   end
@@ -111,7 +111,7 @@ class MaterialsController < ApplicationController
       redirect_to already_registered_materials_path, success: t('materials.update.success')
     else
       flash.now[:danger] = t('materials.update.danger')
-      @qualifications = Qualification.pluck(:name) # Qualificationテーブルのnameを配列として取得
+      @qualifications = Qualification.where(user: current_user).pluck(:name) # Qualificationテーブルのnameを配列として取得
       render :edit, status: :unprocessable_entity
     end
   end
