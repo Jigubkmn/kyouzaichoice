@@ -15,7 +15,7 @@ class MaterialsController < ApplicationController
     elsif @existing_material
       @material = @existing_material
       @material_evaluation = @material.material_evaluations.build(user: current_user)
-      redirect_to new_material_material_evaluation_path(@material.id) # MaterialEvaluationコントローラーのnewアクションにリクエストする
+      redirect_to new_material_material_evaluation_path(@material.id).where(user: current_user) # MaterialEvaluationコントローラーのnewアクションにリクエストする
     else
       @material = Material.new(material_params)
       @material.material_evaluations.build(user: current_user)
@@ -96,7 +96,7 @@ class MaterialsController < ApplicationController
   def edit
     # ログインユーザーに関連するMaterialEvaluationとコメントのみを読み込む
     @material_evaluation = @material.material_evaluations.where(user: current_user)
-    @qualifications = Qualification.pluck(:name) # Qualificationテーブルのnameを配列として取得
+    @qualifications = Qualification.where(user: current_user).pluck(:name) # Qualificationテーブルのnameを配列として取得
   end
 
   def update
