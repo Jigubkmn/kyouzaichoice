@@ -127,7 +127,7 @@ ja:
       material_addition: 教材を登録
     search:
       name: 教材名
-      title: 教材検索
+      title: 教材登録
       danger: 教材を選択出来ませんでした
       material_index: 教材一覧画面へ
     create:

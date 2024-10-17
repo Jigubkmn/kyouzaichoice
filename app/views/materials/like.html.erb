@@ -3,7 +3,7 @@
   <%= render 'profile/sidebar' %>
   <div class="flex flex-col mb-30px">
     <div class="flex flex-row items-center mt-30px mb-5px">
-      <h2 class="text-3xl font-bold mr-50px"><%= t('.title') %></h3>
+      <h2 class="text-30px font-bold mr-50px"><%= t('.title') %></h2>
       <!-- 「登録済み」及び「いいね」リンク -->
       <%= link_to already_registered_materials_path, class: "min-w-75px min-h-30px font-bold mr-20px flex justify-center items-center rounded-md" do %>
         <div><%= t('.already_registered') %></div>
@@ -27,7 +27,7 @@
             <p>下記より教材一覧画面に移動して教材を「いいね」して下さい</p>
           </div>
         </div>
-        <%= link_to t('.material_index'), materials_path, class: "text-lg text-darkest-blue underline underline-offset-4" %>
+        <%= link_to t('.material_index'), materials_path, class: "text-18px text-darkest-blue underline underline-offset-4" %>
       </div>
     <% end %>
   </div>

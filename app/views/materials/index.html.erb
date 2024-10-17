@@ -1,22 +1,27 @@
 <% content_for(:title, t('.title')) %>
 <div class="flex flex-col mb-30px">
   <div class="flex flex-col items-center w-full my-30px">
-    <h2 class="text-3xl font-bold text-center"><%= t('.title') %></h3>
+    <h2 class="text-30px font-bold text-center"><%= t('.title') %></h2>
   </div>
   <% if @materials.present? %>
     <!-- 登録済み教材を表示 -->
     <div class="flex flex-col items-center w-full max-w-1220px mx-auto">
-      <div class="flex flex-wrap justify-center w-full gap-4 mb-20px">
-        <div class="flex-grow flex justify-center">
+      <div class="flex flex-row items-center justify-between w-full mb-20px">
+        <!-- 検索フォーム -->
+        <div class="flex justify-center mx-auto">
           <%= render 'search_form', q: @q, url: materials_path %>
         </div>
-        <div class="ml-4">
+        <!-- 並び替えセレクトボックス -->
+        <div class="flex justify-end">
           <select class="select border-pale-gray hover:border-darkest-blue hover:border-2 select-sm rounded-md w-full w-200px h-38px" onchange="location = this.value;">
             <option value="" disabled selected hidden>標準</option>
             <option value="<%= materials_path(sort: 'published_date') %>" <%= 'selected' if params[:sort] == 'published_date' %>>発売日が早い順</option>
             <option value="<%= materials_path(sort: 'evaluation') %>" <%= 'selected' if params[:sort] == 'evaluation' %>>評価が高い順</option>
           </select>
         </div>
+      </div>
+      
+      <div class="flex flex-wrap justify-center w-full gap-4 mb-20px">
         <%= render 'material' %>
       </div>
       <% unless current_user %>

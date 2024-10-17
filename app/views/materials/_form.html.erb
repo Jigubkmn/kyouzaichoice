@@ -1,4 +1,4 @@
-<div class="mt-5px border-2 border-gray rounded-md" style="width: 600px;">
+<div class="mt-5px border-2 border-gray rounded-md">
   <div class="p-30px">
     <%= form_with model: @material, local: true do |f| %>
       <%= f.fields_for :material_evaluations, @material_evaluation do |evaluation_f| %>
@@ -64,9 +64,9 @@
         <div class="bg-thin-gray hover:bg-pale-gray rounded-md mr-30px", style= "width:150px; height:38px;">
           <%= link_to t('helpers.submit.cancel'), 
           params[:action] == 'edit' ? already_registered_materials_path : search_materials_path,
-          class: "flex items-center justify-center w-full h-full text-xl text-white font-bold" %>
+          class: "flex items-center justify-center w-full h-full text-20px text-white font-bold" %>
         </div>
-        <%= f.submit nil, class: "bg-pale-blue hover:bg-dark-blue w-full text-xl text-white font-bold rounded-md", style: "width:150px; height:38px;" %></div>
+        <%= f.submit nil, class: "bg-pale-blue hover:bg-dark-blue w-full text-20px text-white font-bold rounded-md", style: "width:150px; height:38px;" %></div>
       </div>
     <% end %>      
   </div>     

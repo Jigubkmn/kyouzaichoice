@@ -3,7 +3,7 @@
   <%= render 'profile/sidebar' %>
   <div class="flex flex-col mb-30px">
     <div class="flex flex-row items-center mt-30px mb-5px">
-      <h2 class="text-3xl font-bold mr-50px", style="width:196px;" ><%= t('.title') %></h3>
+      <h2 class="text-30px font-bold mr-50px", style="width:196px;" ><%= t('.title') %></h2>
       <!-- 「登録済み」及び「いいね」リンク -->
       <div class="flex justify-end">
         <%= link_to already_registered_materials_path, class: "min-w-75px min-h-30px bg-pale-orange font-bold mr-20px flex justify-center items-center rounded-md" do %>
@@ -15,7 +15,7 @@
       </div>
       <% if @materials.size >= 4 %>
         <div class="bg-pale-blue hover:bg-dark-blue rounded-md", style= "width:200px; height:38px;">
-          <%= link_to t('.material_addition'), search_materials_path, class: "flex items-center justify-center w-full h-full text-xl text-white font-bold" %>
+          <%= link_to t('.material_addition'), search_materials_path, class: "flex items-center justify-center w-full h-full text-20px text-white font-bold" %>
         </div>
       <% end %>
     </div>
@@ -33,7 +33,7 @@
       </div>
     <% end %>
     <div class="bg-pale-blue hover:bg-dark-blue rounded-md mt-20px md:hidden", style= "width:200px; height:38px;">
-      <%= link_to t('.material_addition'), search_materials_path, class: "flex items-center justify-center w-full h-full text-xl text-white font-bold" %>
+      <%= link_to t('.material_addition'), search_materials_path, class: "flex items-center justify-center w-full h-full text-20px text-white font-bold" %>
     </div>
     <%= paginate @material_evaluations %>
   </div>

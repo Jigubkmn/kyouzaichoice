@@ -1,9 +1,9 @@
 <%= search_form_for q, url: url do |f| %>
   <div class="flex flex-row items-center justify-center">
     <!-- 教材名 -->
-    <%= f.search_field :title_cont, class: "input input-bordered input-accent input-sm pl-4 py-0 w-400px h-38px mr-20px", placeholder: t('materials.index.title_cont') %>
+    <%= f.search_field :title_cont, class: "input input-bordered input-accent input-sm pl-15px py-0 w-400px h-38px mr-20px", placeholder: t('materials.index.title_cont') %>
     <div class="flex justify-center items-center bg-pale-green hover:bg-dark-green rounded-md", style= "width:150px; height:38px">
-      <button type="submit" class="flex justify-center items-center text-xl text-white font-bold">
+      <button type="submit" class="flex justify-center items-center text-20px text-white font-bold">
         <%= t('helpers.submit.search') %>
         <i class="fa-solid fa-magnifying-glass ml-2" style="color: #ffffff;"></i>
       </button>

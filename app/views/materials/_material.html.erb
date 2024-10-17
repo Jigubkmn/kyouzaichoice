@@ -13,7 +13,7 @@
       </div>
       <div class="flex flex-col w-full ml-15px">
         <!-- タイトル -->
-        <div class="text-xl text-darkest-blue font-bold hover:text-pale-gray mb-5px underline underline-offset-4">
+        <div class="text-20px text-darkest-blue font-bold hover:text-pale-gray mb-5px underline underline-offset-4">
           <%= link_to truncate(material.title, length: 20), material_material_evaluation_path(material, material.material_evaluations.first) %>
         </div>
         <!-- 発売日 -->
@@ -35,7 +35,7 @@
           <button class="flex justify-start text-darkest-blue underline hover:text-pale-gray mb-10px" onclick="document.getElementById('modal_<%= index %>').showModal()">【内容説明】</button>
           <dialog id="modal_<%= index %>" class="modal modal-bottom sm:modal-middle">
             <div class="modal-box w-7xl">
-              <h3 class="text-lg font-bold">【内容説明】</h3>
+              <h3 class="text-18px font-bold">【内容説明】</h3>
               <div><%= material.description %></div>
               <div class="modal-action">
                 <form method="dialog">
@@ -48,13 +48,13 @@
         <% end %>
         <!-- 資格 -->
         <% if material.qualification.present? %>
-          <span class="bg-purple text-white text-xs font-semibold px-2.5 py-0.5 rounded self-start mb-10px"><%= material.qualification %></span>
+          <span class="bg-purple text-white text-12px font-semibold px-2.5 py-0.5 rounded self-start mb-10px"><%= material.qualification %></span>
         <% end %>
         <!-- 教材特徴 -->
         <% if material_with_details[:unique_features].present? %>
           <div class="mb-10px flex flex-wrap gap-2">
             <% material_with_details[:unique_features].each do |feature| %>
-              <span class="bg-dark-gray text-white text-xs font-semibold px-2.5 py-0.5 rounded"><%= feature %></span>
+              <span class="bg-dark-gray text-white text-12px font-semibold px-2.5 py-0.5 rounded"><%= feature %></span>
             <% end %>
           </div>
         <% end %>
