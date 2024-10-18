@@ -1,11 +1,47 @@
-<div class="min-w-200px min-h-600px border-2 border-gray rounded-md m-20px pt-25px">
-  <%= link_to profile_user_path, class: "block mx-25px p-15px font-bold hover:bg-pale-orange rounded-md" do %>
-    <div class="text-20px", style="width:120px;"><%= t('profile.user') %></div>
-  <% end %> 
-  <%= link_to qualifications_path, class: "block mx-25px p-15px font-bold hover:bg-pale-orange rounded-md" do %>
-    <div class="text-20px"><%= t('profile.qualification') %></div>
+<div class="flex flex-col w-250px min-h-600px border-2 border-gray rounded-md mt-20px mr-20px p-25px md:flex hidden">
+  <!-- ユーザー情報 -->
+  <%= link_to profile_user_path, class: "block p-15px font-bold hover:bg-pale-orange rounded-md" do %>
+    <div class="text-20px fa-solid fa-user", style="width:200px;">　<%= t('profile.user') %></div>
   <% end %>
-  <%= link_to already_registered_materials_path, class: "block mx-25px p-15px font-bold hover:bg-pale-orange rounded-md" do %>
-    <div class="text-20px"><%= t('profile.material') %></div>
+  <!-- 資格 -->
+  <%= link_to qualifications_path, class: "block p-15px font-bold hover:bg-pale-orange rounded-md" do %>
+    <div class="text-20px fa-solid fa-pen">　<%= t('profile.qualification') %></div>
+  <% end %>
+  <!-- 教材 -->
+  <%= link_to already_registered_materials_path, class: "block p-15px font-bold hover:bg-pale-orange rounded-md" do %>
+    <div class="text-20px fa-solid fa-book">　<%= t('profile.material') %></div>
+  <% end %>
+</div>
+
+<div class="flex flex-col w-20 min-h-600px border-2 border-gray rounded-md mt-20px mr-20px p-4 transition-all duration-300 hover:w-64 md:hidden group">
+  <!-- ユーザー情報 -->
+  <%= link_to profile_user_path, class: "block p-4 font-bold hover:bg-pale-orange rounded-md" do %>
+    <div class="flex items-center">
+      <i class="fa-solid fa-user text-lg"></i>
+      <!-- グループ全体のホバーに基づいて opacity を制御 -->
+      <span class="ml-2 text-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <%= t('profile.user') %>
+      </span>
+    </div>
+  <% end %> 
+
+  <!-- 資格 -->
+  <%= link_to qualifications_path, class: "block p-4 font-bold hover:bg-pale-orange rounded-md" do %>
+    <div class="flex items-center">
+      <i class="fa-solid fa-pen text-lg"></i>
+      <span class="ml-2 text-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <%= t('profile.qualification') %>
+      </span>
+    </div>
+  <% end %>
+
+  <!-- 教材 -->
+  <%= link_to already_registered_materials_path, class: "block p-4 font-bold hover:bg-pale-orange rounded-md" do %>
+    <div class="flex items-center">
+      <i class="fa-solid fa-book text-lg"></i>
+      <span class="ml-2 text-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <%= t('profile.material') %>
+      </span>
+    </div>
   <% end %>
 </div>

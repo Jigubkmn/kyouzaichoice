@@ -54,19 +54,12 @@
 ### 本リリース
 - パスワードリセット機能
 - Googleログイン機能
-- LINEログイン機能
-- 投稿機能
-- 投稿いいね機能
-- 星評価機能
-- トップページスライダー
 - 利用規約ページ
 - お問い合わせページ
 - プライバシーリポジトリー
 
 # 機能の実装方針予定
 ## 使用技術
-- LINE Developers
-　 LINEログイン機能
 - omniauth-google-oauth
 　 Googleログイン機能
 - Google Books API
@@ -125,13 +118,12 @@ erDiagram
 
   materials {
 		integer id PK
-		bigint qualification_id FK
     string title "教材名"
 		string image_link "教材画像"
     date published_date "発売日"
     string publisher "出版社"
     string description "説明"
-    text info_link "教材詳細"
+    text info_link "教材詳細リンク"
     string systemid "ISBN"
     string qualification "対象資格"
 	}
