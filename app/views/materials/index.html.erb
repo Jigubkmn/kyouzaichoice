@@ -3,13 +3,12 @@
   <div class="flex flex-col items-center w-full my-30px">
     <h2 class="text-30px font-bold text-center"><%= t('.title') %></h2>
   </div>
-  <% if @materials.present? %>
     <!-- 登録済み教材を表示 -->
     <div class="flex flex-col items-center w-full max-w-1220px mx-auto">
       <div class="flex flex-row items-center justify-between w-full mb-20px">
         <!-- 検索フォーム -->
         <div class="flex justify-center mx-auto">
-          <%= render 'search_form', q: @q, url: materials_path %>
+          <%= render 'index_search_form', q: @q, url: materials_path %>
         </div>
         <!-- 並び替えセレクトボックス -->
         <div class="flex justify-end">
@@ -20,15 +19,14 @@
           </select>
         </div>
       </div>
-      
-      <div class="flex flex-wrap justify-center w-full gap-4 mb-20px">
-        <%= render 'material' %>
-      </div>
+      <% if @materials.present? %>
+        <div class="flex flex-wrap justify-center w-full gap-4 mb-20px">
+          <%= render 'material' %>
+        </div>
+      <% end %>
       <% unless current_user %>
         <div>教材を新規登録するには先に<%= link_to t('header.login'), login_path, class: "text-dark-green underline underline-offset-4 hover:text-pale-gray" %>を行って下さい</div>
       <% end %>
     </div>
-  <% end %>
-  
 </div>
 <%= paginate @materials %>

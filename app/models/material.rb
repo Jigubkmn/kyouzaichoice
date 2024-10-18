@@ -19,7 +19,8 @@ class Material < ApplicationRecord
       .order('evaluation_average DESC')
   }
 
+  # 検索
   def self.ransackable_attributes(_auth_object = nil)
-    %w[title created_at id image_link info_link published_date systemid updated_at]
+    %w[title created_at id image_link info_link published_date systemid updated_at qualification]
   end
 end

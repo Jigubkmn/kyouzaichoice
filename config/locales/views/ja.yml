@@ -113,6 +113,7 @@ ja:
     index:
       title: 教材一覧
       title_cont : 教材名
+      qualification_cont : 資格名
       feature : 教材特徴
       material_addition: 教材を登録
     like:
