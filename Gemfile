@@ -86,6 +86,10 @@ group :development, :test do
   gem "rubocop"
   gem "rubocop-rails"
   gem "rubocop-checkstyle_formatter"
+  # RSpec
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'faker'
 
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -111,5 +115,5 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
-
+  gem 'simplecov', require: false
 end
