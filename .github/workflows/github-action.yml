@@ -1,4 +1,4 @@
-name: Run Rubocop
+name: Continuous Integration
 
 on:
   push:
@@ -8,6 +8,18 @@ jobs:
   rubocop:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: .
+    services:
+      db:
+        image: postgres:13.4-alpine
+        ports:
+          - 3000:3000
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: app_test
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
