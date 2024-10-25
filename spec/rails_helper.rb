@@ -9,10 +9,8 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 # that will avoid rails generators crashing because migrations haven't been run yet
 # return unless Rails.env.test?
 require 'rspec/rails'
-require 'support/capybara.rb'
 # Add additional requires below this line. Rails is not loaded until this point!
-Dir[Rails.root.join("spec/support/*.rb")].each { |f| require f }
-ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -25,7 +23,7 @@ ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 # of increasing the boot-up time by auto-requiring all files in the support
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
-#
+Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
 # Rails.root.glob('spec/support/**/*.rb').sort_by(&:to_s).each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
@@ -45,10 +43,7 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
-  config.include FactoryBot::Syntax::Methods
-
-  config.include Rails.application.routes.url_helpers
-  config.include Capybara::DSL
+  
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
@@ -72,4 +67,13 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  config.include FactoryBot::Syntax::Methods
+  config.include LoginMacros
+  config.before(:each, type: :system) do
+    driven_by :remote_chrome
+    Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
+    Capybara.server_port = 4444
+    Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
+    Capybara.ignore_hidden_elements = false
+  end
 end
