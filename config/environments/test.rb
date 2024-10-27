@@ -30,6 +30,9 @@ Rails.application.configure do
 
   config.active_support.disallowed_deprecation_warnings = []
 
+  config.assets.compile = true
+  config.assets.digest = true
+
   # 全てのホストからのアクセスを許可
   config.hosts.clear
 end
