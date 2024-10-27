@@ -40,6 +40,7 @@ jobs:
         image: seleniarm/standalone-chromium:latest
         ports:
           - 4444:4444
+          
         options:
           --shm-size: 2g  # メモリサイズの設定
 
