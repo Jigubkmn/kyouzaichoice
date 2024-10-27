@@ -36,5 +36,11 @@ RSpec.describe "UserSessions", type: :system do
         expect(current_path).to eq login_path
       end
     end
+    describe 'ログインページに遷移' do
+      it '遷移リンクをクリック' do
+        visit login_path
+        click_link 'ユーザー新規登録はこちら'
+      end
+    end
   end
 end

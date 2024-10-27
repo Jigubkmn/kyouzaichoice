@@ -27,7 +27,7 @@
       <div class="mb-30px">
         <!-- 検索した教材情報を表示 -->
         <div class="flex flex-wrap gap-4">
-          <% @google_materials['items']&.each do |google_material| %>
+          <% @google_materials['items']&.each_with_index do |google_material, index| %>
             <div class="flex flex-row border-2 border-gray rounded-md" style="width: 600px; max-width: 600px;" >
               <div class="flex flex-row m-10px">
                 <div class="mr-10px"><%= image_tag google_material_thumbnail(google_material), style: "width: 100px; max-width: 100px;" %></div>
@@ -55,7 +55,7 @@
                     <%= hidden_field_tag 'material[publisher]', google_material_params(google_material)['publisher'] %>
                     <%= hidden_field_tag 'material[description]', google_material_params(google_material)['description'] %>
                     <div class="mt-10px">
-                      <%= f.submit '選択', class: "bg-pale-blue hover:bg-dark-blue w-full text-20px text-white font-bold rounded-md", style: "width:100px; height:38px;" %>
+                      <%= f.submit '選択', id: "select-button-#{index}", class: "bg-pale-blue hover:bg-dark-blue w-full text-20px text-white font-bold rounded-md", style: "width:100px; height:38px;" %>
                     </div>
                   <% end %>
                 </div>
