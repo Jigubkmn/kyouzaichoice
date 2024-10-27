@@ -36,6 +36,12 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
           POSTGRES_DB: myapp_test
+      chrome:
+        image: seleniarm/standalone-chromium:latest
+        ports:
+          - 4444:4444
+        options:
+          --shm-size: 2g  # メモリサイズの設定
 
     steps:
       - name: Checkout code
@@ -67,5 +73,6 @@ jobs:
         run: bundle exec rspec
         env:
           RAILS_ENV: test
+          RAILS_HOST: http://web:3000  # 追加
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
