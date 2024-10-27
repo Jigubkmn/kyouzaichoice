@@ -72,7 +72,8 @@ jobs:
         run: bundle exec rspec
         env:
           RAILS_ENV: test
-          RAILS_HOST: http://web:3000  # 追加
+          RAILS_HOST: http://web:3000
+          GOOGLE_BOOKS_API_URL: ${{ secrets.GOOGLE_BOOKS_API_URL }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
