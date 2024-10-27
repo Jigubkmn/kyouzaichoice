@@ -74,10 +74,10 @@ jobs:
           RAILS_HOST: http://web:3000  # 追加
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          
+
       - name: Upload Capybara Screenshots
         if: failure()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: capybara-screenshots
           path: tmp/capybara  # スクリーンショットが保存されるディレクトリ
