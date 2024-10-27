@@ -1,15 +1,15 @@
-<div class="flex flex-col w-250px min-h-600px border-2 border-gray rounded-md mt-20px mr-20px p-25px md:flex hidden">
+<div class="flex flex-col w-250px min-h-600px border-2 border-gray rounded-md mt-20px mr-20px mb-30px p-25px md:flex hidden">
   <!-- ユーザー情報 -->
-  <%= link_to profile_user_path, class: "block p-15px font-bold hover:bg-pale-orange rounded-md" do %>
-    <div class="text-20px fa-solid fa-user", style="width:200px;">　<%= t('profile.user') %></div>
+  <%= link_to profile_user_path, class: "block p-15px font-bold rounded-md #{current_page?(profile_user_path) ? 'bg-pale-orange' : 'hover:bg-pale-orange'}" do %>
+    <div class="text-20px fa-solid fa-user", style="width:200px;">  <%= t('profile.user') %></div>
   <% end %>
   <!-- 資格 -->
-  <%= link_to qualifications_path, class: "block p-15px font-bold hover:bg-pale-orange rounded-md" do %>
-    <div class="text-20px fa-solid fa-pen">　<%= t('profile.qualification') %></div>
+  <%= link_to qualifications_path, class: "block p-15px font-bold rounded-md #{current_page?(qualifications_path) ? 'bg-pale-orange' : 'hover:bg-pale-orange'}" do %>
+    <div class="text-20px fa-solid fa-pen">  <%= t('profile.qualification') %></div>
   <% end %>
   <!-- 教材 -->
-  <%= link_to already_registered_materials_path, class: "block p-15px font-bold hover:bg-pale-orange rounded-md" do %>
-    <div class="text-20px fa-solid fa-book">　<%= t('profile.material') %></div>
+  <%= link_to already_registered_materials_path, class: "block p-15px font-bold rounded-md #{current_page?(already_registered_materials_path) ? 'bg-pale-orange' : 'hover:bg-pale-orange'}" do %>
+    <div class="text-20px fa-solid fa-book">  <%= t('profile.material') %></div>
   <% end %>
 </div>
 
