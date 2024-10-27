@@ -58,6 +58,7 @@ Rails.application.configure do
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
   # 指定ホストを許可
+  config.hosts << "10.1.0.130" 
   config.hosts << "172.27.0.3" 
   config.hosts << "172.27.0.4" 
   config.hosts << "172.30.0.3" 
