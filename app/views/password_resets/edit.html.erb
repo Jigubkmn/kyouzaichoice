@@ -1,6 +1,6 @@
 <% content_for(:title, t('.title')) %>
 <div class="flex justify-center">
-  <div class="w-full max-w-md mb-50px">
+  <div class="w-full max-w-450px mb-50px">
     <h2 class="text-3xl mt-30px mb-50px text-center font-bold"><%= t('.title') %></h2>
    <%= form_with model: @user, url: password_reset_path(@token), local: true do |f| %>
       <div class="mb-20px">

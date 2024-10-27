@@ -13,11 +13,10 @@
           <div><%= t('.like') %></div>
         <% end %>
       </div>
-      <% if @materials.size >= 4 %>
-        <div class="bg-pale-blue hover:bg-dark-blue rounded-md", style= "width:200px; height:38px;">
-          <%= link_to t('.material_addition'), search_materials_path, class: "flex items-center justify-center w-full h-full text-20px text-white font-bold" %>
-        </div>
-      <% end %>
+      <!-- 教材を登録 -->
+      <div class="bg-pale-blue hover:bg-dark-blue rounded-md", style= "width:200px; height:38px;">
+        <%= link_to t('.material_addition'), search_materials_path, class: "flex items-center justify-center w-full h-full text-20px text-white font-bold" %>
+      </div>
     </div>
     <% if @materials.present? %>
       <!-- 登録済み教材を表示 -->
@@ -32,9 +31,6 @@
         <div>下記ボタンより資格を追加してください</div>
       </div>
     <% end %>
-    <div class="bg-pale-blue hover:bg-dark-blue rounded-md mt-20px md:hidden", style= "width:200px; height:38px;">
-      <%= link_to t('.material_addition'), search_materials_path, class: "flex items-center justify-center w-full h-full text-20px text-white font-bold" %>
-    </div>
     <%= paginate @material_evaluations %>
   </div>
 </div>

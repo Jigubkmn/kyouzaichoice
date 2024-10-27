@@ -1,7 +1,7 @@
 <% content_for(:title, t('.title')) %>
 <div class="flex justify-center">
-  <div class="w-full max-w-md mb-50px">
-    <h2 class="text-3xl mt-30px mb-50px text-center font-bold"><%= t('.title') %></h2>
+  <div class="w-full max-w-450px mb-30px">
+    <h2 class="text-3xl my-30px text-center font-bold"><%= t('.title') %></h2>
     <%= form_with url: password_resets_path do |f| %>
       <div class="mb-20px">
         <%= f.label :email, class: "font-bold" %>

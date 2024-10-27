@@ -1,11 +1,13 @@
 # Rubyのバージョンを指定した公式イメージをベースに使用
 FROM ruby:3.2.3
+ENV LANG C.UTF-8
+ENV TZ Asia/Tokyo
 
-# 必要なパッケージのインストール
-RUN apt-get update -qq \
- && apt-get install -y nodejs postgresql-client npm vim \
- && rm -rf /var/lib/apt/lists/* \
- && npm install --global yarn
+RUN curl -sL https://deb.nodesource.com/setup_19.x | bash - \
+  && wget --quiet -O - /tmp/pubkey.gpg https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+  && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+  && apt-get update -qq \
+  && apt-get install -y build-essential libpq-dev nodejs yarn
 
 # コンテナの作業ディレクトリを指定
 RUN mkdir /myapp
@@ -14,12 +16,16 @@ WORKDIR /myapp
 # ホストのGemfileとGemfile.lockをコンテナにコピー
 COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
+COPY yarn.lock /myapp/yarn.lock
+
+RUN gem install bundler
 
 # bundle installを実行
 RUN bundle install
+RUN yarn install
 
 # カレントディレクトリのファイルをコンテナにコピー
-ADD . /myapp
+COPY . /myapp
 
 # コンテナ起動時に実行されるスクリプトをコピーして実行可能にする
 COPY entrypoint.sh /usr/bin/

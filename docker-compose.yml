@@ -14,9 +14,13 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
+      TZ: Asia/Tokyo
+      SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
     volumes:
       - .:/myapp
       - bundle:/bundle
+      - bundle_data:/usr/local/bundle:cached
+      - node_modules:/app/node_modules
     ports:
       - "3000:3000"
     restart: always
@@ -24,6 +28,12 @@ services:
     stdin_open: true
     depends_on:
       - db
+  chrome:
+    image: seleniarm/standalone-chromium:latest
+    ports:
+      - 4444:4444
 volumes:
   postgres_volume:
   bundle:
+  bundle_data:
+  node_modules:
