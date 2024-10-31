@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title><%= page_title(yield(:title)) %></title>
+    <title><%= page_title(yield(:title)) %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-
+    <%= display_meta_tags(default_meta_tags) %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= favicon_link_tag('favicon.ico') %>
+    
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
-    <%= display_meta_tags(default_meta_tags) %>
+    <%= favicon_link_tag('favicon.ico') %>
     <script src="https://kit.fontawesome.com/d22b3f06bb.js" crossorigin="anonymous"></script>
 
     <!-- Google tag (gtag.js) -->
