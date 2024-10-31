@@ -1,7 +1,6 @@
 document.addEventListener('turbo:load', function() {
   const progressSelect = document.getElementById("progress-select");
   const yearAcquiredDiv = document.getElementById("year-acquired-container");
-  console.log(progressSelect.value); // 取得した値をコンソールに表示
   function toggleYearAcquiredVisibility() {
     if (progressSelect.value === '合格') {
       yearAcquiredDiv.style.display = 'block';

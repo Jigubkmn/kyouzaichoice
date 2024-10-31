@@ -1,4 +1,4 @@
-<div class="mt-5px border-2 border-gray rounded-md">
+<div class="border-2 border-gray rounded-md">
   <div class="p-30px">
     <%= form_with model: @material, local: true do |f| %>
       <%= f.fields_for :material_evaluations, @material_evaluation do |evaluation_f| %>
@@ -21,14 +21,7 @@
               <!-- 対象資格 -->
               <div class= "flex flex-col mb-20px">
                 <%= f.label :qualification, class: "font-bold" %>
-                <!-- チェックボックス -->
-                <div class="flex items-center mb-10px">
-                  <%= f.check_box :has_qualification, id: 'has_qualification', name: nil, onclick: "toggleCheckboxes(this)", checked: true %>
-                  <%= f.label :has_qualification, "有", class: "ml-2 font-bold" %>
-                  <%= f.check_box :no_qualification, id: 'no_qualification', class: 'ml-20px', name: nil, onclick: "toggleCheckboxes(this)" %>
-                  <%= f.label :no_qualification, "無", class: "ml-2 font-bold" %>
-                </div>
-                <%= f.select :qualification, options_for_select(@qualifications || []), { include_blank: true }, id: 'select_qualification' ,class: "select select-warning select-sm w-full m-0 py-0 pr-0 pl-4" %>
+                <%= f.select :qualification, options_for_select(@qualifications || []), { include_blank: true } ,class: "select select-warning select-sm w-full m-0 py-0 pr-0 pl-4" %>
               </div>
               <!-- MaterialEvaluationの入力フォーム -->
               <!-- 教材特徴 -->

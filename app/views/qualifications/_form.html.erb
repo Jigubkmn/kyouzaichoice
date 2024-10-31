@@ -1,17 +1,20 @@
 <div style="width: 450px;">
   <%= form_with model: @qualification, local: true do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
+    <!-- 資格名 -->
     <div class= "mb-20px flex flex-col">
       <%= f.label :name, class: "font-bold" %>
       <%= f.text_field :name, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "width:450px;" %>
     </div>
 
+    <!-- 進捗状況 -->
     <div class= "flex flex-col mb-20px" >
       <%= f.label :progress, class: "font-bold" %>
       <%= f.select :progress, ["学習開始前", "学習中","科目合格", "合格"], { include_blank: true }, id:"progress-select", class: "select select-warning select-sm w-full m-0 py-0 pr-0 pl-15px", style: "width:250px;" %>
     </div>
 
-    <div class= "flex flex-col mb-20px" id="year-acquired-container" >
+    <!-- 取得年 -->
+    <div class= "flex flex-col mb-20px" id="year-acquired-container" style="display: none;" >
       <%= f.label :year_acquired, class: "font-bold" %>
       <div class="flex items-center">
         <%= f.select :year_acquired, (1950..Date.today.year).to_a.reverse, { include_blank: true }, class: "select select-warning select-sm input-sm m-0 py-0 pr-0 pl-15px", style: "width:100px;" %>
