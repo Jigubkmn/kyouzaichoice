@@ -112,8 +112,6 @@ ja:
       danger: 選択教材は既に登録済みのため新しく登録出来ません。
     index:
       title: 教材一覧
-      title_cont : 教材名
-      qualification_cont : 資格名
       feature : 教材特徴
       material_addition: 教材を登録
     like:

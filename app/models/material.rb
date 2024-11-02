@@ -23,4 +23,8 @@ class Material < ApplicationRecord
   def self.ransackable_attributes(_auth_object = nil)
     %w[title created_at id image_link info_link published_date systemid updated_at qualification]
   end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[likes material_evaluations] # 検索可能にしたいアソシエーションをリスト
+  end
 end
