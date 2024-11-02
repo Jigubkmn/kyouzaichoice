@@ -15,6 +15,7 @@ module.exports = {
         'thin-orange': '#FFDB7D',
         'pale-orange': '#FFCD4C',
         'dark-orange': '#FFB800',
+        'thin-green': '#7AF194',
         'pale-green': '#25E04E',
         'dark-green': '#26B441',
         'pale-blue': '#27CBFF',

@@ -1,0 +1,3 @@
+<% @materials.each do |material| %>
+  <li role="option" data-autocomplete-value="<%= material.title %>" class="px-1 py-2 w-600px text-sm md:text-base xl:text-lg hover:bg-zinc-300 hover:rounded"><%= material.title %></li>
+<% end %>
