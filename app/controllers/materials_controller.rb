@@ -46,7 +46,7 @@ class MaterialsController < ApplicationController
 
   # オートコンプリート
   def index_autocomplete
-    @materials = Material.where('title like ?', "%#{params[:q]}%")
+    @materials = Material.where('title Like ? OR qualification Like ?', "%#{params[:q]}%", "%#{params[:q]}%")
     render partial: 'materials/index_autocomplete'
   end
 
