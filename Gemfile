@@ -50,6 +50,7 @@ gem 'kaminari'
 # 検索機能
 gem 'ransack'
 
+gem "importmap-rails"
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
