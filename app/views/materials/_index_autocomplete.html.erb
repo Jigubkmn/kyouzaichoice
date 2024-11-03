@@ -1,0 +1,5 @@
+<% @materials.each do |material| %>
+  <li role="option" data-autocomplete-value="<%= material.qualification.present? ? "#{material.title} (#{material.qualification})" : material.title %>" class="p-10px w-600px text-sm bg-ultra-thin-green rounded hover:bg-thin-green">
+    <%= material.title %><% if material.qualification.present? %> (<%= material.qualification %>)<% end %>
+  </li>
+<% end %>

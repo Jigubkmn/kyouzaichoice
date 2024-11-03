@@ -44,6 +44,12 @@ class MaterialsController < ApplicationController
     end
   end
 
+  # オートコンプリート
+  def index_autocomplete
+    @materials = Material.where('title Like ? OR qualification Like ?', "%#{params[:q]}%", "%#{params[:q]}%")
+    render partial: 'materials/index_autocomplete'
+  end
+
   # プロフィール(教材) 登録済み
   def already_registered
     login_material_evaluations # ログインユーザーに関連するMaterialEvaluationを取得
@@ -63,6 +69,7 @@ class MaterialsController < ApplicationController
     end
   end
 
+  # 教材登録時の検索
   def search
     if params[:search].nil?
       return
