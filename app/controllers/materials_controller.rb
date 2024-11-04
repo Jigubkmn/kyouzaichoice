@@ -1,5 +1,5 @@
 class MaterialsController < ApplicationController
-  before_action :require_login, except: %i[index]
+  before_action :require_login, except: %i[index index_autocomplete]
   before_action :set_material, only: %i[edit update destroy]
 
   def new
