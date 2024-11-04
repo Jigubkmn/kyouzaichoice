@@ -2,11 +2,11 @@
 <div class="flex flex-col items-center w-full mb-30px">
   <h2 class="text-30px font-bold mt-30px mb-30px"><%= t('.title') %></h2>
   <div class="flex flex-col">
-    <div class="flex flex-col border-2 border-gray rounded-md w-800px p-15px">
+    <div class="flex flex-col justify-center border-2 border-gray rounded-md md:max-w-800px lg:w-full  mx-10px lg:mx-auto p-10px">
       <div class="flex flex-row w-full">
         <div class="flex flex-col">
           <!-- 教材画像 -->
-          <%= image_tag @material.image_link, style: "width: 100px; max-width: 100px; height: 150px;" %>
+          <div class="w-70px sm:w-100px h-105px sm:h-150px"><%= image_tag @material.image_link %></div>
           <!-- 教材評価 -->
           <div class="flex flex-row items-center justify-center mt-5px">
             <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
@@ -15,29 +15,29 @@
           </div>
         </div>
         <div class="flex flex-col w-full">
-          <div class="ml-15px">
+          <div class="ml-10px">
             <!-- タイトル -->
-            <div class="font-bold text-20px mb-5px">
+            <div class="font-bold text-16px sm:text-20px mb-5px">
               <%= truncate(@material.title, length: 28) %>
             </div>
             <!-- 発売日 -->
             <% if @material.published_date.present? %>
-              <div>発売日：<%= @material.published_date %></div>
+              <div class="text-14px sm:text-16px">発売日：<%= @material.published_date %></div>
             <% else %>
-              <p>発売日：不明</p>
+              <p class="text-14px sm:text-16px">発売日：不明</p>
             <% end %>
             <!-- 出版社 -->
             <div class="mb-5px">
               <% if @material.publisher.present? %>
-                <div>出版社：<%= @material.publisher %></div>
+                <div class="text-14px sm:text-16px">出版社：<%= @material.publisher %></div>
               <% else %>
-                <p>出版社：不明</p>
+                <p class="text-14px sm:text-16px">出版社：不明</p>
               <% end %>
             </div>
             <!-- 内容説明 -->
             <% if @material.description.present? %>
-              <p class="font-bold mb-5px">【内容説明】</p>
-              <div><%= @material.description %></div>
+              <p class="font-bold mb-5px class="text-14px sm:text-16px"">【内容説明】</p>
+              <div class="text-14px sm:text-16px"><%= @material.description %></div>
             <% end %>
             <!-- 資格 -->
             <% if @material.qualification.present? %>
@@ -47,9 +47,9 @@
             <% end %>
             <!-- 教材特徴 -->
             <% if @unique_features.present? %>
-              <div class="flex flex-row mb-10px">
+              <div class="flex flex-wrap">
                 <% @unique_features.each do |feature| %>
-                  <div class="y-10px bg-dark-gray text-white text-12px mr-10px font-semibold px-2.5 py-0.5 rounded">
+                  <div class="y-10px bg-dark-gray text-white text-12px mr-10px mb-10px font-semibold px-2.5 py-0.5 rounded">
                     <%= feature %>
                   </div>
                 <% end %>
@@ -69,22 +69,23 @@
           <div class="ml-20px">
             <!-- 教材評価 -->
             <div class="flex flex-row items-center mb-10px">
-              <div class="font-bold mr-20px"><%= current_user.name %></div>
+              <div class="font-bold mr-20px text-14px sm:text-16px"><%= current_user.name %></div>
               <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
               <div class="font-bold ml-5px"><%= @user_evaluation %></div>
             </div>
-            <p><%= @user_body %></p>
+            <p class="text-14px sm:text-16px"><%= @user_body %></p>
           </div>
         </div>
       <% end %>
     </div>
+    <!-- ログインユーザーのコメント入力欄をよう -->
     <% if @user_evaluation.nil? && current_user %>
       <%= render 'show_form' %>
     <% end %>
 
     <!-- ログインユーザー以外のコメントを全て表示 -->
     <% @other_evaluations.each do |evaluation| %>
-      <div class="border-b-2 border-gray pl-40px py-20px flex flex-row items-center mt-10px">
+      <div class="border-b-2 border-gray pl-20px sm:pl-40px py-10px sm:py-20px flex flex-row items-center mt-10px">
         <%= image_tag(evaluation.user.image_url, class:"h-14 w-14 rounded-full") %>
         <div class="ml-20px">
           <!-- 教材評価 -->
@@ -95,7 +96,7 @@
           </div>
           <p><%= evaluation.body %></p>
         </div>
-      </div>
+      </div>  
     <% end %>
   </div>
 </div>

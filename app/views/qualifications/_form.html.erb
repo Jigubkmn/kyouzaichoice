@@ -1,31 +1,30 @@
-<div style="width: 450px;">
-  <%= form_with model: @qualification, local: true do |f| %>
-    <%= render 'shared/error_messages', object: f.object %>
-    <!-- 資格名 -->
-    <div class= "mb-20px flex flex-col">
-      <%= f.label :name, class: "font-bold" %>
-      <%= f.text_field :name, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4", style: "width:450px;" %>
-    </div>
+<%= form_with model: @qualification, local: true do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <!-- 資格名 -->
+  <div class= "mb-20px flex flex-col w-5/6 sm:w-full mx-auto">
+    <%= f.label :name, class: "font-bold" %>
+    <%= f.text_field :name, class: "input input-bordered input-warning input-sm w-full m-0 py-0 pr-0 pl-4" %>
+  </div>
 
-    <!-- 進捗状況 -->
-    <div class= "flex flex-col mb-20px" >
-      <%= f.label :progress, class: "font-bold" %>
-      <%= f.select :progress, ["学習開始前", "学習中","科目合格", "合格"], { include_blank: true }, id:"progress-select", class: "select select-warning select-sm w-full m-0 py-0 pr-0 pl-15px", style: "width:250px;" %>
-    </div>
+  <!-- 進捗状況 -->
+  <div class= "flex flex-col mb-20px w-5/6 sm:w-full mx-auto" >
+    <%= f.label :progress, class: "font-bold" %>
+    <%= f.select :progress, ["学習開始前", "学習中","科目合格", "合格"], { include_blank: true }, id:"progress-select", class: "select select-warning select-sm w-full m-0 py-0 pr-0 pl-15px", style: "width:250px;" %>
+  </div>
 
-    <!-- 取得年 -->
-    <div class= "flex flex-col mb-20px" id="year-acquired-container" style="display: none;" >
-      <%= f.label :year_acquired, class: "font-bold" %>
-      <div class="flex items-center">
-        <%= f.select :year_acquired, (1950..Date.today.year).to_a.reverse, { include_blank: true }, class: "select select-warning select-sm input-sm m-0 py-0 pr-0 pl-15px", style: "width:100px;" %>
-        <span class="ml-2">年</span>
-      </div>
+  <!-- 取得年 -->
+  <div class= "flex flex-col mb-20px w-5/6 sm:w-full mx-auto" id="year-acquired-container" style="display: none;" >
+    <%= f.label :year_acquired, class: "font-bold" %>
+    <div class="flex items-center">
+      <%= f.select :year_acquired, (1950..Date.today.year).to_a.reverse, { include_blank: true }, class: "select select-warning select-sm input-sm m-0 py-0 pr-0 pl-15px", style: "width:100px;" %>
+      <span class="ml-2">年</span>
     </div>
-    <div class="flex justify-end"> 
-      <div class="bg-thin-gray hover:bg-pale-gray rounded-md mr-30px", style= "width:150px; height:38px;">
-        <%= link_to t('helpers.submit.cancel'), qualifications_path, class: "flex items-center justify-center w-full h-full text-20px text-white font-bold" %>
-      </div>
-      <%= f.submit nil, class: "text-20px text-white font-bold rounded-md bg-pale-blue w-full hover:bg-dark-blue", style: "width:150px; height:38px;" %>
+  </div>
+  <div class="flex justify-end"> 
+    <div class="bg-thin-gray hover:bg-pale-gray rounded-md mr-30px", style= "width:150px; height:38px;">
+      <%= link_to t('helpers.submit.cancel'), qualifications_path, class: "flex items-center justify-center w-full h-full text-20px text-white font-bold" %>
     </div>
-  <% end %>
-</div>
+    <%= f.submit nil, class: "text-20px text-white font-bold rounded-md bg-pale-blue w-full hover:bg-dark-blue", style: "width:150px; height:38px;" %>
+  </div>
+<% end %>
+
