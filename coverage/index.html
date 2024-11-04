@@ -13,7 +13,7 @@
       <img src="./assets/0.13.1/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2024-11-03T11:13:48+09:00">2024-11-03T11:13:48+09:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2024-11-05T02:22:30+09:00">2024-11-05T02:22:30+09:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -2511,7 +2511,7 @@
 
             
 
-            <code class="ruby">  before_action :require_login, except: %i[index]</code>
+            <code class="ruby">  before_action :require_login, except: %i[index index_autocomplete]</code>
           </li>
         </div>
       
@@ -3011,7 +3011,7 @@
 
             
 
-            <code class="ruby">    @materials = Material.where(&#39;title like ?&#39;, &quot;%#{params[:q]}%&quot;)</code>
+            <code class="ruby">    @materials = Material.where(&#39;title Like ? OR qualification Like ?&#39;, &quot;%#{params[:q]}%&quot;, &quot;%#{params[:q]}%&quot;)</code>
           </li>
         </div>
       
