@@ -1,5 +1,5 @@
-<div class="border-2 border-gray rounded-md">
-  <div class="p-30px">
+<div class="border-2 border-gray rounded-md ">
+  <div class="p-10px">
     <%= form_with model: @material, local: true do |f| %>
       <%= f.fields_for :material_evaluations, @material_evaluation do |evaluation_f| %>
         <%= render 'shared/error_messages', object: evaluation_f.object %>
@@ -12,8 +12,8 @@
           <%= f.hidden_field :publisher, value: @material.publisher %>
           <%= f.hidden_field :description, value: @material.description %>
           <div class="flex flex-row">
-            <%= image_tag @material.image_link, style: "width: 100px; height: 150px; max-width: 100px;" %>
-            <div class="ml-15px">
+            <div class="min-w-100px h-150px"><%= image_tag @material.image_link %></div>
+            <div class="flex flex-col ml-10px">
               <div class= "mb-20px">
                 <p class="font-bold">教材名</p>
                 <%= @material.title %>
