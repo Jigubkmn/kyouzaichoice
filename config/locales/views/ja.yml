@@ -144,6 +144,7 @@ ja:
       title: 教材登録
     show:
       title: 教材詳細
+      material_index: 教材一覧画面へ
     create: 
       success: 教材評価を登録しました
       danger: 教材評価を登録出来ませんでした 
