@@ -1,0 +1,34 @@
+<h2 class="text-30px text-center font-bold my-30px"><%= t('.title') %></h2>
+<div class="flex flex-row justify-center items-center">
+  <div><%= link_to image_tag(current_user.image_url, class:"h-20 w-20 rounded-full") %></div>
+  <div class="text-28px ml-30px"><%= current_user.name %></div>
+  <!-- 編集アイコン -->
+  <div class="flex items-center ml-30px">
+    <%= link_to edit_profile_path(current_user), id: 'edit-icon', class: 'flex justify-center items-center bg-thin-orange hover:bg-dark-orange h-7 w-7 rounded-full' do %>
+      <i class="fa-sharp fa-solid fa-pencil fa-lg"></i>
+    <% end %>
+  </div>
+</div>
+<div>
+
+<div class="flex flex-col w-300px sm:w-450px mx-auto mt-30px">
+  <!-- メールアドレス -->
+  <div class="text-16px mb-5px font-bold"><%= t('.email') %></div>
+  <div class="text-16px"><%= current_user.email %></div>
+  <!-- 自己紹介 -->
+  <div class="mt-20px">
+    <div class="text-16px mb-5px font-bold"><%= t('.introduction') %></div>
+    <div class="text-16px">
+      <%= current_user.introduction.present? ? current_user.introduction : "未記入" %>
+    </div>
+  </div>
+</div>
+
+<!-- ページ遷移リンク -->
+<div class="flex flex-row justify-center items-center border-b-2 border-gray mt-50px mb-10px">
+  <!-- 資格一覧 -->
+  <%= link_to t('.qualification'), qualifications_path, class: "mr-10px px-10px mb-10px font-bold rounded-md #{current_page?(qualifications_path) ? 'bg-pale-orange' : 'hover:bg-pale-orange'}" %>
+  <%= link_to t('.material_already_registered'), already_registered_materials_path, class: "mr-10px px-10px mb-10px font-bold rounded-md #{current_page?(already_registered_materials_path) ? 'bg-pale-orange' : 'hover:bg-pale-orange'}" %>
+  <%= link_to t('.material_like'), like_materials_path, class: "px-10px mb-10px font-bold rounded-md #{current_page?(already_registered_materials_path) ? 'bg-pale-orange' : 'hover:bg-pale-orange'}" %>
+  <div class="y"></div>
+</div>

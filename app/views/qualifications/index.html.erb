@@ -1,39 +1,24 @@
 <% content_for(:title, t('.title')) %>
-<div class="flex flex-row w-full">
-  <%= render 'profile/sidebar' %>
-  <div class="flex flex-col mb-30px">
-    <h2 class="mt-20px text-30px font-bold"><%= t('.title') %></h2>
-    <div class="mt-5px border-2 border-gray rounded-md px-30px pb-30px" style="width: 600px;">
-      <% if @qualifications.present? %>
-        <!-- 作成した資格を表示 -->
-        <% @qualifications.each do |qualification| %>
-          <div class="flex flex-row items-center border-b-2 border-gray py-10px">
-            <div class="font-bold ml-20px mr-30px"><%= qualification.name %></div>
-            <div class="mr-30px"><%= qualification.progress %></div>
-            <% if qualification.year_acquired.present? %>
-              <div class="mr-30px">取得年数：<%= qualification.year_acquired %>年</div>
-            <% end %>
-            <div class="ml-auto mr-20px flex justify-center items-center">
-              <!-- 編集アイコン -->
-              <%= link_to edit_qualification_path(qualification), class:'flex justify-center items-center bg-thin-orange hover:bg-dark-orange h-7 w-7 rounded-full mr-20px' do %>
-                <i class="fa-sharp fa-solid fa-pencil fa-lg"></i>
-              <% end %>
-              <!-- 削除アイコン -->
-              <%= link_to qualification_path(qualification), class:'flex justify-center items-center bg-pale-pink hover:bg-dark-pink h-7 w-7 rounded-full', data: { turbo_method: :delete } do %>
-                <i class="fa-solid fa-trash"></i>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
-      <% else %>
-        <div class="mt-30px">
-          <div>資格が登録されていません。</div>
-          <div>下記ボタンより資格を追加してください</div>
-        </div>
-      <% end %>
-      <div class="bg-pale-blue hover:bg-dark-blue rounded-md mt-20px", style= "width:200px; height:38px;">
+<div class="flex flex-col justify-center w-full max-w-1090px mx-auto">
+  <%= render 'profiles/index' %>
+  <!-- 資格一覧 -->
+  <div class="flex flex-col justify-center mb-30px">
+    <div class="flex flex-row items-center justify-center mb-10px">
+      <h2 class="text-30px font-bold mr-30px"><%= t('.title') %></h2>
+      <div class="bg-pale-blue hover:bg-dark-blue rounded-md", style= "width:200px; height:38px;">
         <%= link_to t('.qualification_addition'), new_qualification_path, class: "flex items-center justify-center w-full h-full text-xl text-white font-bold" %>
       </div>
     </div>
+    <!-- 登録した資格一覧を表示 -->
+    <% if @qualifications.present? %>
+      <div class="flex flex-wrap justify-center w-full gap-2.5">
+        <%= render 'index' %>
+      </div>
+    <% else %>
+      <div class="mt-30px">
+        <p>資格が登録されていません。</p>
+        <p>資格を追加してください</p>
+      </div>
+    <% end %>
   </div>
 </div>

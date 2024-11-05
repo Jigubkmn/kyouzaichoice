@@ -1,15 +1,15 @@
-class ProfileUsersController < ApplicationController
+class ProfilesController < ApplicationController
   before_action :set_user, only: %i[index edit update]
 
-  def show; end
+  def index; end
 
   def edit; end
 
   def update
     if @user.update(user_params)
-      redirect_to profile_user_path, success: t('profile_users.update.success')
+      redirect_to qualifications_path, success: t('profiles.update.success')
     else
-      flash.now['danger'] = t('profile_users.update.danger')
+      flash.now['danger'] = t('profiles.update.danger')
       render :edit, status: :unprocessable_entity
     end
   end

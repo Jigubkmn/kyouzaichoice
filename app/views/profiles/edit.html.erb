@@ -2,7 +2,7 @@
 <div class="flex justify-center ">
   <div class="flex flex-col w-full max-w-450px mb-30px">
     <h2 class="my-30px text-30px text-center font-bold"><%= t('.title') %></h2>
-      <%= form_with model: @user, url: profile_user_path, method: :put do |f| %>
+      <%= form_with model: @user, url: profile_path, method: :put do |f| %>
         <%= render 'shared/error_messages', object: f.object %>
         <div class= "mb-20px flex flex-col w-5/6 mx-auto sm:w-full" >
           <%= f.label :name, class: "font-bold" %>
@@ -23,7 +23,7 @@
         </div>
         <div class="flex justify-center sm:justify-end">
           <div class="bg-thin-gray hover:bg-pale-gray rounded-md mr-30px", style= "width:150px; height:38px;">
-            <%= link_to t('helpers.submit.cancel'), profile_user_path, class: "flex items-center justify-center w-full h-full text-20px text-white font-bold" %>
+            <%= link_to t('helpers.submit.cancel'), profiles_path, class: "flex items-center justify-center w-full h-full text-20px text-white font-bold" %>
           </div> 
           <%= f.submit t('helpers.submit.update'), class: "bg-pale-blue hover:bg-dark-blue w-full text-20px text-white font-bold rounded-md", style: "width:150px; height:38px;" %>
         </div>
