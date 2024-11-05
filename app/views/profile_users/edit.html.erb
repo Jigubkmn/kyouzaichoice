@@ -21,7 +21,7 @@
           <%= f.file_field :image, class: "file-input file-input-bordered file-input-warning file-input-sm w-full max-w-xs", accept: 'image/*' %>
           <%= f.hidden_field :image_cache %>
         </div>
-        <div class="flex justify-end">
+        <div class="flex justify-center sm:justify-end">
           <div class="bg-thin-gray hover:bg-pale-gray rounded-md mr-30px", style= "width:150px; height:38px;">
             <%= link_to t('helpers.submit.cancel'), profile_user_path, class: "flex items-center justify-center w-full h-full text-20px text-white font-bold" %>
           </div> 
