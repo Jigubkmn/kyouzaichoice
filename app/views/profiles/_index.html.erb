@@ -29,6 +29,6 @@
   <!-- 資格一覧 -->
   <%= link_to t('.qualification'), qualifications_path, class: "mr-10px px-10px mb-10px font-bold rounded-md #{current_page?(qualifications_path) ? 'bg-pale-orange' : 'hover:bg-pale-orange'}" %>
   <%= link_to t('.material_already_registered'), already_registered_materials_path, class: "mr-10px px-10px mb-10px font-bold rounded-md #{current_page?(already_registered_materials_path) ? 'bg-pale-orange' : 'hover:bg-pale-orange'}" %>
-  <%= link_to t('.material_like'), like_materials_path, class: "px-10px mb-10px font-bold rounded-md #{current_page?(already_registered_materials_path) ? 'bg-pale-orange' : 'hover:bg-pale-orange'}" %>
+  <%= link_to t('.material_like'), like_materials_path, class: "px-10px mb-10px font-bold rounded-md #{current_page?(like_materials_path) ? 'bg-pale-orange' : 'hover:bg-pale-orange'}" %>
   <div class="y"></div>
 </div>
