@@ -5,16 +5,17 @@
   <nav>
     <div class= "dropdown dropdown-bottom dropdown-end md:hidden">
       <!-- ドロップダウンのトリガーとしてbarsアイコンを使用 -->
-      <label tabindex="0" class= "flex items-center justify-center mr-20px hover:bg-slate-200 rounded-full px-2.5 py-5">
+      <label tabindex="0" class= "flex items-center justify-center mr-20px hover:bg-gray rounded-full px-2.5 py-5">
         <i id="bars" class="fa-solid fa-bars fa-xl"></i>
       </label>
       <!-- ドロップダウンメニューの内容 -->
-      <ul tabindex="0" class= "dropdown-content menu bg-base-100 mr-20px rounded-box z-[1] w-52 p-2 shadow">
-        <%= link_to t('header.material_index'), materials_path, class: "p-2 mt-10px hover:bg-slate-200 rounded-md" %>
-        <%= link_to t('header.material_new'), search_materials_path, class: "p-2 mt-10px hover:bg-slate-200 rounded-md" %>
-        <%= link_to link_to t('header.material_like'), like_materials_path, class: "p-2 mt-10px hover:bg-slate-200 rounded-md" %>
-        <%= link_to t('header.mypage'), profile_user_path, class: "p-2 mt-10px hover:bg-slate-200 rounded-md" %>
-        <%= link_to t('header.logout'), logout_path, data: { turbo_method: :delete }, class: "p-2 mt-10px hover:bg-slate-200 rounded-md" %>
+      <ul tabindex="0" class= "dropdown-content menu bg-base-100 mr-20px rounded-box z-[1] w-60 p-2 shadow">
+        <li><%= link_to t('header.material_index'), materials_path, class: "p-2 font-bold hover:bg-gray rounded-md" %></li>
+        <li><%= link_to t('header.material_new'), search_materials_path, class: "p-2 font-bold hover:bg-gray rounded-md" %></li>
+        <li><%= link_to t('header.mypage_qualification'), qualifications_path, class: "p-2 font-bold hover:bg-gray rounded-md" %></li>
+        <li><%= link_to t('header.mypage_already_registered_materials'), already_registered_materials_path, class: "p-2 font-bold hover:bg-gray rounded-md" %></li>
+        <li><%= link_to t('header.mypage_like_materials'), like_materials_path, class: "p-2 font-bold hover:bg-gray rounded-md" %></li>
+        <li><%= link_to t('header.logout'), logout_path, data: { turbo_method: :delete }, class: "p-2 font-bold hover:bg-gray rounded-md" %></li>
       </ul>
     </div>
 
@@ -22,10 +23,9 @@
       <!-- 教材 -->
       <div class= "dropdown dropdown-hover dropdown-bottom dropdown-end">
         <label tabindex="0" class= "text-lg m-1 py-2 px-2 font-bold hover:bg-gray rounded-md"><%= t('header.material') %></label>
-        <ul tabindex="0" class= "dropdown-content menu bg-white rounded-box z-[1] w-52 p-2 shadow">
+        <ul tabindex="0" class= "dropdown-content menu bg-white rounded-box z-[1] w-60 p-2 shadow">
           <li><%= link_to t('header.material_index'), materials_path, class: "font-bold hover:bg-gray rounded-md" %></li>
           <li><%= link_to t('header.material_new'), search_materials_path, class: "font-bold hover:bg-gray rounded-md" %></li>
-          <li><%= link_to t('header.material_like'), like_materials_path, class: "font-bold hover:bg-gray rounded-md" %></li>
         </ul>
       </div>
       <%= link_to t('header.logout'), logout_path, data: { turbo_method: :delete }, class:"text-lg m-1 py-2 px-2 font-bold hover:bg-gray rounded-md" %>
@@ -35,9 +35,9 @@
           <%= image_tag(current_user.image_url, class:"h-14 w-14 rounded-full") %>
         </label> 
         <ul tabindex="0" class= "dropdown-content menu bg-white rounded-box z-[1] w-60 p-2 shadow">
-          <li><%= link_to t('header.mypage_user'), profile_user_path, class: "font-bold hover:bg-gray rounded-md" %></li>
           <li><%= link_to t('header.mypage_qualification'), qualifications_path, class: "font-bold hover:bg-gray rounded-md" %></li>
-          <li><%= link_to t('header.mypage_material'), already_registered_materials_path, class: "font-bold hover:bg-gray rounded-md" %></li>
+          <li><%= link_to t('header.mypage_already_registered_materials'), already_registered_materials_path, class: "font-bold hover:bg-gray rounded-md" %></li>
+          <li><%= link_to t('header.mypage_like_materials'), like_materials_path, class: "font-bold hover:bg-gray rounded-md" %></li>
         </ul>
       </div>
     </div>

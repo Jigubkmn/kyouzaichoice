@@ -13,7 +13,7 @@
       <img src="./assets/0.13.1/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2024-11-05T21:01:10+09:00">2024-11-05T21:01:10+09:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2024-11-06T03:02:40+09:00">2024-11-06T03:02:40+09:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -29,7 +29,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.93
+         1.97
        </span>
     </span> hits/line
     )
@@ -158,13 +158,13 @@
           </tr>
         
           <tr class="t-file">
-            <td class="strong t-file__name"><a href="#e91f9eb50ed3290c2e315172288524f8706be587" class="src_link" title="app/controllers/profile_users_controller.rb">app/controllers/profile_users_controller.rb</a></td>
+            <td class="strong t-file__name"><a href="#a8ad350689590126c8429fabca8e585fc62f8909" class="src_link" title="app/controllers/profiles_controller.rb">app/controllers/profiles_controller.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
             <td class="cell--number">26</td>
             <td class="cell--number">14</td>
             <td class="cell--number">14</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">1.79</td>
+            <td class="cell--number">2.50</td>
             
           </tr>
         
@@ -175,7 +175,7 @@
             <td class="cell--number">30</td>
             <td class="cell--number">30</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">1.93</td>
+            <td class="cell--number">1.97</td>
             
           </tr>
         
@@ -340,7 +340,7 @@
             <td class="cell--number">10</td>
             <td class="cell--number">7</td>
             <td class="cell--number">3</td>
-            <td class="cell--number">6.90</td>
+            <td class="cell--number">7.50</td>
             
           </tr>
         
@@ -362,8 +362,8 @@
      </span>
      covered at
      <span class="covered_strength">
-       <span class="red">
-         0.98
+       <span class="green">
+         1.02
        </span>
     </span> hits/line
     )
@@ -470,13 +470,13 @@
           </tr>
         
           <tr class="t-file">
-            <td class="strong t-file__name"><a href="#e91f9eb50ed3290c2e315172288524f8706be587" class="src_link" title="app/controllers/profile_users_controller.rb">app/controllers/profile_users_controller.rb</a></td>
+            <td class="strong t-file__name"><a href="#a8ad350689590126c8429fabca8e585fc62f8909" class="src_link" title="app/controllers/profiles_controller.rb">app/controllers/profiles_controller.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
             <td class="cell--number">26</td>
             <td class="cell--number">14</td>
             <td class="cell--number">14</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">1.79</td>
+            <td class="cell--number">2.50</td>
             
           </tr>
         
@@ -487,7 +487,7 @@
             <td class="cell--number">30</td>
             <td class="cell--number">30</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">1.93</td>
+            <td class="cell--number">1.97</td>
             
           </tr>
         
@@ -1033,7 +1033,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         6.9
+         7.5
        </span>
     </span> hits/line
     )
@@ -1080,7 +1080,7 @@
             <td class="cell--number">10</td>
             <td class="cell--number">7</td>
             <td class="cell--number">3</td>
-            <td class="cell--number">6.90</td>
+            <td class="cell--number">7.50</td>
             
           </tr>
         
@@ -5492,9 +5492,9 @@
 </div>
 
       
-        <div class="source_table" id="e91f9eb50ed3290c2e315172288524f8706be587">
+        <div class="source_table" id="a8ad350689590126c8429fabca8e585fc62f8909">
   <div class="header">
-    <h3>app/controllers/profile_users_controller.rb</h3>
+    <h3>app/controllers/profiles_controller.rb</h3>
     <h4>
       <span class="green">
   100.0%
@@ -5526,7 +5526,7 @@
 
             
 
-            <code class="ruby">class ProfileUsersController &lt; ApplicationController</code>
+            <code class="ruby">class ProfilesController &lt; ApplicationController</code>
           </li>
         </div>
       
@@ -5560,7 +5560,7 @@
 
             
 
-            <code class="ruby">  def show; end</code>
+            <code class="ruby">  def index; end</code>
           </li>
         </div>
       
@@ -5628,7 +5628,7 @@
 
             
 
-            <code class="ruby">      redirect_to profile_user_path, success: t(&#39;profile_users.update.success&#39;)</code>
+            <code class="ruby">      redirect_to qualifications_path, success: t(&#39;profiles.update.success&#39;)</code>
           </li>
         </div>
       
@@ -5650,7 +5650,7 @@
 
             
 
-            <code class="ruby">      flash.now[&#39;danger&#39;] = t(&#39;profile_users.update.danger&#39;)</code>
+            <code class="ruby">      flash.now[&#39;danger&#39;] = t(&#39;profiles.update.danger&#39;)</code>
           </li>
         </div>
       
@@ -5731,9 +5731,9 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="6" data-linenumber="20">
+          <li class="covered" data-hits="16" data-linenumber="20">
             
-              <span class="hits">6</span>
+              <span class="hits">16</span>
             
 
             
@@ -5940,9 +5940,9 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="4" data-linenumber="10">
+          <li class="covered" data-hits="5" data-linenumber="10">
             
-              <span class="hits">4</span>
+              <span class="hits">5</span>
             
 
             
@@ -9769,9 +9769,9 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="63" data-linenumber="24">
+          <li class="covered" data-hits="69" data-linenumber="24">
             
-              <span class="hits">63</span>
+              <span class="hits">69</span>
             
 
             
