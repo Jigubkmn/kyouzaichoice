@@ -26,14 +26,9 @@ ja:
     material: 教材
     material_new: 教材登録
     material_index: 教材一覧
-    material_like: いいねした教材
-    mypage: マイページ
-    mypage_user: マイページ
-    mypage_qualification: マイページ(資格)
-    mypage_material: マイページ(教材)
-    term_of_service: 利用規約
-    privacy_policy: プライバシーポリシー
-    inquiry: お問い合わせ
+    mypage_qualification: マイページ(資格一覧)
+    mypage_already_registered_materials: マイページ(登録済み教材)
+    mypage_like_materials: マイページ(いいねした教材)
   footer:
     term_of_service: 利用規約
     privacy_policy: プライバシーポリシー
@@ -76,18 +71,17 @@ ja:
     create:
       success: ユーザー登録が完了しました
       danger: ユーザー登録に失敗しました
-  profile:
-    user: プロフィール
-    qualification: 資格
-    material: 教材
-  profile_users:
+  profiles:
     update:
       success: プロフィールを更新しました
       danger: プロフィールを更新出来ませんでした
-    show:
-      title: プロフィール
+    index:
+      title: マイページ
       email: メールアドレス
       introduction: 自己紹介
+      qualification: 資格一覧
+      material_already_registered: 登録済み教材
+      material_like: いいねした教材
     edit:
       title: プロフィール編集
   qualifications:
@@ -119,6 +113,7 @@ ja:
       like: いいね
       already_registered: 登録済み
       material_index: 教材一覧画面へ
+      material_addition: 教材を登録
     already_registered:
       title: 登録済み教材
       like: いいね

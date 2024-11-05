@@ -5,7 +5,7 @@ RSpec.describe "Qualifications", type: :system do
 
   before do
     login_as(user)
-    visit profile_user_path
+    visit profiles_path(user)
   end
 
   describe '資格を登録' do

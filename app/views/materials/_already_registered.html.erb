@@ -1,5 +1,5 @@
 <% @materials.each_with_index do |material, index| %>
-  <div class="flex flex-row border-2 border-gray rounded-md w-350px lg:w-450px mx-10px sm:mx-0 p-10px"> 
+  <div class="flex flex-row border-2 border-gray rounded-md w-350px sm:w-450px mx-10px sm:mx-0 p-10px"> 
     <div class="flex flex-row w-full">
       <% user_evaluations = material.material_evaluations.where(user: current_user) %>
       <% user_evaluations.each do |evaluation| %>

@@ -158,7 +158,7 @@
           null,
           null,
           1,
-          63,
+          69,
           null,
           null,
           null,
@@ -466,7 +466,7 @@
           null
         ]
       },
-      "/myapp/app/controllers/profile_users_controller.rb": {
+      "/myapp/app/controllers/profiles_controller.rb": {
         "lines": [
           1,
           1,
@@ -487,7 +487,7 @@
           1,
           null,
           1,
-          6,
+          16,
           null,
           null,
           1,
@@ -507,7 +507,7 @@
           null,
           null,
           1,
-          4,
+          5,
           null,
           null,
           1,
@@ -908,6 +908,6 @@
         }
       }
     },
-    "timestamp": 1730808070
+    "timestamp": 1730829760
   }
 }
