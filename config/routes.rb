@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get "oauth/:provider", to: "oauths#oauth", as: :auth_at_provider
   resources :users, only: %i[new create]
   resources :password_resets, only: %i[new create edit update]
-  resource :profile_user, only: %i[show edit update]
+  resources :profiles, only: %i[index edit update]
   resources :qualifications, only: %i[new index create edit update destroy]
   resources :materials, only: %i[new index create edit update destroy] do
     collection { get :search } # 教材登録時の検索
