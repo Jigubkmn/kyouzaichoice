@@ -19,13 +19,6 @@ RSpec.describe Material, type: :model do
         another_material.valid?
       end
 
-
-      it 'image_linkがない場合にバリデーションが機能する' do
-        @material.image_link = ''
-        @material.valid?
-        expect(@material.errors.full_messages).to include('Image linkを入力してください')
-      end
-
       it '同じimage_linkは登録ができない' do
         @material.save
         another_material = build(:material)

@@ -31,9 +31,9 @@
           <% @google_materials['items']&.each_with_index do |google_material, index| %>
             <div class="flex flex-row border-2 border-gray rounded-md w-350px sm:w-450px">
               <div class="flex flex-row m-10px">
-                <div class="mr-10px"><%= image_tag google_material_thumbnail(google_material), style: "width: 70px; max-width: 70px;" %></div>
+                <div class="mr-10px"><%= image_tag google_material_thumbnail(google_material), style: "width: 70px; max-width: 70px; height: 105px;" %></div>
                 <div class="flex flex-col">
-                  <div class="mt-5px text-20px font-bold"><%= google_material['volumeInfo']['title'] %></div>
+                  <div class="text-20px font-bold"><%= google_material['volumeInfo']['title'] %></div>
                   <div>発売日:<%= google_material['volumeInfo']['publishedDate'] %></div>
                   <% if google_material['volumeInfo']['publisher'].present? %>
                     <div>出版社:<%= google_material['volumeInfo']['publisher'] %></div>

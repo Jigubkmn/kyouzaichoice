@@ -4,7 +4,11 @@
       <% user_evaluations = material.material_evaluations.where(user: current_user) %>
       <% user_evaluations.each do |evaluation| %>
         <div class="flex flex-col">
-          <div class="w-70px sm:w-100px h-105px sm:h-150px"><%= image_tag material.image_link %></div>
+          <% if material.image_link.present? %>
+            <div class="w-70px sm:w-100px h-105px sm:h-150px"><%= image_tag material.image_link %></div>
+          <% else %>
+            <%= image_tag 'no_image.png', class:'w-70px sm:min-w-100px h-105px sm:h-150px' %>
+          <% end %>
           <!-- 教材評価 -->
           <div class="mt-5px flex flex-row items-center justify-center">
             <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
