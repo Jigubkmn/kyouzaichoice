@@ -13,7 +13,7 @@
   </div>
 
   <!-- 取得年 -->
-  <div class= "flex flex-col mb-20px w-5/6 sm:w-full mx-auto" id="year-acquired-container" >
+  <div class= "flex flex-col mb-20px w-5/6 sm:w-full mx-auto" id="year-acquired-container" style="display: none;" >
     <%= f.label :year_acquired, class: "font-bold" %>
     <div class="flex items-center">
       <%= f.select :year_acquired, (1950..Date.today.year).to_a.reverse, { include_blank: true }, class: "select select-warning select-sm input-sm m-0 py-0 pr-0 pl-15px", style: "width:100px;" %>
