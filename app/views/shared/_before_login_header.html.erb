@@ -10,9 +10,9 @@
       </label>
       <!-- ドロップダウンメニューの内容 -->
       <ul tabindex="0" class= "dropdown-content menu bg-base-100 mr-20px rounded-box z-[1] w-60 p-2 shadow">
-        <%= link_to t('header.material_index'), materials_path, class: "p-2 font-bold hover:bg-gray rounded-md" %>
-        <%= link_to t('header.new_registration'), new_user_path, class: "p-2 font-bold hover:bg-gray rounded-md" %>
-        <%= link_to t('header.login'), login_path, class: "p-2 font-bold hover:bg-gray rounded-md" %>
+        <%= link_to t('header.material_index'), materials_path, class: "p-2 font-bold hover:bg-gray rounded-md", data: { turbo: false } %>
+        <%= link_to t('header.new_registration'), new_user_path, class: "p-2 font-bold hover:bg-gray rounded-md", data: { turbo: false } %>
+        <%= link_to t('header.login'), login_path, class: "p-2 font-bold hover:bg-gray rounded-md", data: { turbo: false } %>
       </ul>
     </div>
     <div class="space-x-8 mr-9 md:flex hidden md:block">
