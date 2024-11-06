@@ -12,7 +12,11 @@
           <%= f.hidden_field :publisher, value: @material.publisher %>
           <%= f.hidden_field :description, value: @material.description %>
           <div class="flex flex-row">
-            <div class="min-w-100px h-150px"><%= image_tag @material.image_link %></div>
+            <% if @material.image_link.present? %>
+              <div class="min-w-100px h-150px"><%= image_tag @material.image_link %></div>
+            <% else %>
+              <%= image_tag 'no_image.png', class:'min-w-100px h-150px' %>
+            <% end %>
             <div class="flex flex-col ml-10px">
               <div class= "mb-20px">
                 <p class="font-bold">教材名</p>
