@@ -21,7 +21,7 @@ class MaterialEvaluationsController < ApplicationController
     @material_evaluation = @material.material_evaluations.build(material_evaluation_params)
     @material_evaluation.user = current_user
     # featureカラムの処理
-    process_features(@material_evaluation) 
+    process_features(@material_evaluation)
     # 教材は既に登録済み。教材評価のみ登録
     if @material_evaluation.save
       redirect_to materials_path, success: t('material_evaluations.create.success')
@@ -31,7 +31,7 @@ class MaterialEvaluationsController < ApplicationController
       if source_view == 'new'
         flash.now[:danger] = t('material_evaluations.create.danger')
         render :new, status: :unprocessable_entity
-      # 教材詳細ページから教材登録する場合  
+      # 教材詳細ページから教材登録する場合
       elsif source_view == 'show'
         @evaluations = @material.material_evaluations.includes(:user)
         # 教材評価平均、教材評価数、教材特徴

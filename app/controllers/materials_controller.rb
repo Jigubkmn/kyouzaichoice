@@ -114,9 +114,7 @@ class MaterialsController < ApplicationController
     @material_evaluations = @material.material_evaluations.find_by(user: current_user)
     # material_evaluation_paramsからfeatureを取得し、デフォルトは空配列
     features = material_evaluation_params[:feature] || []
-    if features.empty?
-      @material_evaluations.feature = ''
-    end
+    @material_evaluations.feature = '' if features.empty?
     if @material.update(material_params) && @material_evaluations.update(material_evaluation_params)
       # 配列をカンマ潜りの文字列に変換
       process_features(@material_evaluations)
