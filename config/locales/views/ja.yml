@@ -36,6 +36,8 @@ ja:
   top:
     index: 
       title: 教材チョイス
+      material_addition: 教材を登録
+      material_index: 教材一覧画面へ
     term_of_service:
       title: 利用規約
     privacy_policy:
