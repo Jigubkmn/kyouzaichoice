@@ -34,7 +34,7 @@
         </div>
       <% end %>
       <% unless current_user %>
-        <div class="mx-10px sm:mx-0">教材を新規登録するには先に<%= link_to t('header.login'), login_path, class: "text-dark-green underline underline-offset-4 hover:text-pale-gray" %>を行って下さい</div>
+        <div class="text-14px sm:text-16px mx-10px sm:mx-0">教材を新規登録するには先に<%= link_to t('header.login'), login_path, class: "text-dark-green underline underline-offset-4 hover:text-pale-gray" %>を行って下さい</div>
       <% end %>
       <%= paginate @materials %>
     </div>

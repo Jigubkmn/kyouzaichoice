@@ -3,7 +3,7 @@
   <!-- 資格一覧 -->
   <div class="flex flex-col justify-center mb-30px">
     <div class="flex flex-col sm:flex-row items-center justify-center mb-10px">
-      <h2 class="text-30px font-bold mr-30px"><%= t('.title') %></h2>
+      <h2 class="text-30px font-bold sm:mr-30px"><%= t('.title') %></h2>
       <div class="bg-pale-blue hover:bg-dark-blue rounded-md", style= "width:200px; height:38px;">
         <%= link_to t('.qualification_addition'), new_qualification_path, class: "flex items-center justify-center w-full h-full text-xl text-white font-bold" %>
       </div>
@@ -14,7 +14,7 @@
         <%= render 'index' %>
       </div>
     <% else %>
-      <div class="mt-30px text-center">
+      <div class="text-center mt-20px">
         <p>資格が登録されていません。</p>
         <p>資格を追加してください</p>
       </div>

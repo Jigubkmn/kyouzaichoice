@@ -40,12 +40,12 @@
             </div>
             <!-- 内容説明 -->
             <% if @material.description.present? %>
-              <p class="font-bold mb-5px class="text-14px sm:text-16px"">【内容説明】</p>
+              <p class="font-bold mb-5px text-14px sm:text-16px">【内容説明】</p>
               <div class="text-14px sm:text-16px"><%= @material.description %></div>
             <% end %>
             <!-- 資格 -->
             <% if @material.qualification.present? %>
-              <div class="mb-10px ">
+              <div class="mb-10px">
                 <span class="bg-purple text-white text-12px font-semibold px-2.5 py-0.5 rounded self-start"><%= @material.qualification %></span>
               </div>
             <% end %>
@@ -68,8 +68,8 @@
       </div>
       <!-- ログインユーザーのコメントを表示 -->
       <% if @user_evaluation.present? %>
-        <div class="border-t-2 border-gray px-20px pt-20px flex flex-row items-center mt-10px">
-          <%= image_tag(current_user.image_url, class:"h-14 w-14 rounded-full") %>
+        <div class="flex flex-row items-center border-t-2 border-gray px-10px sm:px-20px pt-10px mt-10px">
+          <%= image_tag(current_user.image_url, class:"rounded-full w-55px min-w-55px h-55px min-h-55px") %>
           <div class="ml-20px">
             <!-- 教材評価 -->
             <div class="flex flex-row items-center mb-10px">
@@ -89,8 +89,8 @@
 
     <!-- ログインユーザー以外のコメントを全て表示 -->
     <% @other_evaluations.each do |evaluation| %>
-      <div class="border-b-2 border-gray pl-20px sm:pl-40px py-10px sm:py-20px flex flex-row items-center mt-10px">
-        <%= image_tag(evaluation.user.image_url, class:"h-14 w-14 rounded-full") %>
+      <div class="border-b-2 border-gray pl-30px pr-20px py-10px flex flex-row items-center mt-10px">
+        <%= image_tag(evaluation.user.image_url, class:"rounded-full w-55px min-w-55px h-55px min-h-55px") %>
         <div class="ml-20px">
           <!-- 教材評価 -->
           <div class="flex flex-row items-center mb-10px">
@@ -103,7 +103,7 @@
       </div>  
     <% end %>
   </div>
-  <% if @user_evaluation.present? %>
+  <% if @user_evaluation.present? || @other_evaluations.present? %>
     <div class="bg-thin-gray hover:bg-pale-gray rounded-md mt-10px w-150px", style= "height:38px;">
       <%= link_to t('material_evaluations.show.material_index'), materials_path, class: "flex items-center justify-center w-full h-full text-20px text-white font-bold" %>
     </div>
