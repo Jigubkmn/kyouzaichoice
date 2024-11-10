@@ -15,10 +15,10 @@
         <%= render 'material' %>
       </div>
     <% else %>
-      <div class="text-center">
+      <div class="text-center mt-20px">
         <p>いいねした教材がありません</p>
         <p>下記より教材一覧画面に移動して教材を「いいね」して下さい</p>
-        <%= link_to t('.material_index'), materials_path, class: "text-18px text-darkest-blue underline underline-offset-4" %>
+        <%= link_to t('.material_index'), materials_path, class: "text-18px text-darkest-blue hover:text-pale-gray underline underline-offset-4" %>
       </div>
     <% end %>
     <%= paginate @materials %>
