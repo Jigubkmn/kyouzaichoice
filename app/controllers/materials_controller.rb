@@ -15,7 +15,8 @@ class MaterialsController < ApplicationController
     elsif @existing_material
       @material = @existing_material
       @material_evaluation = @material.material_evaluations.build(user: current_user)
-      redirect_to new_material_material_evaluation_path(@material.id).where(user: current_user) # MaterialEvaluationコントローラーのnewアクションにリクエストする
+      # MaterialEvaluationコントローラーのnewアクションにリクエストする
+      redirect_to new_material_material_evaluation_path(@material.id).where(user: current_user)
     else
       @material = Material.new(material_params)
       @material.material_evaluations.build(user: current_user)
@@ -33,9 +34,11 @@ class MaterialsController < ApplicationController
     # 並び替え処理
     @materials = case params[:sort]
                  when 'published_date'
-                   @materials.order_by_published_date # 公開日の新しい順
+                   # 公開日の新しい順
+                   @materials.order_by_published_date
                  when 'evaluation'
-                   @materials.order_by_evaluation_average # 評価が高い順
+                   # 評価が高い順
+                   @materials.order_by_evaluation_average
                  else
                    @materials
                  end
@@ -50,12 +53,13 @@ class MaterialsController < ApplicationController
     render partial: 'materials/index_autocomplete'
   end
 
-  # プロフィール(教材) 登録済み
+  # マイページ(登録済みの教材)
   def already_registered
-    login_material_evaluations # ログインユーザーに関連するMaterialEvaluationを取得
+    # ログインユーザーに関連するMaterialEvaluationを取得
+    login_material_evaluations
   end
 
-  # プロフィール(教材) いいね
+  # マイページ(いいねした教材)
   def like
     @q = current_user.like_materials.ransack(params[:q])
     @materials = @q.result(distinct: true)
@@ -108,13 +112,15 @@ class MaterialsController < ApplicationController
 
   def update
     @material_evaluations = @material.material_evaluations.find_by(user: current_user)
-    features = material_evaluation_params[:feature] || [] # material_evaluation_paramsからfeatureを取得し、デフォルトは空配列
-    if features.empty? # featureが空の場合は空文字列を追加
-      @material_evaluations.feature = '' # 空文字列を@material_evaluationsに設定
+    # material_evaluation_paramsからfeatureを取得し、デフォルトは空配列
+    features = material_evaluation_params[:feature] || []
+    if features.empty?
+      @material_evaluations.feature = ''
     end
     if @material.update(material_params) && @material_evaluations.update(material_evaluation_params)
-      process_features(@material_evaluations) # 配列をカンマ潜りの文字列に変換
-      @material_evaluations.save # 変換後のデータを保存
+      # 配列をカンマ潜りの文字列に変換
+      process_features(@material_evaluations)
+      @material_evaluations.save
       redirect_to already_registered_materials_path, success: t('materials.update.success')
     else
       flash.now[:danger] = t('materials.update.danger')
@@ -138,20 +144,22 @@ class MaterialsController < ApplicationController
 
   private
 
-  # index用
   def calculate_material_details(evaluations)
-    @average_evaluation = evaluations.average(:evaluation).to_f.round(1) # 教材評価平均
-    @count_of_unique_evaluators = evaluations.select(:user_id).distinct.count # 教材評価者数
-    features = evaluations.pluck(:feature).map { |f| f.split(',') }.flatten # 教材特徴
+    # 教材評価平均
+    @average_evaluation = evaluations.average(:evaluation).to_f.round(1)
+    # 教材評価者数
+    @count_of_unique_evaluators = evaluations.select(:user_id).distinct.count
+    # 教材特徴
+    features = evaluations.pluck(:feature).map { |f| f.split(',') }.flatten
     @unique_features = features.uniq
   end
 
-  # index、like用
   def material_contents(material)
     @evaluations = material.material_evaluations
-    calculate_material_details(@evaluations) # 教材評価平均、教材評価数、教材特徴
-    comments_count = @evaluations.where.not(body: nil).count # 各教材に関連する評価のコメント数を計算
-    like_count = material.likes.count # いいね数
+    # 教材評価平均、教材評価数、教材特徴
+    calculate_material_details(@evaluations)
+    comments_count = @evaluations.where.not(body: nil).count
+    like_count = material.likes.count
     material.as_json.merge(
       average_evaluation: @average_evaluation,
       count_of_unique_evaluators: @count_of_unique_evaluators,
@@ -161,7 +169,6 @@ class MaterialsController < ApplicationController
     )
   end
 
-  # create、update用
   def process_features(evaluation)
     return if evaluation.feature.blank?
 
@@ -170,7 +177,6 @@ class MaterialsController < ApplicationController
     evaluation.feature = features_array.join(',')
   end
 
-  # new用、already_registered用
   def login_material_evaluations
     @material_evaluations = current_user.material_evaluations
                                         .joins(:material)
@@ -178,18 +184,17 @@ class MaterialsController < ApplicationController
                                         .page(params[:page])
                                         .per(10)
                                         .order(Arel.sql('is_null, published_date DESC')) # published_dateがnilのデータは並び替えで一番最後に表示させる
-    @materials = @material_evaluations.map(&:material).uniq # 対象materialデータ表示
+    # 対象materialデータ表示
+    @materials = @material_evaluations.map(&:material).uniq
   end
 
   # ユーザー情報を設定
   def uers_information(material)
-    # MaterialEvaluationにuser_idを設定
     material.material_evaluations.each do |evaluation|
       evaluation.user = current_user
     end
   end
 
-  # new,create,update用
   def material_params
     params.require(:material).permit(
       :title, :image_link, :published_date, :info_link, :systemid, :publisher, :description, :qualification,
@@ -199,7 +204,6 @@ class MaterialsController < ApplicationController
     )
   end
 
-  # update
   def material_evaluation_params
     params.require(:material).permit(
       material_evaluations_attributes: [

@@ -9,8 +9,8 @@ class MaterialEvaluationsController < ApplicationController
   def show
     @material_evaluation = @material.material_evaluations.build
     @evaluations = @material.material_evaluations.includes(:user)
-    # @material_evaluation.comments.build
-    calculate_material_details(@evaluations) # 教材評価平均、教材評価数、教材特徴
+    # 教材評価平均、教材評価数、教材特徴
+    calculate_material_details(@evaluations)
     # ログインユーザー教材情報(教材評価、コメント)
     login_user_evaluation_information(@evaluations)
     # ログインユーザー以外の教材評価とコメントを取得
@@ -19,19 +19,23 @@ class MaterialEvaluationsController < ApplicationController
 
   def create
     @material_evaluation = @material.material_evaluations.build(material_evaluation_params)
-    @material_evaluation.user = current_user # ユーザー情報を設定
-    process_features(@material_evaluation) # featureカラムの処理
-    # 教材は既に登録済み。教材情報のみ登録
+    @material_evaluation.user = current_user
+    # featureカラムの処理
+    process_features(@material_evaluation) 
+    # 教材は既に登録済み。教材評価のみ登録
     if @material_evaluation.save
       redirect_to materials_path, success: t('material_evaluations.create.success')
     else
       source_view = params[:material_evaluation][:source_view]
-      if source_view == 'new' # 登録済み教材ページから教材登録する場合
+      # 登録済み教材ページから教材登録する場合
+      if source_view == 'new'
         flash.now[:danger] = t('material_evaluations.create.danger')
         render :new, status: :unprocessable_entity
-      elsif source_view == 'show' # 教材詳細ページから教材登録する場合
+      # 教材詳細ページから教材登録する場合  
+      elsif source_view == 'show'
         @evaluations = @material.material_evaluations.includes(:user)
-        calculate_material_details(@evaluations) # 教材評価平均、教材評価数、教材特徴
+        # 教材評価平均、教材評価数、教材特徴
+        calculate_material_details(@evaluations)
         # ログインユーザー教材情報(教材評価、コメント)
         login_user_evaluation_information(@evaluations)
         # ログインユーザー以外の教材評価とコメントを取得
@@ -44,25 +48,24 @@ class MaterialEvaluationsController < ApplicationController
 
   private
 
-  # show用
   def calculate_material_details(evaluations)
-    @average_evaluation = evaluations.average(:evaluation).to_f.round(1) # 教材評価平均
-    @count_of_unique_evaluators = evaluations.select(:user_id).distinct.count # 教材評価者数
-    features = evaluations.pluck(:feature).map { |f| f.split(',') }.flatten # 教材特徴
+    # 教材評価平均
+    @average_evaluation = evaluations.average(:evaluation).to_f.round(1)
+    # 教材評価者数
+    @count_of_unique_evaluators = evaluations.select(:user_id).distinct.count
+    # 教材特徴
+    features = evaluations.pluck(:feature).map { |f| f.split(',') }.flatten
     @unique_features = features.uniq
   end
 
-  # show用
   def login_user_evaluation_information(evaluations)
     # ログインユーザーの評価を取得
     user_evaluation = evaluations.find { |evaluation| evaluation.user == current_user }
     @user_evaluation = user_evaluation&.evaluation
-
-    @body = evaluations.map(&:body) # すべての評価のbodyを配列で取得
-    @user_body = user_evaluation&.body # ログインユーザーの評価のbodyを取得
+    @body = evaluations.map(&:body)
+    @user_body = user_evaluation&.body
   end
 
-  # create用
   def material_evaluation_params
     params.require(:material_evaluation).permit(
       :id, :evaluation, :body, :_destroy,
@@ -70,7 +73,6 @@ class MaterialEvaluationsController < ApplicationController
     )
   end
 
-  # create用
   def process_features(material_evaluations)
     return unless material_evaluations.feature.present?
 
