@@ -102,7 +102,6 @@ erDiagram
   users ||--o{ qualifications : "1人のユーザーは複数の資格を持つ"
   materials ||--o{ likes : "1つの教材には複数のいいねを持つ"
 	materials ||--o{ material_evaluations : "1つの教材には複数の評価を持つ"
-	materials ||--|| qualifications  : "1つの教材には1つの資格を持つ"
 
 
 	users {
