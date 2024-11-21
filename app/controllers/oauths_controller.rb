@@ -10,12 +10,12 @@ class OauthsController < ApplicationController
     provider = auth_params[:provider]
     # 既存のユーザーをプロバイダ情報を元に検索し、存在すればログイン
     if (@user = login_from(provider))
-      redirect_to root_path, success: "#{provider.titleize}アカウントでログインしました"
+      redirect_to materials_path, success: "#{provider.titleize}アカウントでログインしました"
     else
       begin
         # ユーザーが存在しない場合はプロバイダ情報を元に新規ユーザーを作成し、ログインする
         signup_and_login(provider)
-        redirect_to root_path, success: "#{provider.titleize}アカウントでログインしました"
+        redirect_to materials_path, success: "#{provider.titleize}アカウントでログインしました"
       rescue StandardError
         redirect_to root_path, danger: "#{provider.titleize}アカウントでのログインに失敗しました"
       end
