@@ -82,7 +82,7 @@
 | フロントエンド | JavaScript、TailwindCSS、DaisyUI |
 | バックエンド | ruby-3.2.3、Rails 7.0.8.4 |
 | db | PostgreSQL |
-| インフラ | Render、AWS A3 |
+| インフラ | Render、AWS S3 |
 | 環境構築 | Docker |
 | API | GoogleBooksAPI |
 | CI | GitHub Actions |
