@@ -84,7 +84,8 @@ class MaterialsController < ApplicationController
       url = ENV.fetch('GOOGLE_BOOKS_API_URL')
       text = params[:search]
       api_key = ENV.fetch('GOOGLE_BOOKS_API_KEY')
-      res = Faraday.get(url, q: text, langRestrict: 'ja', maxResults: 30, orderBy: 'relevance', key: api_key)
+      query = "intitle:#{text}"
+      res = Faraday.get(url, q: query, langRestrict: 'ja', maxResults: 30, orderBy: 'newest', key: api_key)
       @google_materials = JSON.parse(res.body)
     end
   end
