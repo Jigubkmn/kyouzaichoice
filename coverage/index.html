@@ -13,7 +13,7 @@
       <img src="./assets/0.13.1/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2024-12-23T22:47:03+09:00">2024-12-23T22:47:03+09:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2024-12-28T22:08:57+09:00">2024-12-28T22:08:57+09:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -22,14 +22,14 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="red">
-  41.48%
+  41.13%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.98
+         1.96
        </span>
     </span> hits/line
     )
@@ -42,11 +42,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>458</b> relevant lines,
+    <b>462</b> relevant lines,
     <span class="green"><b>190</b> lines covered</span> and
-    <span class="red"><b>268</b> lines missed. </span>
+    <span class="red"><b>272</b> lines missed. </span>
     (<span class="red">
-  41.48%
+  41.13%
 </span>
 )
   </div>
@@ -138,10 +138,10 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#abf52802656c3d228dea06247bd7ec6187aaf15a" class="src_link" title="app/controllers/oauths_controller.rb">app/controllers/oauths_controller.rb</a></td>
             <td class="red strong cell--number t-file__coverage">0.00 %</td>
-            <td class="cell--number">36</td>
-            <td class="cell--number">28</td>
+            <td class="cell--number">41</td>
+            <td class="cell--number">32</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">28</td>
+            <td class="cell--number">32</td>
             <td class="cell--number">0.00</td>
             
           </tr>
@@ -356,14 +356,14 @@
     <span class="group_name">Controllers</span>
     (<span class="covered_percent">
       <span class="red">
-  41.18%
+  40.67%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.02
+         1.01
        </span>
     </span> hits/line
     )
@@ -376,11 +376,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>323</b> relevant lines,
+    <b>327</b> relevant lines,
     <span class="green"><b>133</b> lines covered</span> and
-    <span class="red"><b>190</b> lines missed. </span>
+    <span class="red"><b>194</b> lines missed. </span>
     (<span class="red">
-  41.18%
+  40.67%
 </span>
 )
   </div>
@@ -450,10 +450,10 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#abf52802656c3d228dea06247bd7ec6187aaf15a" class="src_link" title="app/controllers/oauths_controller.rb">app/controllers/oauths_controller.rb</a></td>
             <td class="red strong cell--number t-file__coverage">0.00 %</td>
-            <td class="cell--number">36</td>
-            <td class="cell--number">28</td>
+            <td class="cell--number">41</td>
+            <td class="cell--number">32</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">28</td>
+            <td class="cell--number">32</td>
             <td class="cell--number">0.00</td>
             
           </tr>
@@ -4794,9 +4794,9 @@
     
 
     <div class="t-line-summary">
-      <b>28</b> relevant lines.
+      <b>32</b> relevant lines.
       <span class="green"><b>0</b> lines covered</span> and
-      <span class="red"><b>28</b> lines missed.</span>
+      <span class="red"><b>32</b> lines missed.</span>
     </div>
 
     
@@ -4902,7 +4902,7 @@
 
             
 
-            <code class="ruby">    provider = auth_params[:provider]</code>
+            <code class="ruby">    if params[:error].present?</code>
           </li>
         </div>
       
@@ -4912,7 +4912,7 @@
 
             
 
-            <code class="ruby">    # 既存のユーザーをプロバイダ情報を元に検索し、存在すればログイン</code>
+            <code class="ruby">      # ユーザーが認証をキャンセルした場合の処理</code>
           </li>
         </div>
       
@@ -4922,7 +4922,7 @@
 
             
 
-            <code class="ruby">    if (@user = login_from(provider))</code>
+            <code class="ruby">      redirect_to root_path, danger: &#39;認証がキャンセルされました&#39;</code>
           </li>
         </div>
       
@@ -4932,7 +4932,7 @@
 
             
 
-            <code class="ruby">      redirect_to materials_path, success: &quot;#{provider.titleize}アカウントでログインしました&quot;</code>
+            <code class="ruby">      return</code>
           </li>
         </div>
       
@@ -4942,7 +4942,7 @@
 
             
 
-            <code class="ruby">    else</code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
@@ -4952,7 +4952,7 @@
 
             
 
-            <code class="ruby">      begin</code>
+            <code class="ruby">    provider = auth_params[:provider]</code>
           </li>
         </div>
       
@@ -4962,7 +4962,7 @@
 
             
 
-            <code class="ruby">        # ユーザーが存在しない場合はプロバイダ情報を元に新規ユーザーを作成し、ログインする</code>
+            <code class="ruby">    # 既存のユーザーをプロバイダ情報を元に検索し、存在すればログイン</code>
           </li>
         </div>
       
@@ -4972,7 +4972,7 @@
 
             
 
-            <code class="ruby">        signup_and_login(provider)</code>
+            <code class="ruby">    if (@user = login_from(provider))</code>
           </li>
         </div>
       
@@ -4982,7 +4982,7 @@
 
             
 
-            <code class="ruby">        redirect_to materials_path, success: &quot;#{provider.titleize}アカウントでログインしました&quot;</code>
+            <code class="ruby">      redirect_to materials_path, success: &quot;#{provider.titleize}アカウントでログインしました&quot;</code>
           </li>
         </div>
       
@@ -4992,7 +4992,7 @@
 
             
 
-            <code class="ruby">      rescue StandardError</code>
+            <code class="ruby">    else</code>
           </li>
         </div>
       
@@ -5002,17 +5002,17 @@
 
             
 
-            <code class="ruby">        redirect_to root_path, danger: &quot;#{provider.titleize}アカウントでのログインに失敗しました&quot;</code>
+            <code class="ruby">      begin</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="21">
+          <li class="never" data-hits="" data-linenumber="21">
             
 
             
 
-            <code class="ruby">      end</code>
+            <code class="ruby">        # ユーザーが存在しない場合はプロバイダ情報を元に新規ユーザーを作成し、ログインする</code>
           </li>
         </div>
       
@@ -5022,7 +5022,7 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">        signup_and_login(provider)</code>
           </li>
         </div>
       
@@ -5032,17 +5032,17 @@
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">        redirect_to materials_path, success: &quot;#{provider.titleize}アカウントでログインしました&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="24">
+          <li class="missed" data-hits="0" data-linenumber="24">
             
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">      rescue StandardError</code>
           </li>
         </div>
       
@@ -5052,17 +5052,17 @@
 
             
 
-            <code class="ruby">  private</code>
+            <code class="ruby">        redirect_to root_path, danger: &quot;#{provider.titleize}アカウントでのログインに失敗しました&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="26">
+          <li class="missed" data-hits="0" data-linenumber="26">
             
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">      end</code>
           </li>
         </div>
       
@@ -5072,7 +5072,7 @@
 
             
 
-            <code class="ruby">  def auth_params</code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
@@ -5082,22 +5082,12 @@
 
             
 
-            <code class="ruby">    params.permit(:code, :provider)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="29">
-            
-
-            
-
             <code class="ruby">  end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="30">
+          <li class="never" data-hits="" data-linenumber="29">
             
 
             
@@ -5107,12 +5097,22 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="31">
+          <li class="missed" data-hits="0" data-linenumber="30">
             
 
             
 
-            <code class="ruby">  def signup_and_login(provider)</code>
+            <code class="ruby">  private</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="31">
+            
+
+            
+
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -5122,7 +5122,7 @@
 
             
 
-            <code class="ruby">    @user = create_from(provider)</code>
+            <code class="ruby">  def auth_params</code>
           </li>
         </div>
       
@@ -5132,7 +5132,7 @@
 
             
 
-            <code class="ruby">    reset_session</code>
+            <code class="ruby">    params.permit(:code, :provider)</code>
           </li>
         </div>
       
@@ -5142,12 +5142,62 @@
 
             
 
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="35">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="36">
+            
+
+            
+
+            <code class="ruby">  def signup_and_login(provider)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="37">
+            
+
+            
+
+            <code class="ruby">    @user = create_from(provider)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="38">
+            
+
+            
+
+            <code class="ruby">    reset_session</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="39">
+            
+
+            
+
             <code class="ruby">    auto_login(@user)</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="35">
+          <li class="missed" data-hits="0" data-linenumber="40">
             
 
             
@@ -5157,7 +5207,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="36">
+          <li class="missed" data-hits="0" data-linenumber="41">
             
 
             
