@@ -7,6 +7,11 @@ class OauthsController < ApplicationController
   end
 
   def callback
+    if params[:error].present?
+      # ユーザーが認証をキャンセルした場合の処理
+      redirect_to root_path, danger: '認証がキャンセルされました'
+      return
+    end
     provider = auth_params[:provider]
     # 既存のユーザーをプロバイダ情報を元に検索し、存在すればログイン
     if (@user = login_from(provider))
